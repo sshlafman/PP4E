@@ -29,7 +29,7 @@ class Input:
             res, self.text = self.text, ''
         else:
             res, self.text = self.text[:eoln+1], self.text[eoln+1:]
-        return eos
+        return res
 
 def redirect(function, pargs, kargs, input):    # redirect stdin/out
     savestreams = sys.stdin, sys.stdout
