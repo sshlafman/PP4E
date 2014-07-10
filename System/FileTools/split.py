@@ -1,4 +1,5 @@
-#!/usr/bin/python
+#!/usr/bin/python3
+
 """
 ###################################################################################
 split a file into a set of parts; join.py puts them back together;
@@ -9,7 +10,7 @@ also be imported and reused in other applications;
 ###################################################################################
 """
 
-import os
+import sys, os
 kilobytes = 1024
 megabytes = kilobytes * 1000
 chunksize = int(1.4 * megabytes)                  # default: roughly a floppy
@@ -23,7 +24,7 @@ def split(fromfile, todir, chunksize=chunksize):
     partnum = 0
     inputf = open(fromfile, 'rb')                  # binary: no decode, endline
     while True:                                   # eof=empty string from read
-        chunk = input.read(chunksize)             # get next part <= chunksize
+        chunk = inputf.read(chunksize)             # get next part <= chunksize
         if not chunk: break
         partnum += 1
         filename = os.path.join(todir, ('part%04d' % partnum))
@@ -35,4 +36,25 @@ def split(fromfile, todir, chunksize=chunksize):
     return partnum
 
 if __name__ == '__main__':
-    if len
+    if len(sys.argv) == 2 and sys.argv[1] == '-help':
+        print('Use: split.py [file-to-split trget-dir [chunksize]]')
+    else:
+        if len(sys.argv) < 3:
+            interactive = True
+            fromfile = input('File to be split? ')   # input if clicked
+            todir = input('Directory to store part files? ')
+        else:
+            interactive = False
+            fromfile, todir = sys.argv[1:3]         # args in cmdline
+            if len(sys.argv) == 4: chunksize = int(sys.argv[3])
+        absfrom, absto = map(os.path.abspath, [fromfile, todir])
+        print('Splitting', absfrom, 'to', absto, 'by', chunksize)
+        
+        try:
+            parts = split(fromfile, todir, chunksize)
+        except:
+            print('Error during split')
+            print(sys.exc_info()[0], sys.exc_info()[1])
+        else:
+            print('Split finished:', parts, 'parts are in', absto)
+        if interactive: input('Press Enter key') # pause if clicked
