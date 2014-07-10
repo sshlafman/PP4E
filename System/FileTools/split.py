@@ -37,7 +37,7 @@ def split(fromfile, todir, chunksize=chunksize):
 
 if __name__ == '__main__':
     if len(sys.argv) == 2 and sys.argv[1] == '-help':
-        print('Use: split.py [file-to-split trget-dir [chunksize]]')
+        print('Use: split.py [file-to-split target-dir [chunksize]]')
     else:
         if len(sys.argv) < 3:
             interactive = True
