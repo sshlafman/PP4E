@@ -1,0 +1,188 @@
+<HTML><BODY>
+
+<P><I>This page seems unusually prone to frequent revision, most recently on 10/20/11.</I></P>
+<HR>
+
+<H1>What's a Programming Language?</H1>
+
+<P>
+Like most people in the software field, I sometimes have trouble explaining what I do to others.
+To people who don't work in this field, the idea of a "language" for programming computers can 
+seem downright bizarre.  For readers who might fall into this category too, here's the story of
+programming condensed to just fourteen paragraphs to provide a brief bit of context.  This story
+revolves around three key ideas: the stored-program model, the software hierarchy, and the 
+mapping from language to hardware.
+
+
+<H2>The Stored-Program Model</H2>
+
+<P>
+Probably the first thing you need to know in order to understand programming languages is the notion
+of the <I>stored-program model</I> that underlies all computers today.  Really, computers are fairly 
+dumb at their core; their chips and circuits do nothing but load simple numerically-coded instructions
+from the computer's memory and carry out the actions they imply.   A set of these instructions stored
+in a computer memory is called a <I>program</I>.  It's also sometimes called <I>code</I> for color; 
+an <I>algorithm</I> by the more numeric among us; and <I>software</I> to distinguish it from the less 
+transient hardware of the computer itself.  Whatever we call them, programs consist of fairly basic 
+numeric actions from the computer's perspective: they add and subtract numbers, move data around in 
+memory, and so on -- a process which is blazingly fast, but essentially pointless by itself.  By 
+loading different sets of instructions into its memory, though, we can make a computer perform 
+different tasks and tangible work. 
+
+<P>
+This model, a changeable memory of stored instructions and a hardware device that sequences
+through them, is generally called the <I>Von Neumann architecture</I> after the person most
+strongly associated with it.  In principle, this model isn't all that different from more 
+familiar devices such as CD or DVD players; by loading different media, a player can be made 
+to perform a variety of selections.  The instructions loaded into and run by a computer, though, 
+support much more varied goals.  A computer can perform any task that can be encoded and
+expressed in its native instruction set.
+
+<P>
+Though simple, the implications of this model are arguably mind-blowing: computers are 
+<I>machines for building other machines</I>.  They are a sort of super-generalized, universal 
+tool.  From this one same machine we can build web sites, hydrology models, Mars rover
+navigation systems, video games, and digital music and movie players (which nudge those CDs 
+and DVDs towards obsolescence daily).  We don't need to build a custom machine from scratch for 
+each of these goals, because the computer, the machine of machines, is general enough to take 
+whatever form we can graft upon it by the programs we load into its memory.  It's as if a 
+single generic tool could be hammer, saw, and drill; or a single appliance could be toaster,
+refrigerator, and television.  Depending on the programs you choose to load, the otherwise 
+lifeless hardware of the computer can take on a very wide variety of personalities and roles.
+
+<P>
+So where do programming languages fit in this model?  <I>Programming languages</I> are simply the 
+instructions we use to specify the steps to be taken by a program.  Viewed abstractly, each 
+program we write in such a language represents a <I>brand new software machine</I>, to be run by the 
+hardware machine of the underlying computer.  Although the physical computer may be generic and
+bland by itself, the programs we run on top of its hardware have much more concrete and useful 
+roles -- they search libraries, process images, display emails, and so on.  Programming 
+languages allow us to encode the knowledge needed to perform these more realistic tasks, and 
+effectively add it to the computer's capabilities when loaded into memory.  They are the
+raw material of the software which animates and gives purpose to hardware.
+
+
+<H2>A Hierarchy of Structure</H2>
+
+<P>
+To fully understanding programming itself it's also important to understand its reliance on a 
+<I>hierarchy of structure</I>, also known as a <I>software stack</I> to those who care about such 
+things enough to invent jargon for them.  It's actually a simple idea.  Like most engineering
+enterprises, programming languages and programming in general leverage multiple layers of 
+increasingly abstract structure aimed at hiding the complexity of the lower layers.  
+
+<P>
+At the bottom of the languages hierarchy, a computer's hardware implements a simple set of instructions 
+known as its <I>machine language</I>.  These numerically-coded instructions stored in memory deal in 
+terms of numeric addresses and numeric data.  Because machine languages are native to a computer's 
+hardware they differ from platform to platform.  But all support the three pillars of computer programs: 
+<I>sequence</I>: stepping through instructions one after another; <I>selection</I>: branching to 
+instructions based on logical tests; and <I>repetition</I>: repeating instructions over and over.  
+Although they are simple, machine language instructions are sufficient to achieve all that computers 
+do today.
+
+<P>
+While machine language may be sufficient, it's also virtually impossible to use for realistic
+tasks.  In fact, it's so tedious to use that a variety of approaches to simplifying it have
+emerged over the years.  The earliest attempts were known as <I>assembler</I> languages, which 
+were really just machine language with window dressing; they gave cryptic names to the numeric 
+codes of machine language instructions, allowed memory addresses to be labeled, and usually 
+provided a <I>macro</I> tool which expanded text into other text.  For instance, programmers 
+could now say things like "move x, y" to move data from one place in memory to another, instead
+of giving that instruction's numeric code and the numeric addresses of the source and target.  
+Though better than the numbers of raw machine language, assembler language still had most of 
+the same downsides.
+
+
+<H2>Enter Programming Languages</H2>
+
+<P>
+At the next level of hierarchy, higher order <I>programming languages</I> are designed to add structure
+and abstraction on top of the raw machine language model to make it easier to use.  Though their 
+approaches may vary, all aim to allow a task's solution to be described in ways that are closer 
+to the way people think, instead of requiring it to be morphed to match the way that computer 
+hardware operates.  Most programming languages achieve this goal by allowing a procedure to be 
+specified with sentences and grammars which are much closer to a natural language such as 
+English, rather than numeric codes or labels for them.
+
+<P>
+The earliest of what most people today call true programming languages, such as FORTRAN and C, 
+made it much easier to express complex ideas and calculations.  Among other things, they 
+provided syntax for describing tasks to be carried out, and decomposed larger arithmetic 
+expressions into the set of machine language instructions required to implement them.  For 
+example, conditional and repeated actions were typically coded with "if" and "while" statements,
+and mathematical operations were written with familiar "+" and "-" expressions.  Though still in
+wide use today, most of these early languages provided only a thin abstraction layer, and many 
+found them to be still too closely tied to the hardware machine's underlying model, as well as
+much of the drudgery and programming peril that comes with it.  Programming is still largely 
+about sequences of instructions at this level, and requires substantial work to map information
+to computer memory.
+
+<P>
+At the top of the hierarchy, the so called <I>high-level languages</I> go further by providing 
+abstractions and structures that move substantially beyond the Von Neumann model, and gain wider 
+utility and accessibility in the process.  This is Python's family; its <I>object-oriented</I> 
+and <I>functional</I> programming models, for example, have very little to do with raw machine 
+language, but can improve the task of programming profoundly.  Further, Python's built-in 
+datatypes such as lists and dictionaries are only remotely reminiscent of data stored in 
+computer memory, and are much more flexible.  Python's automatic memory management alone 
+obviates much work required by earlier languages, and eliminates entire categories of program
+errors.  Languages like Python are also sometimes called <I>scripting</I> languages to 
+highlight their relative ease of use, especially compared to larger <I>systems</I> languages 
+like C++ and Java; per this distinction, a script is a simple sort of program.
+
+<P>
+Other high-level languages have explored other paradigms such as aspect-oriented and logic 
+programming.  Some such paradigms in high-level languages attempt to improve on the basic 
+machine language model, and others aim to remove it altogether.  For instance, <I>object-oriented</I>
+languages like Python provide a model in which programs are built by customizing existing code,
+and <I>logic programming</I> languages such as Prolog view computation as deduction from a set of 
+logical rules that declare what it means to satisfy a goal but don't specify how to do so.  
+While programming language technology is still a fairly young field that evolves quickly, 
+programmers tend to be pragmatic folk who gravitate towards tools that work well in practice.  
+This mindset likely accounts at least in part for the prominence of object-oriented and scripting 
+languages like Python today.
+
+
+<H2>Mapping Languages to Chips</H2>
+
+<P>
+The last key idea is related to the prior, and has to do with the way programs are actually run.  
+Because computers understand only their native machine language, programs coded in high-level programming
+languages must ultimately be mapped to lower-level machine language in order to be run by the computer's 
+hardware.  This is arranged by another program loaded into and run on the computer -- by a <I>compiler</I>,
+which translates language statements to machine language instructions directly; by an <I>interpreter</I>, 
+which carries out the program's commands itself; or by some combination of these two approaches, such as 
+compiling to a platform-neutral form known as <I>bytecode</I> which is then interpreted.
+
+<P>
+For example, most programs written in Python are run by a program coded in C, which is itself translated
+to machine language prior to execution -- a hierarchy spanning three languages, which compiles Python code
+to bytecode, and runs your program on raw hardware at the bottom.  Python variants such as Jython and 
+IronPython may add additional software layers to the mix, but still run your programs on chips in the end.
+
+<P>
+But why go to such trouble?  In short, programming languages exist to address the great disparity
+between the <I>numeric</I> nature of computer hardware, and the <I>symbolic</I> nature of the world we 
+all live in.  Although their statements and larger structures must be mapped to the simpler instructions of 
+the underlying computer, the added expressiveness of high-level programming languages makes the act of
+programming real-world tasks faster, less error prone, and much more productive.  Many people have also
+found that Python in particular, with its straightforward syntax and high-level tools and paradigms 
+makes the task of codifying a program even simpler and more natural than some of its contemporaries.
+
+
+<H2>For More Details</H2>
+
+<P>
+At least that's the abstract story.   To see what Python programs actually <I>look like</I>, 
+and to judge claims about its merits for yourself, you'll have to read on.  Much like 
+understanding programming languages in general, making sense of random Python code requires
+some background context, and providing it is largely what the rest of this book is about.
+
+
+
+</BODY></HTML>
+
+
+
+

@@ -1,0 +1,19 @@
+# Find and remove any lingering byte-code files in the tree with Chapter 6 example.
+# These are harmless (especially in the new __pycache__ model, but take extra space.
+
+D:\Books\4E\PP4E\examples-dev\1.4>c:\pp4e\PP4E-Examples-1.3.1\Examples\PP4E\Tools\cleanpyc.py .
+=> .\PP4E-Examples-1.4\Examples\PP4E\Gui\TextEditor\__pycache__\__init__.cpython-33.pyc
+=> .\PP4E-Examples-1.4\Examples\PP4E\Gui\TextEditor\__pycache__\textEditor.cpython-33.pyc
+=> .\PP4E-Examples-1.4\Examples\PP4E\Gui\TextEditor\__pycache__\textConfig.cpython-33.pyc
+=> .\PP4E-Examples-1.4\Examples\PP4E\Gui\Tools\__pycache__\__init__.cpython-33.pyc
+=> .\PP4E-Examples-1.4\Examples\PP4E\Gui\Tools\__pycache__\windows.cpython-33.pyc
+=> .\PP4E-Examples-1.4\Examples\PP4E\Gui\Tools\__pycache__\guimaker.cpython-33.pyc
+=> .\PP4E-Examples-1.4\Examples\PP4E\Gui\__pycache__\__init__.cpython-33.pyc
+=> .\PP4E-Examples-1.4\Examples\PP4E\__pycache__\Launcher.cpython-33.pyc
+=> .\PP4E-Examples-1.4\Examples\PP4E\__pycache__\launchmodes.cpython-33.pyc
+=> .\PP4E-Examples-1.4\Examples\PP4E\__pycache__\__init__.cpython-33.pyc
+=> .\PP4E-Examples-1.4\Examples\PP4E\__pycache__\textConfig.cpython-33.pyc
+Found 11 files, removed 11
+
+D:\Books\4E\PP4E\examples-dev\1.4>c:\pp4e\PP4E-Examples-1.3.1\Examples\PP4E\Tools\cleanpyc.py .
+Found 0 files, removed 0

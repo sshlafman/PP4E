@@ -1,0 +1,3 @@
+"Book support" <lutz@rmi.net>
+lutz@learning-python.com
+the book <PP4E@learning-python.com>

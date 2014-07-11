@@ -1,0 +1,135 @@
+[Jan-11-11] Python 3.2 removes struct.pack prior documented behavior for str (and other acts of anarchy?) 
+
+
+<P>
+The behavior of the <B>struct.pack</B> binary data packer 
+tool has changed in Python 3.2 with respect to strings and 
+the "s" type code.  It no longer accepts normal <B>str</B> 
+Unicode text strings for this type code, and now allows 
+only <B>bytes</B>, forcing manual encoding of str strings.  
+
+<P>
+This Python 3.2 change impacts examples in the current 4th 
+Editions of all 3 of my books: Learning Python and Programming Python
+primarily, and one small example in Python Pocket Reference. 
+The books' code still works as shown in the versions of 
+Python which they claim to use (3.0 and 3.1).  While the books
+aren't responsible for changes in Python after their publication,
+this change seems dubious enough to warrant a note.
+
+<P>
+The <B>original behavior</B> of struct.pack in 3.0 and 3.1, the
+versions used in the books, allows normal strings, and encodes 
+per UTF8; this is documented clearly and explicitly in Python 
+3.1's manuals:
+
+<PRE>
+c:\misc>c:\python31\python
+>>> import struct
+>>> data = struct.pack('>i4shf', 2, 'spam', 3, 1.234)
+>>> data
+b'\x00\x00\x00\x02spam\x00\x03?\x9d\xf3\xb6'
+</PRE>
+
+The <B>new behavior</B> in Python 3.2 no longer allows str 
+strings for the "s" code, but requires bytes strings; str 
+text must be encoded to byte strings manually as needed:
+
+<PRE>
+c:\misc>c:\python32\python
+>>> import struct
+>>> data = struct.pack('>i4shf', 2, 'spam', 3, 1.234)
+Traceback (most recent call last):
+  File "&lt;stdin>", line 1, in &lt;module>
+struct.error: argument for 's' must be a bytes object
+
+>>> data = struct.pack('>i4shf', 2, b'spam', 3, 1.234)
+>>> data
+b'\x00\x00\x00\x02spam\x00\x03?\x9d\xf3\xb6'
+
+>>> data = struct.pack('>i4shf', 2, bytes('spam', 'utf8'), 3, 1.234)
+>>> data
+b'\x00\x00\x00\x02spam\x00\x03?\x9d\xf3\xb6'
+
+>>> data = struct.pack('>i4shf', 2, 'spam'.encode(), 3, 1.234)
+>>> data
+b'\x00\x00\x00\x02spam\x00\x03?\x9d\xf3\xb6'</PRE>
+</PRE>
+
+
+
+<H4>This was not a bug fix</H4>
+
+<P>
+You can read about this change on Python's PEP list:
+
+<UL>
+<LI><A HREF="http://bugs.python.org/issue10783">http://bugs.python.org/issue10783</A>
+</UL>
+
+This tool worked with both str and bytes in 3.1 and 3.0, so 
+this was clearly a case of <I>taking away existing functionality</I>, 
+not fixing a bug (only the second of the following usage
+modes is supported as of 3.2):
+
+<PRE>
+c:\misc>c:\python31\python
+>>> import struct
+>>> data = struct.pack('>i4shf', 2, 'spam', 3, 1.234)            # removed in 3.2
+>>> data
+b'\x00\x00\x00\x02spam\x00\x03?\x9d\xf3\xb6'
+
+>>> data = struct.pack('>i4shf', 2, 'spam'.encode(), 3, 1.234)   # always worked
+>>> data
+b'\x00\x00\x00\x02spam\x00\x03?\x9d\xf3\xb6'
+</PRE>
+
+
+
+<H3>cgi module change in 3.2+</H3>
+
+<P>
+Regrettably, this type of non-fix change that breaks existing
+code is not an isolated case, even long after the season of 
+arbitrary incompatibility allowed for Python 3.0.  For a similar 
+example of personal preference seeming to rule the day, see the
+decision to move <B>cgi.escape</B> &mdash; a tool very widely 
+used since the mid 90's &mdash; to the <B>html</B> module package.
+
+<UL>
+<LI><A HREF="http://bugs.python.org/issue2830">http://bugs.python.org/issue2830</A>
+</UL>
+
+The original cgi.escape was supposed to issue a warning in 
+3.2 and be removed altogether in 3.3 (though it's not clear 
+if this plan is being implemented in full).  Was this really 
+so aesthetically important to justify breaking so much Python 
+web scripting code that has worked for so long and for so many?  
+
+
+
+<H3>Where to complain</H3>
+
+<P>
+To me, both these changes seems like cases of personal 
+aesthetic preferences trouncing existing behavior which was 
+both well documented and already relied upon by working code.
+There was no clear technical reason for removing the additional
+utility for stuct.pack or moving cgi.escape to a different 
+standard library module, apart from subjective opinion of a 
+very small group.
+
+<P> 
+I encourage anyone impacted by such changes to register 
+a complaint in Python's development channels.  It's your
+language, after all.  For 
+details on reporting such things, read
+<A HREF="http://wiki.python.org/moin/Asking%20for%20Help/How%20can%20%22normal%22%20users%20report%20bugs%20in%20Python%20or%20the%20documentation%3F">
+this wiki page</A>.  The reporting process seems a bit 
+more difficult than it might be, but is probably 
+worth the effort when changes impact your code.
+
+<P>
+Open source development need only seem like anarchy or
+tyranny if its users silently accept such a fate.
+</P>

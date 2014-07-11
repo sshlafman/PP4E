@@ -1,0 +1,375 @@
+<HTML>
+<TITLE>PP4E examples on Python 3.3</TITLE>
+<BODY bgcolor="beige">
+
+<H1>How to run PP4E book examples with Python 3.3</H1>
+
+<P>
+This page summarizes the 4 steps required to run the examples in the
+book <A HREF="http://www.rmi.net/~lutz/about-pp4e.html">Programming Python, 4th Edition</A> with 
+Python 3.3, and gives the corresponding changes applied to the new 
+<A HREF="http://examples.oreilly.com/9780596158118">release 1.4</A>
+of the book's examples package, created October 15, 2013.  In brief:
+<OL>
+<LI><A HREF="#s1">[Windows only] Set PY_PYTHON=3 for new Windows launcher</A>
+<LI><A HREF="#s2">[Windows only] Fix #! lines unrecognized by new Windows launcher</A>
+<LI><A HREF="#s3">Install 2-file PyMailGUI patch required for 3.3 email package change</A>
+<LI><A HREF="#s4">Install the Pillow drop-in replacement for the PIL image library</A>
+</OL>
+
+<P>
+The first <B>2</B> of these steps are needed for Windows only, and the new release 1.4 of 
+the examples package incorporates the first <B>3</B> steps automatically.  For example, the
+<I>PyGadgets</I> and <I>PyDemos</I> auto-launchers, as well as the larger stand-alone
+programs such as <I>PyMailGUI</I> and <I>PyEdit</I> should work on 3.3 out of the box. 
+Still, you'll need to manually install Pillow instead of PIL for image examples such as 
+<I>PyPhoto</I>, and may need to set your PY_PYTHON on Windows for general 3.X use.
+
+<P>
+Note that all these changes are <B>backward-compatible</B> with earlier 
+3.X releases, so release <B>1.4</B> of the book's examples package works 
+with Pythons <B>3.0 through 3.3</B>.  Python 3.4 and later may or may not
+require additional patches, especially given the flux in the email package; watch 
+for updates to be posted here as warranted.  Also note that most book examples 
+will run unchanged under 3.3; the steps outlined here are mainly required for 
+specific programs only, and mostly for larger graphical programs.
+</P>
+
+
+
+
+<HR>
+<H2><A NAME="s1">1) [Windows only] Set PY_PYTHON=3 for new Windows launcher</A></H2>
+
+<P>
+As
+<A HREF="http://www.rmi.net/~lutz/py33-windows-launcher.html#pitfalls">noted here</A>, 
+the new Windows launcher automatically installed with Python 3.3 runs scripts
+and commands with an installed 2.X by default, unless they give a more specific 
+release number in #! patterns or command argument options.  This effectively 
+<I>breaks</I> programs meant to be used with 3.X if they use generic Python commands 
+or have top-level script files with missing or release-ambiguous #! lines.  
+As it's common practice on Windows to omit a #! line formerly useful only in some 
+Unix usage modes, this can have broad impacts.  Even on Unix, #! lines with a generic 
+"python" resolved by file links is a norm, but will now fail if run by Python 3.3 on 
+Windows.
+
+<P>
+To work around this, you can either: 
+<OL>
+<LI>Add a Unix #! line to the top of <I>every</I> Python 3.X script you run on 
+Windows&mdash;a bizarre expectation that needlessly adds extra work, and 
+seems just plain rude to people who use Python on Windows.
+
+<LI>Set your PY_PYTHON environment variable to "3" to force the 3.3 launcher to 
+default to 3.X globally for all programs that don't give a version explicitly.
+</OL>
+
+While a manual PY_PYTHON setting applies to all scripts run on your machine, 
+it doesn't help much for scripts meant to run immediately with no user configuration
+steps&mdash;like some of those in the book.  Subtly, the changes required in 
+auto-launcher scripts depend on how the launched code is run:
+
+<UL>
+<LI>For code run <B>in-process</B>&mdash;via imports, exec(), etc.&mdash;the launcher script 
+itself requires a "#!...python3" line, so that the entire process is started with 3.X.
+
+<LI>For code run in a <B>spawned process</B>&mdash;with os.system(), os.spawnv(), etc.&mdash;the 
+launcher script may or may not require a "#!...python3" line for its own code, but must set 
+PY_PYTHON=3 via os.environ for any version-generic spawned programs (os.environ
+settings are inherited by subprocesses).  
+</UL>
+
+Manually setting your PY_PYTHON makes both changes unnecessary, but that 
+doesn't address auto-launchers' goals.
+
+
+</P>
+<H3>In the book examples package</H3>
+<P>
+In release 1.4, the required changes were applied to the book's 4 auto-launcher 
+scripts that I drag out as shortcuts to my Windows desktop and use on a regular 
+basis, as well as in 1 utility module they leverage:
+
+<P>
+<TABLE border=1>
+<TR>
+<TD align=left>PP4E\Launch_PyGadgets_bar.pyw
+<TD>Added #!/usr/bin/python3 to force 3.X execution of itself; 
+this script runs Launcher.py tools in-process via imports.
+<TR>
+<TD align=left>PP4E\Launch_PyDemos.pyw
+<TD>Added #!/usr/bin/python3 to force 3.X execution of itself; 
+this script runs Launcher.py tools in-process via imports.
+<TR>
+<TD align=left>PP4E\Gui\TextEditor\pyedit.pyw
+<TD>Added #!/usr/bin/python3 line to force 3.X execution of itself; 
+this script runs the main PyEdit script in-process with exec().
+<TR>
+<TD align=left>PP4E\Internet\Email\PyMailGui\altconfigs\launch_PyMailGui.py</PRE>
+<TD>Added os.environ['PY_PYTHON']='3' to force 3.X execution of the PyMailGUI subprocess spawned with os.system(); 
+a #! line for this script's own execution is irrelevant, as its code runs on both 2.X and 3.X.
+<TR>
+<TD align=left>PP4E\Launcher.py <I>(utility)</I>
+<TD>Added <I>both</I> #!/usr/bin/python3 to force 3.X execution of itself (when run standalone), 
+and os.environ['PY_PYTHON']='3' to force 3.X execution of any subprocess it spawns (see below).
+</TABLE>
+
+<P>
+Note that the last entry in this table, Launcher.py, sets PY_PYTHON=3 in os.environ, to be 
+inherited by spawned programs.  This may be moot for its immediate subprocesses, because this 
+module runs explicit "python ..." command lines with os.spawnv() after setting Python and system 
+paths automatically, thereby cutting out the 3.3 "py" launcher in the Windows registry; deeper 
+program descendants, however, may still require this setting.  Complex to be sure, but avoidable 
+if you're willing to require an extra environment setting for using existing 3.X code under 3.3 
+on Windows&mdash;a manual task PP4E's top-level launchers were designed to obviate.
+
+<P>
+Also keep in mind that this patch applies to the selected auto-launcher scripts only. 
+When using 3.3 and later, you'll still probably want to <B>manually set your PY_PYTHON</B>
+environment variable eventually in order to run other version-agnostic 3.X scripts on Windows
+with 3.X instead of 2.X.  This includes any book examples not updated by this patch; see the 
+Advanced system settings in your Control Panel's <B>System</B> entry to set the version default
+globally.
+
+
+
+</P>
+<H3><A NAME="winlauchercaveats">Three caveats on this process</A></H3>
+
+<P>Although this patch suffices in the normal case, there are three issues 
+that may impact your Windows launcher experience worth noting here:
+
+
+<UL>
+<LI><B>Unix portability paradox?</B>:
+It's not impossible that hardcoding a "python3" in a #! line for use on Windows may not
+be portable to some <I>Unix systems</I>, which would virtually force a manual PY_PYTHON=3 
+setting on Windows machines with 2.X installs.  If this impacts you, you'll have to modify 
+the patched scripts as needed&mdash;set PY_PYTHON, and either use a generic "python" in #! 
+lines, or avoid #! lines altogether (per the next bullet, PATH can do similar work with 
+a "python" #! on 3.4).  All Unix portability bets are off, of course, if you use a 
+#! pattern not common on Unix; and abbreviated "#!python3" may be a prime suspect.
+<BR><BR>
+
+
+<LI><B>PATH checked in 3.4 (sometimes)</B>:
+The Windows launcher has been recently modified in 3.4 to give a PATH variable setting 
+priority over searching the registry for the highest-numbered Python, when just a generic
+"python" appears in a #! line.  This better emulates the /usr/bin/env paradigm on Unix 
+(and may allow for more portable #! lines in general), but is apparently employed only when 
+generic "python" #! lines are present&mdash;not when #! lines are absent altogether, 
+the <I>normal case on Windows</I>, and an additional case addressed by PY_PYTHON.  
+For more background on this change, see Python issue reports: 
+<A HREF="http://bugs.python.org/issue17903">here</A> and 
+<A HREF="http://bugs.python.org/issue19141">here</A>.
+<BR><BR>
+
+
+
+<LI><B>Filename associations bug?</B>: for unknown reasons, Python 3.3+ Windows MSI installers
+can sometimes fail to properly set filename association in the Windows registry for launcher use. 
+This should automatically associate <B>.py</B> and <B>.pyw</B> file types (plus bytecode) with the 
+launcher's <B>py.exe</B> and <B>pyw.exe</B> executables, respectively.  However, I've noticed this fail 
+on 2 of 6 Windows machines tested&mdash;on 2 machines running Windows Vista and 7, Python files are 
+incorrectly associated with a former <B>python.exe</B> and <B>pythonw.exe</B> after installing 3.3; 
+on 4 other machines running XP, Vista, 7, and 8, the associations are correctly set to the launcher's 
+programs instead.  All these machines had prior Pythons installed, of various versions (3.2 and 2.6 
+where associations failed; 3.2, 3.1, and 2.5 where they worked).
+
+<BR><BR>
+Without the expected filename associations, the launcher is never invoked for scripts run without explicit "py ..."
+command lines&mdash;scripts will instead run under any Python named in the registry, <I>and will 
+happily ignore any #! lines completely</I>, despite 3.3's best intentions.  I noticed this when 3.2 was 
+still inexplicably running scripts after a 3.3 install, despite #! directives; more generally, you can 
+detect this problem in simpler terms by running a script from the command line like the following, shown here 
+on a system with incorrect associations:
+
+<PRE>
+c:\PP4E> <B>type t.py</B>
+#!/usr/bin/python3.3
+import sys
+print(sys.version)
+
+c:\PP4E> <B>t.py</B>
+3.2.2 (default, Sep  4 2011, 09:07:29) [MSC v.1500 64 bit (AMD64)]
+
+c:\PP4E> <B>py t.py</B>
+3.3.2 (v3.3.2:d047928ae3f6, May 16 2013, 00:06:53) [MSC v.1600 64 bit (AMD64)]
+</PRE>
+
+On another failer, this turns out even worse:
+
+<PRE>
+C:\PP4E> <B>type t.py</B>
+#!/usr/bin/python3
+import sys
+print(sys.version)
+
+C:\PP4E> <B>t.py</B>
+2.6 (r26:66721, Oct  2 2008, 11:35:03) [MSC v.1500 32 bit (Intel)]
+
+C:\PP4E> <B>py t.py</B>
+3.4.0a2 (v3.4.0a2:9265a2168e2c+, Sep  8 2013, 19:41:05) [MSC v.1600 32 bit (Intel)]
+</PRE>
+
+If the first command doesn't run the same highest-numbered 3.X Python installed and 
+print the same version as the second, your associations are probably incorrect.  In
+this case, the association reported by "assoc .py" and "ftype Python.File" command-line
+tools seem correct, but are apparently overridden by registry settings, and link to 
+"python.exe" instead of "Python Launcher for Windows" in the Default Programs GUI.
+
+<BR><BR>
+<I>To fix</I>: open your <B>Default Programs</B> in Control Panel (or similar), and manually 
+associate all 4 Python file extensions with the launcher's py.exe/pyw.exe executables 
+(normally installed in C:\Windows), a regrettable and error-prone step, but a one-time 
+event.  This may or may not be a "bug" in the Windows launcher (the registry is notoriously
+fragile), but it's certainly an issue; it is especially difficult to justify a mandatory
+change that requires extra work and can break existing programs, if that change itself 
+cannot be relied on to work as advertised.
+</UL>
+
+<P>
+For more on the 3.3 Windows launcher in general, see the new Appendix B in 
+<A HREF="http://www.rmi.net/~lutz/about-lp5e.html">Learning Python, 5th Edition</A>, 
+or its early draft 
+<A HREF="http://www.rmi.net/~lutz/py33-windows-launcher.html">here</A>.  The
+often prescribed alternative to environment settings mentioned earlier&mdash;adding 
+a Unix #! line at the top of every script on Windows&mdash;seems rude and extreme, 
+especially given other launcher issues like those of the former and following sections.
+</P>
+
+
+
+
+<HR>
+<H2><A NAME="s2">2) [Windows only] Fix #! lines unrecognized by new Windows launcher</A></H2>
+
+<P>
+As
+<A HREF="http://www.rmi.net/~lutz/py33-windows-launcher.html#pitfalls">described here</A>, 
+the new Windows launcher installed with Python 3.3 fails when 
+a script begins with a Unix #! line that it cannot recognize.  Some book
+example scripts used a "#!/bin/env python" pattern that was ignored on Windows
+by every Python through 3.2, but is now treated as an error by 3.3.  Such 
+#! forms are valid and even required on some Unix systems, but must be changed 
+to a launcher-accepted pattern such as "#!/usr/bin/python" or 
+"#!/usr/bin/env python" in order to run under 3.3 on Windows&mdash;a platform 
+where such lines are otherwise irrelevant.  
+
+<P>
+Note that this is true even if you use "python3" in the #! line or set your 
+PY_PYTHON=3 per the prior section; an unrecognized #! pattern fails in 3.3 
+even if it's not version-ambiguous, and even if it's valid on a Unix system.
+
+
+</P>
+<H3>In the book examples package</H3>
+<P>
+In release 1.4, this fix was applied to the #! lines at the top of the following 
+10 files, changing their "/bin/env" to "/usr/bin/env"; no other code or environment 
+changes are required:
+<UL>
+<LI>PP4E\Launch_PyDemos.pyw <I>(also changed for prior section)</I>
+<LI>PP4E\Launch_PyGadgets_bar.pyw <I>(also changed for prior section)</I>
+<LI>PP4E\LaunchBrowser.pyw
+<LI>PP4E\Internet\Ftp\Mirror\cleanall.py
+<LI>PP4E\Internet\Ftp\Mirror\downloadflat.py
+<LI>PP4E\Internet\Ftp\Mirror\downloadflat_modular.py
+<LI>PP4E\Internet\Ftp\Mirror\ftptools.py
+<LI>PP4E\Internet\Ftp\Mirror\uploadall.py
+<LI>PP4E\Internet\Ftp\Mirror\uploadflat.py
+<LI>PP4E\Internet\Ftp\Mirror\uploadflat_modular.py
+</UL>
+
+<P>
+You can locate and edit these files yourself in older example packages 
+by using the Search/Grep tool in the book's <I>PyEdit</I> GUI example on the
+package's PP4E root directory, or by running one of the directory search and 
+edit/replace utilities presented in the System Programming part of the book 
+(e.g., see search_all.py and Visitor subclasses later in Chapter 6).  Fixing 
+any additional unrecognized #! patterns lurking in the examples package is an
+officially suggested exercise. 
+
+<P>
+For more on the 3.3 Windows launcher in general, see the new Appendix B in 
+<A HREF="http://www.rmi.net/~lutz/about-lp5e.html">Learning Python, 5th Edition</A>, or its early draft 
+<A HREF="http://www.rmi.net/~lutz/py33-windows-launcher.html">here</A>.
+</P>
+
+
+
+
+<HR>
+<H2><A NAME="s3">3) Install 2-file PyMailGUI patch required for 3.3 email package change</A></H2>
+
+<P>
+As
+<A HREF="http://www.rmi.net/~lutz/pp4e-updates.html#py33emailfix">covered here</A>,
+Python 3.3 changed a standard library email utility that the book's largest example, 
+<I>PyMailGUI</I>, depends on to format non-ASCII email address names for display.  The 
+patch is simple, and spans just two files:
+
+<UL>
+<LI>
+<A HREF="http://www.rmi.net/~lutz/py33patch.py">PP4E\Internet\Email\PyMailGui\py33patch.py</A>, 
+a new file that restores the prior version of the email utility
+
+<LI>
+<A HREF="http://www.rmi.net/~lutz/SharedNames.py">PP4E\Internet\Email\PyMailGui\SharedNames.py</A>,
+a modified file which runs an import of the patch to affect the change
+</UL>
+
+</P>
+<H3>In the book examples package</H3>
+<P>
+The new and modified file of the patch are automatically included in 
+PyMailGUI's source code directory of the new release 1.4 of the examples 
+package; no other code or environment changes are required.
+</P>
+
+
+
+
+<HR>
+<H2><A NAME="s4">4) Install the Pillow drop-in replacement for the PIL image library</A></H2>
+
+<P>
+As
+<A HREF="http://www.rmi.net/~lutz/pp4e-updates.html#pil">mentioned here</A>,
+the third-party PIL image-processing library used by examples in the book has been subsumed
+by the Pillow fork&mdash;an open source drop-in replacement for PIL which is being actively 
+supported for use in newer Python releases.  You'll want to fetch and install Pillow to use 
+most of the book's image examples, including the <I>PyPhoto</I> viewer, which employs image 
+display, thumbnail generation, and resize operations.  I've also used Pillow successfully for
+EXIF photo metadata <A HREF="http://www.rmi.net/~lutz/tagpix.py">tag processing</A>.
+
+<P>
+Pillow is currently  
+<A HREF="https://pypi.python.org/pypi/Pillow/">available at this site<A>.  For example, all 
+image-based book examples run fine under on Python 3.3 after installing the following on my 
+Windows 32- and 64-bit systems, respectively; see PIL's site for other Pythons and platforms:
+
+<UL>
+<LI><A HREF="https://pypi.python.org/packages/3.3/P/Pillow/Pillow-2.2.1.win32-py3.3.exe#md5=a8bc7384fa702a4d7ecb0ee2381f6e89">Pillow-2.2.1.win32-py3.3.exe</A>
+
+<LI><A HREF="https://pypi.python.org/packages/3.3/P/Pillow/Pillow-2.2.1.win-amd64-py3.3.exe#md5=b838dd2bad715ca4a326a234d5c867e2">Pillow-2.2.1.win-amd64-py3.3.exe</A>
+</UL>
+
+
+</P>
+<H3>In the book examples package</H3>
+<P>
+No fix was applied, because the example package doesn't ship 3rd-party systems as bundled 
+items as a rule; you'll want to fetch and install Pillow for your Python and platform, from 
+its official site above.
+</P>
+
+
+<HR>
+<A HREF="http://www.rmi.net/~lutz/about-pp4e.html">
+    <IMG SRC="http://www.rmi.net/~lutz/ora-pp4e-tiny.jpg" ALIGN=left ALT="[PP4E cover]" height=47 width=36 border=1 vspace=2 hspace=15></A> 
+<A HREF="http://www.rmi.net/~lutz/about-pp4e.html">
+    Book's main page</A>
+</BODY>
+</HTML>

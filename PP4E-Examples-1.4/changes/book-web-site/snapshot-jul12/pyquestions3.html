@@ -1,0 +1,743 @@
+<HTML>
+<TITLE>Answer me these questions three...</TITLE>
+<BODY>
+
+<P align=right><I>January-July, 2012</I></P>
+
+
+<H1>Answer Me These Questions Three...</H1>
+
+
+<P>
+It's official: I've now been using and advocating the 
+<A HREF="http://rmi.net/~lutz/about-python.html">Python</A> computer programming language
+for two decades.  I have no idea where the time went (the current theory is that much 
+of it wound up on the West Coast).  It's been a 
+<A HREF="formalbio.html">busy time</A>.  All told, I've spent 15 of
+those years teaching 250 live Python classes, and 17 years writing 4 editions each of 
+my 3 Python books.  Despite the passage of time, I look forward to teaching and writing 
+about Python for years to come.  After two decades, writing Python scripts is still too
+much fun to stop.  
+
+<P>
+That said, it's impossible to not be at least a little reflective when reaching 
+a major milestone in any career path.  I've watched Python grow from the new 
+kid on the scripting languages block in 1992 to one of the top programming languages
+used in the work today.  Especially given Python's much larger user baser and its 
+presently divisive 2.X/3.X versions fork, it's only natural to wonder what's next.  
+I might mull over such things more than the average Python user, of course, but my 
+long sojourn as Python programmer, teacher, and advocate probably affords me a
+somewhat unique perspective on them.
+
+<P>
+With the benefit of some hard-won Python historical context, then, here are 
+a few observations about Python's future. To me, 3 questions seem paramount to 
+it, and capture both the dilemmas and opportunities facing Python today:
+
+<OL>
+<LI>
+<A HREF="#q1">
+Has Python grown too complex, or is it only as complex as it must be
+given its many roles, and still much simpler than alternatives like
+Java, C#, and C++?
+</A>
+<BR><BR>
+
+<LI>
+<A HREF="#q2">
+Should Python developers strive for a stable base that its current 
+users can rely on, or pursue a more dynamic evolution independent of those 
+users?
+</A>
+<BR><BR>
+
+<LI>
+<A HREF="#q3">
+Do some think that Python is easier to learn than it is, or have
+they simply been misled by the unrealistic claims of marketing?
+</A>
+</OL>
+
+These queries raise complex and interrelated issues regarding the complexity, stability, 
+and learning curve of Python.  And like most controversial issues, they come with 
+valid points on both sides of their fences.  In the rest of this article I'll pose 
+these questions three<A HREF="#note1"><sup>1</sup></A> and explore their major 
+arguments, both pro and con.  You'll have to work on the answers yourself, though; 
+like all open source systems, Python's future is best charted by its users.
+</P>
+
+
+
+
+
+<H2><A name="q1">1) Complexity</A></H2>
+
+
+<H3><I>The question</I></H3>
+
+<P>
+Has Python grown too complex, or is it only as complex as it must be
+given its many roles, and still much simpler than alternatives like
+Java, C#, and C++?
+</P>
+
+
+<H3><I>The arguments</I></H3>
+
+<P>
+A simple line and character count would convince most observers that
+Python is still much easier to use than most of its contemporaries.  
+Thanks to its dynamic typing, built-in toolset, and minimal syntax, 
+most Python scripts continue to weigh in at 1/3 to 1/5 as much code 
+as they'd be in Java or C++.  You can get much more done in Python 
+with much less typing, and you can read your code after you do so. 
+
+
+<P>
+This is as true a distinction for Python today as it was at its beginning,
+and is undoubtedly one of the main reasons that Python continues to attract 
+such a wide audience.  Its relative ease of use remains a compelling
+feature to many &mdash; from curious newcomers and occasional scripters,
+to avid hobbyists and professional developers.
+
+<P>
+Still, with the addition of tools like generators, context managers, 
+decorators, and Unicode, Python has clearly grown more complex over the 
+years.  One could even make a case that it may have lost some of its 
+original focus on simple scripting along the way, a model now championed 
+by newer arrivals on the programming language scene such as 
+<A HREF="http://lua-users.org/wiki/LuaVersusPython">Lua</A>.
+
+
+</P>
+<H4>Power versus simplicity</H4>
+
+<P>
+The upside to Python's growth is that it is substantially more powerful 
+today, and better suited to larger-scale systems development than simpler 
+tools.  It seems to fill a midlevel niche between scripting languages
+(like Lua and Tcl) and systems languages (like Java and C++), but can 
+still usually serve in both roles if needed.  With support for procedural,
+object-oriented, and function programming paradigms, Python's present 
+scope is broader than it was in the past. 
+
+<P>
+But the problem with adding powerful new tools is that you must add 
+powerful new tools &mdash; and burden your new and existing users with 
+them in the process.  This has both intellectual and pragmatic consequences.
+As I point out in a sidebar at the end of the latest 
+<A HREF="http://www.rmi.net/~lutz/about-lp4e.html">Learning Python</A>, as 
+soon as one person uses such a new or advanced tool in their code, it's 
+no longer optional for anyone who touches that code.  It raises the 
+intellectual bar for most of the community.
+
+
+</P>
+<H4>Power versus scope</H4>
+
+<P>
+And while Python is very broadly used, some systems which may have deployed 
+it as a scripting layer in the past are today choosing lighter-weight options.
+See the 
+<A HREF="http://www.google.com/search?q=python+lua+game+scripting">gaming</A>
+domain for notable 
+<A HREF="http://www.wowwiki.com/Lua">examples</A>; whether warranted or 
+not, there is a growing conception that Python has become too complex or 
+large for some potential embedded application roles that it once may have 
+addressed.  More features mean more power, but also less scope.<A HREF="#note2"><sup>2</sup></A>
+
+<P>
+I've heard both sides of this issue from Python newcomers and veterans alike.
+While some applaud new language features, others may be hesitant to base 
+a project on what they perceive as shifting sands, or worse, bloat-ware.  
+Most agree that recent growth has nudged Python's scope towards larger 
+scale development and away from simple scripting tasks, though they may 
+differ on the degree and merit of that shift.
+
+<P>
+Whether Python is viewed as a simpler Java, a more powerful Lua, or a class 
+unto itself, its focus and identity are bound to affect its reach in years 
+to come.  What Python <I>is</I> has always been up to its users, of course, but 
+we'd do well to safeguard the identity and scope that made Python successful in
+the first place.  Feature creep is also related to the broader issue of stability, 
+and next question.  
+</P>
+
+
+
+
+
+<H2><A name="q2">2) Stability</A></H2>
+
+
+<H3><I>The question</I></H3>
+
+<P>
+Should Python developers strive for a stable base that its current 
+users can rely on, or pursue a more dynamic evolution independent of those 
+users?
+</P>
+
+
+
+<H3><I>The arguments</I></H3>
+
+<P>
+Python's long history of backward compatibility came to a screeching halt 
+in late 2008 with the release of version 3.0, an intentionally incompatible 
+version of the language intended to resolve longstanding legacy concerns.  
+Even within the 2.X and 3.X lines, though, change has always been constant;
+some of it broke existing code, and not all of it has been in the name of 
+fixing genuine problems.  This seems almost indigenous to open source projects,
+but it has grown a large enough concern among Python newcomers to merit 
+careful consideration by Python's developers.
+
+
+</P>
+<H4>The few versus the many</H4>
+
+<P>
+By most ballpark estimates, there are roughly 1M Python users (plus or minus
+a few).  By contrast, some 1K people attend PyCon conferences, and the number 
+of active Python core developers is on the order of just 100.  That means the 
+user base outnumbers conference goers by 1,000 to 1, and developers by 10,000 
+to 1.  Put another way, conferences and core developers reflect just 0.10% and
+0.01% of the Python user base, respectively.<A HREF="#note3"><sup>3</sup></A>
+
+<P>
+This is as it must be: not everyone can attend conferences, and Python 
+maintenance is a volunteer effort.  But when these smaller groups make changes
+that impact all, this seems a case of the few dictating to the many in the 
+extreme.  And when these few break existing code, there must be very clear 
+cause if they hope to keep the many in their camp.
+
+
+</P>
+<H4>Python 3.X versus Python 2.X</H4> 
+
+<P>
+This massive difference in scale between Python users and Python developers 
+is also a likely large part of the reason that the audience for the non-backward
+compatible Python 3.X is still just a fraction of the 2.X audience, more 
+than 3 years after 3.X's release, and more than half way through the 5 year
+worst case projection for 3.X's rise to dominance.  The user base seems to be 
+voting with its downloads and ports (or lack thereof).
+
+<P>
+As one metric, Python 2.X is still downloaded for Windows at 
+<A HREF="http://www.python.org">python.org</A> roughly
+but consistently <I>3 times</I> as often as Python 3.X as of today, January 2012. 
+By some analyses, the actual 2.X/3.X gap is likely to be even wider than this 3:1
+ratio implies.<A HREF="#note4"><sup>4</sup></A>  But even with a positive spin, 
+3.X now has less than 2 years left on its 5 year plan, to overcome the current 
+3:1 spread and subsume 2.X.  That may be asking a lot.
+
+<P>
+As another measure, many popular systems still aren't yet available in 3.X form, 
+including Django and wxPython; see python.org's 
+<A HREF="http://www.python.org/3kpoll">survey</A> for an 
+up-to-date list.  Of note, Google's popular  
+<A HREF="http://code.google.com/appengine/docs/whatisgoogleappengine.html">App Engine</A>
+Web development system is also 2.X-only today, with an upcoming upgrade based on 
+<A HREF="http://code.google.com/appengine/docs/python/runtime.html">Python 2.7</A>.  
+Python 3.X's potential to supersede 2.X is still unclear, well into the second half 
+of this milestone's projected timeframe.
+
+<P>
+Ironically, the most plausible explanation for this slow (or limited) adoption is 
+Python 2.X's success.  It may be that 2.X is too widely used and 3.X is too much of a leap 
+for the shift to occur.  To some, it seems increasingly likely that 2.X and 3.X 
+will coexist indefinitely, as distinct projects &mdash; both active and widely 
+used, but receiving fewer developer cycles than a single solution might.  
+You can't often pull a well-worn rug out from under 1M users; they won't gladly
+leap to another, and are usually too heavy to move in any event. 
+
+
+</P>
+<H4>Stability versus sandbox</H4>
+
+<P>
+On the other hand, some view change as an asset that keeps Python up to date 
+and <I>relevant</I>.  Adding new features to a tool can help avoid decline in a 
+marketplace of ideas as dynamic as the software field (this is also why Python
+standardization efforts have never gotten off the ground<A HREF="#note5"><sup>5</sup></A>).  
+Moreover, some have long seen Python as both a <I>sandbox</I> for exploring new ideas, 
+and a sort of <I>teaching project</I> for newcomers to cut their large-scale software 
+development teeth on.  In fact, many in the Python developers group have explicitly 
+encouraged relative beginners to get involved for this very purpose. 
+
+<P>
+But is this really the best context for amateurs to learn from their mistakes?  
+There seems an inherent danger in allowing the less experienced to experiment 
+by changing a tool which so many rely on: focus and quality can both sometimes
+suffer. See <A HREF="http://www.rmi.net/~lutz/lp4e-updates-notes-recent.html#py320inputbug">this post</A> 
+for one recent quality example in Python 3.2 &mdash; a temporary breakage of Python's
+<B>input()</B> function on Windows, a fundamental and widely used tool.  The initial 
+I/O performance problems in Python 3.0 
+<A HREF="http://www.rmi.net/~lutz/python30-speed-tests.html">described here</A> 
+may also fall into this category &mdash; though made a moot point by later 3.X 
+releases, 3.0 was so weak on this front (up to 1,000 times slower than 2.X in 
+worst cases) as to be unusable in some contexts, and considered by many to be 
+beta quality code.
+
+<P>
+All software has bugs, of course (including mine), and most software evolves
+over time (including mine).  But there is a social responsibility issue here too:
+software that is as widely used as Python merits extra caution, lest quality
+issues alienate its user base.  In the case of the 3.2 input() breakage, many of 
+the posts I've seen suggest dumping 3.X and going back to 2.X &mdash; probably not 
+the outcome that 3.X's developers intended.
+
+<P>
+Bugs aside, some of Python's recent changes also underscore how its focus can seem
+to shift according to the whims of its current developers.  Its new emphasis on 
+<I>functional programming</I> tools like generators and closures, for example, makes Python 
+more powerful, but also more difficult to learn for those without backgrounds in this
+model.  Python becomes a multi-paradigm tool, with multi-paradigm prerequisites 
+&mdash; its users today must generally know <I>both</I> object-oriented and functional 
+techniques, if they are to understand all the code they are likely to encounter in 
+the wild.  And its users today must accept that new paradigms might creep into the 
+language tomorrow, and base projects on what might be a perpetually moving target.
+
+
+</P>
+<H4>Preferences versus fixes</H4>
+
+<P>
+Even much narrower changes made by Python's developers can sometimes seem to stem 
+from little more than the personal preferences of the initiator.  See 
+<A HREF="http://www.rmi.net/~lutz/lp4e-updates-notes-recent.html#py32structchange">
+this post</A> for some recent examples in this department &mdash; a change to the 
+<B>struct</B> module which removed existing and documented functionality, and
+a <B>cgi</B> module change that relocated a very widely used tool &mdash; both 
+of which occurred long after 3.0's open season of incompatible change, and serve
+as recent representatives of a much broader category of Python change.
+
+<P>
+I don't mean to unfairly single out these two changes or their advocates (some 
+of whom I count as personal friends) and could list dozens of similar examples,
+but these two reflect a culture that seems to surround Python development today.
+In both cases, the modifications made will break existing code, not in the name of
+fixing bugs, but only for the sake of the aesthetic whims of individuals or very 
+small groups working with virtually no input from the user base at large.
+
+<P>
+One could also argue the merit of these changes, of course: the automatic 
+UTF-8 encoding in struct may seem inconsistent to some (though in 3.0 through 3.2,
+DBM files also auto-encode str keys per UTF-8, and ftplib auto-encodes lines per 
+Latin-1), and HTML escaping has roles beyond CGI scripting.  But it shouldn't 
+matter &mdash; in a tool as widely used as Python, once something is supported 
+in released code, and is formally documented as being supported in the manuals, 
+the window of retrospective analysis should be closed except in the case of true 
+bugs.  How else can anyone rely on such a tool?  
+
+<P>
+Unfortunately, this type of change has been a relative constant in Python's history. 
+Having been on the front lines of Python documentation and teaching since 1995, I know 
+something of what I speak.  Especially in the larger Python world of today, what may 
+seem interesting to core developers often comes across as arbitrary and even aggravating 
+to the user base.  
+
+<P>
+These people aren't "haters" &mdash; a label tossed out sarcastically at a recent Python
+conference.  They are having an honest and reasonable reaction to a crucial issue in this 
+domain: Developers of commercial compilers, and established software in general, do most of
+their work by <i>responding</I> to requests from actual users, not by <I>initiating</I> requests 
+on their own.  Open source projects often seem to follow the opposite path, even when the
+changes initiated by their developers are incompatible with masses of existing user code.
+
+<P>
+From the outside, it would be impossible for some not to see this development model as 
+a sort of <I>anarchy</I> at best, and a <I>tyranny of the minority</I> at worst.  Such
+states can flourish in an open source project only under a silent user base, but most
+people are simply too busy using Python to monitor its developers' actions.  The larger 
+consequence of subjective change by the few is to further cloud Python's perceived 
+stability.  Barring a standardized version of Python (which, as mentioned earlier, 
+has yet to gain traction), developer restraint seems the only solution 
+here.<A HREF="#note6"><sup>6</sup></A>
+
+
+</P>
+<H4>Isolation versus support</H4>
+
+<P>
+A final argument raised in this department is that users of an open source tool
+are in control of their own destiny: they can stick with the version they've
+fetched, and need not upgrade to new, incompatible releases.  This seems a bit
+thin to me.  If users never upgrade as a tool evolves, they soon become badly 
+out of date with libraries, tools, on-line help, and books.  This is true
+even if users maintain their Python themselves: while their dated code might
+run in some newer Pythons, they will still wind up well behind the curve in 
+terms of both resources, and the language's ecosystem at large.
+
+<P>
+Python's history is a good case in point here: code written in Python today looks 
+very different than it did in the past.  In fact, I commonly write scripts which 
+contain almost no lines that would have run in a Python of just a few years ago.  
+If users had installed 2.0, for instance, and never upgraded, their code would be 
+badly out of date today, and nearly every available learning resource would be 
+largely irrelevant to their code.  As is, today's users must take care with books to
+select from one that covers 2.X, 3.X, or both.  Even in open source, users do have
+to keep up with new releases, just as they must keep up with new language features,
+or risk being alienated from most forms of support. 
+
+<P>
+This <I>stability-versus-relevance</I> debate reflects a basic difference of philosophies, 
+and is a core dilemma of open source in general.  As a former compiler developer I 
+know that experimenting with language features can be fun.  But as an author and trainer 
+who has taught thousands of Python users in person, I also know that stability becomes 
+crucial once a system grows to be as widely used as Python.  For better or worse, this 
+tradeoff bears directly on the choice of tools like Python in production environments, 
+and will likely continue to be a factor in Python's future.  It also impacts the size of 
+the learning task for Python newcomers, the next and final question's theme.
+
+</P>
+
+
+
+
+
+<H2><A name="q3">3) Learning Curve</A></H2>
+
+
+<H3><I>The question</I></H3>
+
+<P>
+Do some think that Python is easier to learn than it is, or have
+they simply been misled by the unrealistic claims of marketing?
+</P>
+
+
+<H3><I>The arguments</I></H3>
+
+<P>
+As a trainer and writer, I've confronted this question directly and personally 
+for some time.  It has only grown more acute as Python has shed some of its original
+simplicity over the years.  I took a first pass over this topic in a post on my book
+site, <A HREF="http://www.rmi.net/~lutz/lp4e-updates-notes-recent.html#s0d">
+<I>How long will it take to learn Python?</I></A>, and addressed it in my training
+site's 
+<A HREF="http://learning-python.com/about.html">Mission statement</A>, so I won't 
+repeat those documents' learning curve notes in full here.  In short, it seems time 
+to start setting more realistic expectations about the effort required to learn a
+programming language like Python.  This is true both in the publishing and training 
+industries, and in the software field at large.
+
+
+</P>
+<H4>Realism versus inspiration</H4>
+
+<P>
+Let's be honest: programming is both highly rewarding and deeply challenging.
+Except for very limited scripting contexts, software development takes years 
+to master.  Understating this does a disservice both to newcomers and to
+the field at large.  On the one hand, a misunderstanding of the learning curve 
+can be an obstacle to Python adoption when expectations lead to frustration 
+among beginners.  On the other, the software field desperately needs skilled 
+engineers who were willing to invest the time and focus required to master 
+its content; in their absence, quality can become problematic for all 
+stakeholders.   
+
+<P>
+The downside to such brutal realism is that it may scare away some potential
+or budding programmers who might have otherwise gone on to become talented 
+practitioners.  Teaching is as much about inspiring as it is about knowledge 
+transfer.  Encouraging newcomers is never wrong, as long as it's honest.  After
+all, we all were beginners once, and many of us owe our careers to such positive
+reinforcement.  We need only be more accurate in our promises.  While subsets 
+of Python can be had relatively quickly by experienced developers, no newcomer can
+fully master it in 24 hours, 3 days, or any other measure which masks the true
+size of the learning task.  This may not be welcome news to a generation accustomed
+to shortcuts in other domains, but we need to be clear that there is no 
+"<A HREF="http://en.wikipedia.org/wiki/Guitar_Hero"><I>Software Hero</I></A>" 
+to be had.  Python can be great fun, but programming it well requires substantial
+effort.  It never was an N-hour skim, and its feature set growth in recent years 
+has only amplified this point.<A HREF="#note7"><sup>7</sup></A>
+
+<P>
+In worst cases, I've seen sites which seem to promise immediate career 
+benefits for their training offerings.  This is almost common practice
+at some sites selling certificate programs &mdash; a resume benchmark
+which many employers filling worthwhile positions would either ignore or 
+consider a strike against a candidate.  While jobs might be rewarding and 
+plentiful for experienced Python programmers in the long run, implying that 
+this is somehow automatic before the first lesson is just plain wrong.  
+At the same time, understating software engineering's entry requirements this
+way can serve to <I>denigrate the entire field</I>.  Why would anyone promise 
+shortcuts to proficiency in a highly technical field? And why would anyone expect
+to find them?  Software is a lot more interesting and substantial than some of 
+the marketing out there implies.
+
+<P>
+It's important to note that this idea that nonprogrammers should be able to 
+program is not new to Python, or even scripting languages in general.  In 
+fact, it's been around since the dawn of computer science.  One of the main 
+design goals of <a HREF="http://en.wikipedia.org/wiki/COBOL">COBOL</A>, 
+a programming language invented in 1959 and still used widely in business 
+applications today, was to provide an English-like syntax so that,
+to quote one source: "non-programmers&mdash;managers, supervisors, and 
+users&mdash;could read and understand the code."  Noble goal to be sure, 
+but this field has a very long history of confusing the skill level 
+needed to understand individual lines of code with that required to 
+perform full-scale systems development of larger programs.  As the 
+next section argues, both roles have merit, but we blur the line 
+between them at the peril of our field.
+
+
+</P>
+<H4>Quantity versus quality</H4>
+
+<P>
+A counter argument I've heard on this front is that some tasks require
+less skill, and producing more developers is better than fewer even if
+they aren't masters of the domain, because this means more applications 
+will be created.  Per this argument, not everyone needs to be a proficient 
+programmer to do programming.  There is a big difference between 
+software <I>hobbyist</I> and <I>professional</I> &mdash; a 
+distinction too often overlooked by the 
+<A HREF="http://www.drdobbs.com/architecture-and-design/240000432?cid=DDJ_nl_upd_2012-05-15_h&elq=b30853e8969f43c68d1f5d76e3527d0a">technical press</A>. 
+Crossing the threshold from the former to the latter requires extra 
+knowledge, experience, and sacrifice which some tasks may not require.
+
+<P>
+To be sure, many software domains owe either their 
+existence or their recent growth to this viewpoint.  For example, in some 
+popular Python application domains such as scientific programming, software 
+development is often considered to be a secondary skill, and given 
+limited focus.<A HREF="#note8"><sup>8</sup></A>  Web programming and 
+system administration are sometimes similarly seen as less technically 
+demanding than other tasks, and ideal scripting domains.  If pressed,
+many Python users today would happily consider themselves more hobbyist
+than professional, and disinclined to wade any further into the software
+pond than their specific, narrow goals require.
+
+<P>
+Such a liberal attitude towards entry requirements may make perfect sense
+for some code of limited scope.  But most programs don't fall into this 
+category; they are used, reused, and then reused again, and often by other 
+than their original authors.  More fundamentally, the real danger in 
+blurring the line between hobbyist and professional is that it discounts 
+the huge importance of <I>quality</I> in software: more
+applications is not an absolute good, if those applications don't work as 
+they should.  Poorly written software can become a major liability, both for 
+its users, and for other programmers who must later maintain it.  In truth, a 
+widespread lack of quality in applications could prove a much larger negative 
+for the software field than a dearth of applications, and might even contribute
+to a backlash against computerization in general.
+
+<P>
+And if you aren't buying that, come back and read this again the next time your 
+game console freezes up; your music player does the wrong thing with your
+files; your social networking site does the wrong thing with your identity;
+your car's electronic control system malfunctions; your Blu-ray player
+chokes on an incompatible disc or device; or your credit card balance is botched by 
+a Web page or an "app" &mdash; most of which I count as recent personal experience.
+Quantity doesn't trump quality in this domain.  If the software that people depend on 
+doesn't work, people will eventually stop depending on it.<A HREF="#note9"><sup>9</sup></A>  
+
+<P>
+There are many possible futures, of course, but in one there is a world 
+in which some applications grow so unusable that they are relegated to 
+the cultural fad pile (to be greeted warmly, perhaps, by 8-track players
+and CB radios).  That world may seem unlikely today, but it's dire enough 
+to merit caution when setting expectations and agendas for the next wave 
+of newcomers eager to get into the field.
+
+</P>
+
+
+
+
+<H2>Closing Thoughts</H2>
+
+<P>
+So there you have it: a few points to ponder from someone who has spent
+two decades in the Python trenches.  I suspect that Python's future may 
+hinge on such questions, but they are too rich to explore further here, 
+where they'll have to remain asked but unanswered.  Ultimately they are 
+up to the Python community to resolve over time.  I look forward to 
+watching the resolutions continue to unfold.  
+
+<P>
+For my part, I don't believe the sky is falling, do not think Python 3.X will
+kill Python, and expect that people will continue to be attracted to what 
+still seems a much nicer way to program machines than any of the alternatives.
+One of the great rewards of teaching Python is the common 
+reaction of students when they realize how much easier their work can 
+be with this tool.  While Python might not be the radical paradigm shift that 
+may someday free us from the shackles of the  
+<A HREF="http://www.rmi.net/~lutz/whats-a-programming-language.html">
+Von Neumann computer architecture</A>
+altogether, it does represent an incremental step forward, and is still 
+good news for software developers today.
+
+<P>
+But judging from what I've seen recently of the real world in which people 
+evaluate and learn Python, the answer that seems most perilous is status 
+quo.  Mature projects merit mature perspectives.  The model normally 
+followed by Python developers in the past &mdash;  hacking as they wish 
+and letting the chips fall where they may &mdash; might be fun and may 
+have worked well in Python's early growth years, but there's a lot more 
+to think about today.  Whether Python is a tool for hobbyists or professionals, 
+a project focused on sandbox or stability, or everything to everyone at once, 
+I suspect that its perceived identity will probably be more important to its 
+future than any latest and greatest language feature.
+
+<P>
+A more thorough retrospective at the two-decade milestone of my Python career
+would undoubtedly include attack ships on fire off the shoulder of Orion (and 
+that sort of thing), but is thankfully beyond this article's scope.
+</p>
+
+<P>
+<I>--Mark Lutz (<A HREF="http://learning-python.com">http://learning-python.com</A>, <A HREF="http://www.rmi.net/~lutz">http://rmi.net/~lutz</A>)</I>
+</P>
+
+
+
+<P>
+<HR>
+
+<B>Endnotes</B>
+
+<P>
+<A name="note1"><sup><B>1</B></sup></A> 
+Yes, this article's title is a Monty Python
+<A HREF="http://www.google.com/search?q=answer+me+these+questions+three+monty+python">reference</A>.
+
+
+<P>
+<A name="note2"><sup><B>2</B></sup></A> 
+But game programming is done regularly in Python too.  A major counterexample 
+in this domain, the popular <A HREF="http://www.eveonline.com/">Eve Online</A>
+massively multiplayer online game is heavily based on Python, both on the
+client and server.  This seems to use Python as a core development language,
+though, not in an embedded scripting role.  One note about Eve Online's 
+Python use, which also describes its upgrade to 2.7 as well as its reluctance
+to upgrade to 3.X, lives 
+<A HREF="http://www.eveonline.com/devblog.asp?a=blog&bid=786">here</A>. 
+There's also a quote from Eve Online on 
+<A HREF="http://www.python.org/about/quotes/">this</A> page, and much more about 
+game programming in Python 
+<A HREF="http://wiki.python.org/moin/PythonGames">here</A>.
+
+
+<P>
+<A name="note3"><sup><B>3</B></sup></A> 
+Interestingly, the ratio of PyCon attendees to Python users at large is 
+roughly the same as the ratio of readers who post book reviews about my 
+books on web sites to the books' customer base at large &mdash; about
+<A HREF="http://www.rmi.net/~lutz/lp4e-updates-notes-recent.html#s3">1 in 1000</A>.
+The few do drown out the many on the Web.  <I>Update: In 2012 Pycon attendance 
+shot up to over 2,000 and sales of my books reached half a million units, 
+but the user-base ratios in this doucument are still fairly accurate, at
+least to an order of magnitude, if possibly off by a small factor.</I>
+
+
+<P>
+<A name="note4"><sup><B>4</B></sup></A> 
+I analyze Python downloads at python.org using the site's 
+<A HREF="http://www.python.org/webstats/">webstats page</A>, collecting KBs 
+downloaded for the top 2.X and 3.X Windows install files, and dividing by 
+file size to get units.  This reflects Windows users only, and is probably 
+skewed to artificially inflate 3.X's popularity, because it doesn't fully account for  
+the large existing 2.X user base, or users of systems with preinstalled 2.X Pythons.
+Linux, Mac OSX, and many Python-scripted packages typically come with 2.X as their
+default Python today, and most Python newcomers would probably be more inclined
+to fetch the latest and greatest version, 3.X.  Still, the 3:1 ratio for 2.X:3.X 
+Windows downloads has been fairly consistent for some time, suggesting at least 
+that the adoption rate for 3.X is still slow, regardless of its true magnitude,
+and nowhere near the 3.X dominance forecast by some.  <I>Update: this 3:1
+ratio for 2.X to 3.X downloads at python.org still holds true as of July, 2012.</I>
+
+
+<P>
+<A name="note5"><sup><B>5</B></sup></A> 
+Though a <I>standardized version</I> of Python might address many of the issues raised in 
+this article: it would provide a stable base which users could rely upon, and 
+could ease the learning process by removing the specter of perpetual change from
+newcomer curriculums.  It's not impossible that Python 2.7, the last of the 2.X line, 
+might become a <I>de facto</I> standard of sorts, due to both 2.X pervasiveness,
+and the fact that 2.7 is no longer being actively changed.  In this scenario, 2.7 would
+be base Python, and 3.X would be an experimental branch &mdash; which is one way to 
+interpret the current 2.X/3.X adoption rates.  The future remains to be seen, but 2.X's still
+much larger user base probably controls it at least as much as 3.X developers.
+
+
+<P>
+<A name="note6"><sup><B>6</B></sup></A>
+For two more examples in this category, see the just-announced 3.3 decision to deprecate 
+<A HREF="http://docs.python.org/dev/whatsnew/3.3.html#deprecated-python-modules-functions-and-methods">
+distutils and FTP.nlst()</A>, widely used tools both.  You should judge the merits of 3.3's new 
+<A HREF="http://docs.python.org/dev/whatsnew/3.3.html#pep-380-syntax-for-delegating-to-a-subgenerator">yield from...</A> and
+<A HREF="http://docs.python.org/dev/whatsnew/3.3.html#pep-409-suppressing-exception-context">raise...from None</A> 
+language extensions for yourself, but they may be pushing Python complexity further than some wish.
+There is good work being done in 3.X too, of course, but some of it 
+will be very difficult for impacted users not to view as arbitrary preference of core developers.
+I encourage anyone impacted by backward-incompatible
+changes to register a complaint in Python's development channels. 
+It's your language, after all.  For details on reporting such things, read
+<A HREF="http://wiki.python.org/moin/Asking%20for%20Help/How%20can%20%22normal%22%20users%20report%20bugs%20in%20Python%20or%20the%20documentation%3F">
+this wiki page</A>.  The reporting process seems a bit more difficult than 
+it might be, but is probably worth the effort when changes impact your code.
+Open source development need only seem like anarchy or tyranny if its users 
+silently accept such a fate.
+
+
+<P>
+<A name="note7"><sup><B>7</B></sup></A> 
+Full disclosure: Like most people who wrote books or did 
+training in the software development field in the last 2 decades, I've probably
+made a few learning curve underestimates myself, though in my defense, mine were
+intended to be about the curve for already experienced programmers, not true 
+beginners.  In fact, the latter group was explicitly removed from the target 
+audience of my books' content early on once it became clear how distinct their
+needs were (and very shortly after I started receiving emails asking for help
+running a text editor).  Still, misconceptions can be difficult to avoid,
+especially those that have permeated a field since its inception.
+
+
+<P>
+<A name="note8"><sup><B>8</B></sup></A>
+Numeric and scientific programming is a major domain for Python; for a
+quick sample, see 
+<A HREF="http://wiki.python.org/moin/NumericAndScientific">this page</A>.
+For an example of the low esteem in
+which many in the scientific community hold programming, see the first bullet on 
+<A HREF="http://www.enthought.com/company/">this page</A>: 
+"<I>Scientists first, developers second.</I>"  I don't mean to 
+single out this source unfairly either &mdash; Enthought provides a popular turnkey 
+Python distribution which includes numeric and scientific programming extensions, and 
+offers training specific to this domain which I often recommend as a follow-up to my 
+general Python class &mdash; but this also seems 
+representative.  A student in a Python class I once taught at Los Alamos came up 
+during a break to tell me that "Scientists can program, but programmers cannot do science."  
+When I saw his code later, I realized he was probably wrong on at least one count.
+
+
+<P>
+<A name="note9"><sup><B>9</B></sup></A>
+It's easy to find evidence on the Web of just how far the underestimation of requirements
+for careers in software engineering seems to have spread, and how broad the challenge to 
+quality may be.  Here's a
+<A HREF="http://ask.metafilter.com/161036/Python-Programming-How-to-go-from-Amateur-to-Pro">
+typical example</A>
+from a blog picked at random (and with no offense intended to its participants); the word 
+on the Internet street seems to be that amateurs can get into programming without any formal
+training, in part by contributing to an open source project like Python to flesh out their 
+resumes.  As for the blog's other advice, I'll let you ponder the merit of laptop stickers 
+and coffee shops as career advancement tools.  We all started out as hobbyists or amateurs,
+of course.  Most of us also understood the importance of education and experience in a 
+technical field.
+</P>
+
+
+<HR>
+
+<P>
+<I>Latest revision: July 10, 2012 (first posted: January 12, 2012).</I><BR>
+Have a comment on this article? <A HREF="mailto:lutz@rmi.net">send an email</A>.<BR>
+Back to my <A HREF="http://www.rmi.net/~lutz">book page</A>.<BR>
+Back to my <A HREF="http://learning-python.com">training page</A>.
+</P>
+</BODY></HTML> 

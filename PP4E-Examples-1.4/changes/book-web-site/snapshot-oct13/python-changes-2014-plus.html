@@ -1,0 +1,174 @@
+<HTML><BODY>
+
+<H1>Post-Publication Python Changes</H1>
+
+Contents:
+
+<UL>
+<LI><A href="#section1">Introduction</A>
+<LI><A href="#section2">Python 3.4 Changes</A>
+</UL>
+
+
+
+
+
+</P>
+<H2><A name="section1">Introduction</A></H2>
+
+<P>
+The 5th Edition of Learning Python published in 2013 has been updated to 
+be current with Pythons 3.3 and 2.7.  Especially given its introductory 
+tutorial role, this book should address the needs of all Python 3.X and 2.X 
+newcomers for many years to come.
+
+<P>
+Nevertheless, the inevitable parade of changes that seems inherent in  
+open source projects will likely continue unabated in each new Python 
+release.  Many such changes are trivial, and often optional, extensions 
+which will likely see limited use, and may be safely ignored by newcomers.
+
+<P>
+And to some, many Python changes may seem <I>features in search of use 
+cases</I>&mdash;mutations considered clever by their advocates, but which
+have little clear relevance to real Python programs.  This is a substantial 
+downside of Python's dynamic, community-driven development model, which is
+most glaring to those on the leading edge of new releases, and which this book
+addresses head-on, especially in its introduction and conclusion
+(Chapters 1 and 41).
+
+<P>
+That being said, new Python features become <I>required reading</I> for 
+you if they appear in code you use, and can become a factor if you upgrade 
+to Python versions in which they appear.  Consequently, this page briefly 
+chronicles changes in Python since the 5th Edition's 2013 release, as a sort
+of virtual appendix to the book.  You'll have to weigh for yourself the 
+potential benefits of such changes against the expansion of Python's 
+required knowledge base which they imply.
+
+
+
+
+
+</P>
+<H2><A name="section2">Major Changes in Python 3.4 (February, 2014)</A></H2>
+
+<I>This section is in progress, and necessarily tentative until 3.4 is 
+released officially in final form.</I>
+
+
+
+
+</P>
+<H3>1) Star syntax generalizations</H3>
+
+<P>
+As covered in the book, in Python 3.3 and earlier, the special <B>*X</B> 
+and <B>**X</B> syntax can appear in 3 places: in <I>assignment statements</I>, 
+where it collects unmatched items in sequence assignments; in <I>function headers</I>,
+where it collects unmatched positional and keyword arguments; and in <I>function calls</I>,
+where it unpacks iterables and dictionaries into individual items (arguments).
+
+<P>
+Per current plans, in Python 3.4, this star syntax will be generalized,
+such that it may also be used within arbitrary <I>data structure literals</I>,
+where it will unpack collections into individual items, much like its original 
+use in function calls.  Specifically, the unpacking star syntax will be allowed
+to appear in tuples, lists, sets, dictionaries, and comprehensions.  This is in 
+addition to its original 3 roles in assignment statements, and function headers and 
+calls.  Moreover, some of the restrictions regarding use of the star syntax
+currently in place may be lifted in the process.
+
+<P>
+This change is imagined as a general way of flattening structures and yields
+some clever coding possibilities, though it remains to be seen whether 
+Python programmers perceive this as an academic curiosity with a still-limited
+and special-case scope, or adopt it as a broadly applicable tool. 
+
+<P>
+For more details, see Python 3.4's 
+<A HREF="http://docs.python.org/3.4/whatsnew/3.4.html">What's New? document<A>, 
+or the change's <A HREF="http://www.python.org/dev/peps/pep-0448/">PEP document</A>. 
+Note that this is an extension to the core language itself, but not a change that 
+breaks existing code.
+
+
+
+
+</P>
+<H3>2) Enumerated type as a standard library class/module</H3>
+
+<P>
+Since its inception, Python has allowed definition of a set 
+of identifiers using a simple range: for example, "red, green, blue = range(3)".
+Similar techniques are available with basic class-level attributes, dictionary
+keys, list and set members, and so on.
+
+<P>
+As of Python 3.4, a new standard library module makes this more explicit,
+with an <B>Enum</B> class in a new <B>enum</B> module that offers a plethora 
+of functionality on this front.  It employs class-level attributes to serve
+as identifiers, but adds support for iterations, printing, and much more.
+
+<P>
+As Python programmers seem to have gotten along fine without an
+explicit enumerated type for over two decades, the need for such 
+an extension seems unclear.  And to some, the numerous options 
+afforded by the new class may also seem like over-engineering&mdash;a 
+sort of identifier enumeration on steroids.  Like all additions, though, 
+time will have to be the judge on this module's applications and merits.
+
+<P>
+For more details, see Python 3.4's 
+<A HREF="http://docs.python.org/3.4/whatsnew/3.4.html">What's New? document<A>, 
+or the change's <A HREF="http://www.python.org/dev/peps/pep-0435/">PEP document</A>.
+Note that this is a new standard library module, not a change to the core 
+language itself, and should not impact working code; some standard library 
+modules may, however, incorporate this new module to replace existing
+integer constants, with effects that may remain to be seen. 
+
+
+
+
+<H3>3) Import-related standard library module changes</H3>
+
+<P>A large number of 3.4 changes have to do with its modules related
+to the import operation&mdash;site of a major overhaul in 3.3 for
+both import in general, and the new namespace packages described in the book.
+As this is a relatively obscure functional area which is unlikely to impact 
+typical Python programmers, see 3.4's    
+<A HREF="http://docs.python.org/3.4/whatsnew/3.4.html">What's New? document<A>
+for more details, especially its section 
+<A HREF="http://docs.python.org/3.4/whatsnew/3.4.html#porting-to-python-3-4">
+Porting to Python 3.4</A>.
+
+
+
+
+<H3>4) More Windows launcher changes and caveats</H3>
+
+<P>
+<A HREF="README-PP4E-PY33.html#winlauchercaveats">See this page<A> for  
+additional issues regarding the Windows launcher shipped and installled 
+with Python 3.3, beyond those described in Learning Python, 5th Edition's
+new Appendix B.  In short:
+
+<UL>
+<LI>Python 3.4 may prefer PATH settings to defaults for generic "python"
+#! lines (only?).
+
+<LI>Python's MSI installers may sometimes fail to set up the required
+launcher filename associations, requiring a manual step on your part.
+
+<LI>You should be aware of possible Unix incompatibilities when coding 
+#! lines for use on Windows. 
+
+</UL>
+The Windows launcher makes it easy to switch between installed Pythons, 
+but might have beeb positioned better in a less mandatory role. 
+
+
+
+
+</P>
+</BODY></HTML>  

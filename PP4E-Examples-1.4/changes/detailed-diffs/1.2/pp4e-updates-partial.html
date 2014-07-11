@@ -1,0 +1,154 @@
+<HTML>
+<TITLE>
+Programming Python 4th Edition: Updates Page
+</TITLE>
+<BODY>
+
+<H1><I>Programming Python 4th Edition</I>: Updates Page</H1>
+
+<P>
+<I>I've deleted most of this page for use here. 
+For the full story, see either 
+<A HREF="http://www.rmi.net/~lutz/pp4e-updates.html">
+www.rmi.net/~lutz/pp4e-updates.html</A> live,
+or the snapshot of the book's website in this package's
+<A HREF="..\..\book-web-site\snapshot-feb11\pp4e-updates.html">  
+       changes\book-web-site\snapshot-feb11</A> folder.</I>
+
+
+
+
+</P>
+<HR>
+<H1><A name="fixes"><I>Book Corrections</I></A></H1>
+
+<P>
+<OL>
+
+
+
+
+
+<HR><BR>
+<LI><A name="focuspatch">
+<B>Page 702 and 704, PyEdit: add text.focus() calls after askstring() Unicode popups</B></A><BR>
+For convenience, and per the <A HREF="#focusnote">detailed description above</A>, we should 
+add a call to reset focus back to the text widget after the Unicode encoding prompt popups which
+may be issued on Open and Save/SaveAs requests (depending on texconfig settings).  As is, 
+the code works, but requires the user to click in the text area if they wish to resume 
+editing it immediately after the Unicode popup is dismissed; this standard popup itself 
+should  probably restore focus, but does not.  To fix, add focus calls in two places. 
+<B>First</B>, on page 702, at code line 21 at roughly mid page, change:
+<PRE>
+            if askuser:
+                try:
+                    text = open(file, 'r', encoding=askuser).read()
+</PRE>
+to the following, adding the new first line (the rest of this code is unchanged):
+<PRE>
+            self.text.focus() # else must click
+            if askuser:
+                try:
+                    text = open(file, 'r', encoding=askuser).read()
+</PRE>
+<B>Second</B>, on page 704, at code line 8 near top of page, similarly change:
+<PRE>
+            if askuser:
+                try:
+                    text.encode(askuser)
+</PRE>
+to the following, again just adding the new first line:
+<PRE>
+            self.text.focus() # else must click
+            if askuser:
+                try:
+                    text.encode(askuser)
+</PRE>
+Reprints: please let me know if there is not enough space for the inserts;
+I'd rather avoid altering page breaks in the process.  This patch will also
+be applied to future versions of the book's examples package; in the 
+package, the code in question is in file 
+<B>PP4E\Gui\TextEditor\textEditor.py</B>, at lines 298 and 393.
+<BR><BR>
+
+
+
+
+
+
+
+
+<HR><BR>
+<LI><A name="timeoutpatch">
+<B>Page 963 line 9, and page 970 line 4: add timeout arguments to email server connect calls</B></A><BR>
+For robustness, and per the <A HREF="#timeoutnote">detailed description above</A>, add
+"timeout=15" arguments to the POP and SMTP connect calls, so that email clients don't 
+hang when email servers fail to respond.  In the book, change code line 9 on page 963 
+from the first of the following to the second:
+<PRE>
+        server = smtplib.SMTP(self.smtpServerName)           # this may fail too
+        server = smtplib.SMTP(self.smtpServerName, timeout=15)  # this may fail too
+</PRE>
+
+Similarly, change code line 4 on page 970 from the first of the following to the second:
+<PRE>
+        server = poplib.POP3(self.popServer)
+        server = poplib.POP3(self.popServer, timeout=15)
+</PRE>
+In the book examples package, these changes would be applied to 
+line 153 of mailSender.py, and line 34 of file mailFetcher.py, 
+both of which reside in directory PP4E\Internet\Email\mailtools.
+They'll be patched in a future examples package version.
+
+<BR><BR>
+<B><I>Update</I></B>: I made the timeout 20 seconds in the examples package
+release version 1.2, to allow for slower email servers; 15 is more than enough
+to detect a problem with mine, but tweak this as desired.
+<BR><BR>
+
+
+
+
+<HR><BR>
+<LI><A name="closepatch">
+<B>Page 1072, code line 10 from top of page, PyMailGUI: add a close() for HTML mail files</B></A><BR>
+For portability, and per the <A HREF="#closenote">detailed description above</A>, we 
+should add an explicit close() call to flush the temporary file of an HTML-only email 
+before starting a web browser to view it, so that this code works in all contexts.  
+As is, it works on the test platform used for the book, and likely works on 
+most others, because the method in question exits and thus reclaims, closes, 
+and flushes the file before the spawned web browser gets around to reading it.  
+However, this is timing and platform dependent, and may fail on some machines 
+that start browsers more quickly; its been seen to fail on a fast Vista machine.
+To fix in the book, change the middle line of the following three current code 
+lines:
+<PRE>
+                        tmp = open(tempname, 'wb')      # already encoded
+                        tmp.write(asbytes)
+                        webbrowser.open_new('file://' + tempname)
+</PRE>
+to read as follows, adding the text that starts with the semicolon 
+(I'm combining statements to avoid altering page 
+breaks):
+<PRE>
+                        tmp = open(tempname, 'wb')      # already encoded
+                        tmp.write(asbytes); tmp.close() # flush output now
+                        webbrowser.open_new('file://' + tempname)
+</PRE>
+In the book's examples package, this code is located at line 209 in file 
+<B>PP4E\Internet\Email\PyMailGUI\ListWindows.py</B>; it will be patched 
+there too in a future examples package release (version 1.2, date TBD).
+<BR><BR>
+
+
+
+</OL>
+
+
+
+
+
+
+</P>
+<HR>
+</BODY></HTML>

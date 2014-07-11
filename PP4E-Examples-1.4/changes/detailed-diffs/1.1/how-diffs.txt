@@ -1,0 +1,12 @@
+-----------------------------------------------------------------------------------
+
+Command used to generate the diff-all.txt file here:
+
+[C:\...\Books\4E\PP4E\production\QC1\examples-work]>
+    C:\...\Books\4E\PP4E\dev\Examples\PP4E\System\Filetools\diffall.py 
+    1.0\Examples PP4E-Examples-1.1\Examples > PP4E-Examples-1.1\changes\diffs-all.txt
+
+Also ran Windows fc commands based on entries at the bottom of the diffs-all.txt 
+file to see specific file differences.
+
+-----------------------------------------------------------------------------------

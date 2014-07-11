@@ -1,0 +1,61 @@
+<HTML>
+<TITLE>PyLotto</TITLE
+<BODY>
+<H1>PyLotto</H1>
+
+<FORM method=GET action="cgi/pylotto.py">
+<P>
+To enter a drawing for a free Python book, fill
+out your name here and press the Submit button:
+<P><input type=text name=-form size=50>
+<P><input type=submit value=Submit>
+</P>
+</FORM>
+
+
+<HR>
+<H2>Description</H2>
+
+<P>
+Winners will be selected from among form submissions at random, 
+by a Python script which can be viewed online at this site:
+
+<PRE>
+<A HREF="http://www.rmi.net/~lutz/pp4e-updates.html#lotto">http://www.rmi.net/~lutz/pp4e-updates.html#lotto</A>
+</PRE>
+
+<p>
+As described there, the Python script's source code is also online 
+(use your browser's "view source" to see this page's HTML code too):
+
+<PRE>
+<A HREF="http://www.rmi.net/~lutz/pylotto.py">http://www.rmi.net/~lutz/pylotto.py</A>
+</PRE>
+
+<P>
+In order to work around the security constraints at some sites, 
+the pylotto script can run the lottery in 3 different main modes,
+selected by command-line options or query parameters: to select 
+from emails, to select from names in a file created by this page, 
+or to select from names typed into a local file manually.  Its 
+results can be displayed in console or CGI web reply page formats, 
+and a variety of administrative and test modes are also available.
+
+<P>
+Note that submitting this forms is equivalent to submitting a
+URL of the following form, typed into a browser window or sent
+with Python's urllib or similar:
+
+<PRE>
+http://learning-python.com/cgi/pylotto.py?-form=yourname
+</PRE>
+
+To run the lottery, a URL of the following form is submitted
+by the instructor (only -- if you run this URL yourself, its
+results will be ignored!):
+
+<PRE>
+http://learning-python.com/cgi/pylotto.py?-show=cgi&-find=file
+</PRE>
+
+</P></BODY></HTML>

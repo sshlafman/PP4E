@@ -1,0 +1,9 @@
+# this is a byte-for-byte directory tree comparison to prior version;
+# see the end of file diffall.txt for a summary of differences found;
+# see script diffall.py in the book, larger system examples chapter;
+
+F:\Books\4E\PP4E\examples-dev\unpack-1.3>
+  ..\..\examples-official\1.2\unpacked\PP4E-Examples-1.2\Examples\PP4E\System\Filetools\diffall.py 
+  PP4E-Examples-1.3 
+  f:\Books\4E\PP4E\examples-official\1.2\unpacked\PP4E-Examples-1.2 
+  > PP4E-Examples-1.3\changes\detailed-diffs\1.3\diffall.txt

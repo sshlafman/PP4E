@@ -1,0 +1,1085 @@
+PP4E-Examples-1.4 ...
+README-PP4E-PY33.html
+PP4E-Examples-1.4\changes ...
+PP4E-Examples-1.4\changes\book-web-site ...
+PP4E-Examples-1.4\changes\book-web-site\snapshot-feb11 ...
+about-pp4e.html
+cleansite.py
+flatten-itunes.py
+index.html
+lp4e-updates-notes-recent.html
+matrix-code.py
+pp4e-marketing-replies.html
+pp4e-updates.html
+pylotto-orig-24.py
+pylotto-orig.py
+pylotto.html
+pylotto.py
+simple-pylotto.py
+PP4E-Examples-1.4\changes\book-web-site\snapshot-jul12 ...
+about-pyref4e.html
+about-python.html
+flatten-itunes-2.py
+formalbio.html
+index.html
+lp4e-updates-clarifications-recent.html
+lp4e-updates-notes-recent.html
+lp4e-updates.html
+pp4e-updates.html
+py32structchange.html
+pyquestions3.html
+pyref4e-updates.html
+recenthighlights.html
+renamer.py
+whats-a-programming-language.html
+PP4E-Examples-1.4\changes\book-web-site\snapshot-oct11 ...
+about-lp4e.html
+about-pp4e.html
+cleansite.py
+flatten-itunes.py
+index.html
+lentimer.py
+lp4e-updates-clarifications-recent.html
+lp4e-updates-notes-recent.html
+lp4e-updates.html
+matrix-code.py
+pp4e-marketing-replies.html
+pp4e-updates.html
+pylotto-orig-24.py
+pylotto-orig.py
+pylotto.html
+pylotto.py
+simple-pylotto.py
+whats-a-programming-language.html
+PP4E-Examples-1.4\changes\book-web-site\snapshot-oct13 ...
+README-PP4E-PY33.html
+recenthighlights.html
+index.html
+pp4e-updates.html
+about-pp4e.html
+about-lp5e.html
+python-changes-2014-plus.html
+ACA_utils.py
+python-newstyle-inheritance.html
+tagpix.py
+flatten-itunes-2.py
+pylotto.py
+pylotto.html
+flatten-itunes.py
+cleansite.py
+PP4E-Examples-1.4\changes\book-web-site\snapshot-oct13\pystockmood ...
+pystockmood.py
+PP4E-Examples-1.4\changes\book-web-site\snapshot-oct13\pystockmood\testfiles ...
+PP4E-Examples-1.4\changes\book-web-site\snapshot-oct13\pystockmood\audiofiles ...
+PP4E-Examples-1.4\changes\book-web-site\snapshot-oct13\errata ...
+PP4E-Examples-1.4\changes\book-web-site\snapshot-oct13\errata\Programming Python Confirmed Errata  --fulll_files ...
+PP4E-Examples-1.4\changes\detailed-diffs ...
+PP4E-Examples-1.4\changes\detailed-diffs\1.1 ...
+PP4E-Examples-1.4\changes\detailed-diffs\1.2 ...
+pp4e-updates-partial.html
+PP4E-Examples-1.4\changes\detailed-diffs\1.2\patched-files-12 ...
+ListWindows.py
+mailFetcher.py
+mailSender.py
+textEditor.py
+PP4E-Examples-1.4\changes\detailed-diffs\1.3.1 ...
+PP4E-Examples-1.4\changes\detailed-diffs\1.3 ...
+pp4e-updates-partial.html
+PP4E-Examples-1.4\changes\detailed-diffs\1.3\patched-files-13 ...
+ListWindows.py
+mailconfig.py
+mailParser.py
+mailSender.py
+PP4E-Examples-1.4\changes\detailed-diffs\1.3\patched-files-13\i18n-filenames-tests ...
+PP4E-Examples-1.4\changes\detailed-diffs\1.3\patched-files-13\prior -release ...
+PP4E-Examples-1.4\changes\detailed-diffs\1.3\patched-files-13\prior -release\patched-files-12 ...
+ListWindows.py
+mailFetcher.py
+mailSender.py
+textEditor.py
+PP4E-Examples-1.4\changes\detailed-diffs\1.4 ...
+PP4E-Examples-1.4\Examples ...
+PP4E-Examples-1.4\Examples\PP4E ...
+__init__.py
+echo.py
+Launch_PyDemos.pyw
+Launch_PyGadgets_bar.pyw
+LaunchBrowser.pyw
+Launcher.py
+launchmodes.py
+PyDemos.pyw
+PyGadgets.py
+PyGadgets_bar.pyw
+textConfig.py
+PP4E-Examples-1.4\Examples\PP4E\Ai ...
+__init__.py
+PP4E-Examples-1.4\Examples\PP4E\Ai\ExpertSystem ...
+__init__.py
+PP4E-Examples-1.4\Examples\PP4E\Ai\ExpertSystem\holmes ...
+PP4E-Examples-1.4\Examples\PP4E\Ai\ExpertSystem\holmes\examples ...
+PP4E-Examples-1.4\Examples\PP4E\Ai\ExpertSystem\holmes\holmes2 ...
+backward.py
+backwrd3.py
+backwrd4.py
+backwrd5.py
+backwrd6.py
+backwrd7.py
+forward.py
+forward2.py
+holmes.py
+index.py
+kbase.py
+match.py
+PP4E-Examples-1.4\Examples\PP4E\Ai\ExpertSystem\holmes\holmes3 ...
+backward.py
+backwrd5.py
+backwrd7.py
+forward.py
+forward2.py
+holmes.py
+PP4E-Examples-1.4\Examples\PP4E\Ai\ExpertSystem\holmes\holmes ...
+backward.py
+backwrd2.py
+backwrd3.py
+backwrd4.py
+backwrd5.py
+backwrd6.py
+backwrd7.py
+forward.py
+forward2.py
+holmes.py
+kbase.py
+match.py
+PP4E-Examples-1.4\Examples\PP4E\Ai\ExpertSystem\holmes\kbases ...
+PP4E-Examples-1.4\Examples\PP4E\Ai\TicTacToe ...
+__init__.py
+tictactoe.py
+tictactoe_lists.py
+PP4E-Examples-1.4\Examples\PP4E\Ai\TicTacToe\unconverted-python2X ...
+__init__.py
+tictactoe.py
+tictactoe_dict.py
+tictactoe_grid.py
+tictactoe_lists.py
+tictactoe_lists_2.py
+tictactoe_loop.py
+tictactoe_slow.py
+PP4E-Examples-1.4\Examples\PP4E\Dbase ...
+__init__.py
+castdump.py
+castinit.py
+filepickle.py
+person-start.py
+person.py
+testdata.py
+PP4E-Examples-1.4\Examples\PP4E\Dbase\data ...
+PP4E-Examples-1.4\Examples\PP4E\Dbase\Sql ...
+cleardb.py
+dumpdb.py
+loaddb.py
+loaddb1.py
+makedb.py
+makedicts.py
+querydb.py
+testdb.py
+PP4E-Examples-1.4\Examples\PP4E\Dbase\Sql\MySql-2.x ...
+cleardb.py
+dumpdb.py
+loaddb.py
+loaddb1.py
+makedb.py
+makedicts.py
+querydb.py
+testdb.py
+PP4E-Examples-1.4\Examples\PP4E\Dbase\Sql\MySql-2.x\Documentation ...
+PP4E-Examples-1.4\Examples\PP4E\Dbase\TableBrowser ...
+__init__.py
+dbinit1.py
+dbinit2.py
+dbview.py
+formgui.py
+formtable.py
+viewsysmod.py
+PP4E-Examples-1.4\Examples\PP4E\Dbase\TableBrowser\Documentation ...
+PP4E-Examples-1.4\Examples\PP4E\Dbase\Zodb-2.x ...
+person-test.py
+person.py
+viewzodb.py
+zodb-class-make.py
+zodb-class-read.py
+zodbtools.py
+PP4E-Examples-1.4\Examples\PP4E\Dbase\Zodb-2.x\Documentation ...
+PP4E-Examples-1.4\Examples\PP4E\Dstruct ...
+__init__.py
+PP4E-Examples-1.4\Examples\PP4E\Dstruct\Basic ...
+__init__.py
+fastset.py
+inter.py
+inter2.py
+reltest.py
+rset.py
+set.py
+settime.py
+stack1.py
+stack2.py
+stack3.py
+stack4.py
+stacklog.py
+stacktime.py
+timer.py
+typesubclass.py
+PP4E-Examples-1.4\Examples\PP4E\Dstruct\Classics ...
+__init__.py
+btree.py
+btreevals.py
+graph.py
+gsearch1.py
+gsearch2.py
+gtestfunc.py
+gtestobj1.py
+gtestobj2.py
+permcomb.py
+rev1.py
+rev2.py
+sort1.py
+sort2.py
+PP4E-Examples-1.4\Examples\PP4E\Dstruct\OldIntro ...
+fastset.py
+graph.py
+inter.py
+set.py
+stack1.py
+stack2.py
+stack3.py
+vector.py
+vector2.py
+PP4E-Examples-1.4\Examples\PP4E\Dstruct\TreeView ...
+__init__.py
+treeview.py
+treeview_wrappers.py
+PP4E-Examples-1.4\Examples\PP4E\Dstruct\TreeView\alternatives ...
+treeview_left.py
+treeview_subclass.py
+PP4E-Examples-1.4\Examples\PP4E\Dstruct\TreeView\Documentation ...
+PP4E-Examples-1.4\Examples\PP4E\Gui ...
+__init__.py
+PP4E-Examples-1.4\Examples\PP4E\Gui\Clock ...
+__init__.py
+clock.py
+clockStyles.py
+plotterGui.py
+plotterText-alt.py
+plotterText.py
+PP4E-Examples-1.4\Examples\PP4E\Gui\gifs ...
+PP4E-Examples-1.4\Examples\PP4E\Gui\Intro ...
+defaults.py
+gui1-old.py
+gui1.py
+gui1.pyw
+gui1b.py
+gui1c.py
+gui1d.py
+gui1e.py
+gui1f.py
+gui1g.py
+gui2.py
+gui2b.py
+gui3.py
+gui3b-scopes.py
+gui3b.py
+gui3c.py
+gui3d.py
+gui3e.py
+gui4.py
+gui5.py
+gui5b-themed-user.py
+gui5b-themed.py
+gui5b.py
+gui6.py
+gui6b.py
+gui6c.py
+gui6d.py
+gui7.py
+gui7b.py
+gui7c.py
+user_preferences.py
+PP4E-Examples-1.4\Examples\PP4E\Gui\MovingPics ...
+movingpics.py
+movingpics_after.py
+movingpics_threads.py
+PP4E-Examples-1.4\Examples\PP4E\Gui\PIL ...
+pyphoto1.py
+temp.py
+viewer-dir.py
+viewer-pil.py
+viewer-thumbs-fixed.py
+viewer-thumbs-grid.py
+viewer-thumbs-nosave.py
+viewer-tk.py
+viewer_thumbs.py
+viewer_thumbs_scrolled.py
+PP4E-Examples-1.4\Examples\PP4E\Gui\PIL\images ...
+PP4E-Examples-1.4\Examples\PP4E\Gui\PIL\images\thumbs ...
+PP4E-Examples-1.4\Examples\PP4E\Gui\ShellGui ...
+__init__.py
+formrows.py
+mytools.py
+packdlg-redirect.py
+packdlg.py
+packer.py
+shellgui.py
+unpacker.py
+unpkdlg.py
+PP4E-Examples-1.4\Examples\PP4E\Gui\ShellGui\temp ...
+PP4E-Examples-1.4\Examples\PP4E\Gui\SlideShow ...
+slideShow.py
+slideShow_frames.py
+slideShow_framesFast.py
+slideShow_toplevels.py
+slideShowPlus.py
+PP4E-Examples-1.4\Examples\PP4E\Gui\TextEditor ...
+__init__.py
+_nonunicode-textEditor.py
+_techreview-textEditor.py
+_unthreaded-textEditor.py
+destroy-tests.py
+destroyer.py
+pyedit.pyw
+simpleshell.py
+textConfig.py
+textEditor.py
+textEditorNoConsole.pyw
+PP4E-Examples-1.4\Examples\PP4E\Gui\TextEditor\test ...
+PP4E-Examples-1.4\Examples\PP4E\Gui\TextEditor\test\TempParts ...
+part-000.html
+PP4E-Examples-1.4\Examples\PP4E\Gui\TextEditor\__pycache__ ...
+PP4E-Examples-1.4\Examples\PP4E\Gui\Tools ...
+__init__.py
+big_gui.py
+guimaker.py
+guimixin.py
+guiStreams.py
+mainloopdemo.py
+pipe-gui1.py
+pipe-gui2-thread.py
+pipe-gui2.py
+pipe-nongui.py
+pipe_gui3.py
+queuetest-gui-class.py
+queuetest-gui.py
+rad.py
+radactions.py
+socket-gui.py
+socket-nongui.py
+socket_stream_redirect0.py
+spams.py
+threadtools-test-classes.py
+threadtools.py
+widgets.py
+windows-test.py
+windows.py
+PP4E-Examples-1.4\Examples\PP4E\Gui\Tools\__pycache__ ...
+PP4E-Examples-1.4\Examples\PP4E\Gui\Tour ...
+__init__.py
+alarm-hide.py
+alarm-withdraw.py
+alarm.py
+bind.py
+buttonbars.py
+buttonpics-func.py
+buttonpics.py
+canvas-bind.py
+canvas1.py
+canvasDraw.py
+canvasDraw_tags.py
+canvasDraw_tags_after.py
+canvasDraw_tags_thread.py
+config-button.py
+config-label.py
+demo-check-auto.py
+demo-check-manual.py
+demo-radio-auto.py
+demo-radio-clear.py
+demo-radio-clear2.py
+demo-radio-manual.py
+demo-radio-multi.py
+demo-scale-simple.py
+demoAll-frm-ridge.py
+demoAll-frm.py
+demoAll-prg-multi.py
+demoAll-prg.py
+demoAll-win.py
+demoCheck.py
+demoDlg-print.py
+demoDlg.py
+demoRadio.py
+demoScale.py
+dialogTable.py
+dlg-custom.py
+dlg-old.py
+dlg-recursive.py
+dlg1.pyw
+entry1.py
+entry2-modal.py
+entry2.py
+entry3-modal.py
+entry3.py
+imgButton.py
+imgCanvas.py
+imgCanvas2.py
+makefile.py
+mbutton.py
+menu_frm-multi.py
+menu_frm-multi2.py
+menu_frm.py
+menu_win-multi.py
+menu_win.py
+menuDemo.py
+menuDemo2.py
+menuDemo3.py
+message.py
+optionmenu.py
+quitter.py
+scrolledcanvas.py
+scrolledlist.py
+scrolledtext.py
+setcolor.py
+simpleedit.py
+simpleedit2.py
+temp.py
+texttags.py
+threads-demoAll-frm.py
+threads-demoAll-win.py
+toplevel0.py
+toplevel1.py
+toplevel2.py
+PP4E-Examples-1.4\Examples\PP4E\Gui\Tour\Grid ...
+grid1.py
+grid2-fails.py
+grid2-same.py
+grid2.py
+grid3.py
+grid4.py
+grid5.py
+grid5b.py
+grid5c.py
+temp.py
+PP4E-Examples-1.4\Examples\PP4E\Gui\__pycache__ ...
+PP4E-Examples-1.4\Examples\PP4E\Integrate ...
+__init__.py
+PP4E-Examples-1.4\Examples\PP4E\Integrate\Embed ...
+PP4E-Examples-1.4\Examples\PP4E\Integrate\Embed\Basics ...
+embed-bytecode.c
+embed-dict.c
+embed-object.c
+embed-simple.c
+embed-string.c
+usermod.py
+PP4E-Examples-1.4\Examples\PP4E\Integrate\Embed\prioredition-2x ...
+coerce1.py
+coerce2.py
+PP4E-Examples-1.4\Examples\PP4E\Integrate\Embed\prioredition-2x\ApiClients ...
+codestring-api.c
+codestring-low.c
+module.py
+objects-api.c
+objects-err-low.c
+objects-low.c
+PP4E-Examples-1.4\Examples\PP4E\Integrate\Embed\prioredition-2x\HighLevelApi ...
+ppembed-attributes.c
+ppembed-callables.c
+ppembed-errors.c
+ppembed-globals.c
+ppembed-modules.c
+ppembed-strings.c
+ppembed.h
+PP4E-Examples-1.4\Examples\PP4E\Integrate\Embed\prioredition-2x\Inventory ...
+inventory.py
+order-bytecode.c
+order-bytecode.py
+order-func.c
+order-func.py
+order-string.c
+order-string.py
+ordersfile.h
+ordersfile.py
+validate1.py
+validate2.py
+PP4E-Examples-1.4\Examples\PP4E\Integrate\Embed\prioredition-2x\Inventory\Output ...
+PP4E-Examples-1.4\Examples\PP4E\Integrate\Embed\prioredition-2x\Inventory\WithDbase ...
+dbasetools.py
+inventory.py
+order-func.c
+order-func.py
+PP4E-Examples-1.4\Examples\PP4E\Integrate\Embed\prioredition-2x\Inventory\WithDbase\Data ...
+PP4E-Examples-1.4\Examples\PP4E\Integrate\Embed\prioredition-2x\Inventory\WithDbase\Dbase ...
+PP4E-Examples-1.4\Examples\PP4E\Integrate\Embed\prioredition-2x\Inventory\WithDbase\Output ...
+PP4E-Examples-1.4\Examples\PP4E\Integrate\Embed\prioredition-2x\TestApi ...
+testapi.c
+testapi.py
+testapi_c.py
+PP4E-Examples-1.4\Examples\PP4E\Integrate\Embed\prioredition-2x\TestApi\WithPackages ...
+testapi.c
+testapi_c.py
+testapi_c_from.py
+PP4E-Examples-1.4\Examples\PP4E\Integrate\Embed\prioredition-2x\TestApi\WithPackages\pkgdir ...
+__init__.py
+testapi.py
+PP4E-Examples-1.4\Examples\PP4E\Integrate\Embed\Pyclass ...
+module.py
+objects-err.c
+objects.c
+PP4E-Examples-1.4\Examples\PP4E\Integrate\Embed\Regist ...
+cregister.c
+register.py
+PP4E-Examples-1.4\Examples\PP4E\Integrate\Extend ...
+PP4E-Examples-1.4\Examples\PP4E\Integrate\Extend\Cenviron ...
+cenviron.c
+envattr.py
+envmap.py
+PP4E-Examples-1.4\Examples\PP4E\Integrate\Extend\Hello ...
+disthello-alt.py
+disthello.py
+hello.c
+hellouse.py
+PP4E-Examples-1.4\Examples\PP4E\Integrate\Extend\Hello\build ...
+PP4E-Examples-1.4\Examples\PP4E\Integrate\Extend\Hello\build\lib.cygwin-1.7.1-i686-3.1 ...
+PP4E-Examples-1.4\Examples\PP4E\Integrate\Extend\Hello\build\temp.cygwin-1.7.1-i686-3.1 ...
+PP4E-Examples-1.4\Examples\PP4E\Integrate\Extend\HelloLib ...
+hellolib.c
+hellolib.h
+PP4E-Examples-1.4\Examples\PP4E\Integrate\Extend\prioredition-2x ...
+PP4E-Examples-1.4\Examples\PP4E\Integrate\Extend\prioredition-2x\Modulator ...
+csets.c
+PP4E-Examples-1.4\Examples\PP4E\Integrate\Extend\prioredition-2x\Stacks ...
+exttime.py
+oopstack.py
+stackmod.c
+stacktyp.c
+substack.py
+PP4E-Examples-1.4\Examples\PP4E\Integrate\Extend\prioredition-2x\Stacks\pp2e ...
+PP4E-Examples-1.4\Examples\PP4E\Integrate\Extend\Swig ...
+hellolib.i
+hellolib_wrap.c
+hellowrap.py
+PP4E-Examples-1.4\Examples\PP4E\Integrate\Extend\Swig\Environ ...
+environ.i
+environ.py
+environ_wrap.c
+PP4E-Examples-1.4\Examples\PP4E\Integrate\Extend\Swig\Shadow ...
+main.cxx
+main.py
+main_low.py
+main_subclass.py
+number.cxx
+number.h
+number.i
+number.py
+number_wrap.cxx
+PP4E-Examples-1.4\Examples\PP4E\Internet ...
+__init__.py
+PP4E-Examples-1.4\Examples\PP4E\Internet\Email ...
+__init__.py
+mailconfig.py
+popmail.py
+pymail.py
+pymail2.py
+smtpmail-noTo.py
+smtpmail.py
+PP4E-Examples-1.4\Examples\PP4E\Internet\Email\mailtools ...
+__init__.py
+_PRIOR-mailParser.py
+_PRIOR-mailSender.py
+_test-decoding-old.py
+_test-decoding.py
+_test-i18n-headers.py
+_test_headers.py
+_test_replies.py
+mailFetcher.py
+mailParser.py
+mailSender.py
+mailTool.py
+selftest.py
+PP4E-Examples-1.4\Examples\PP4E\Internet\Email\mailtools\TempParts ...
+PP4E-Examples-1.4\Examples\PP4E\Internet\Email\PyMailGui ...
+__init__.py
+BOOK-ListWindows.py
+BOOK-mailconfig.py
+html2text.py
+ListWindows.py
+mailconfig.py
+messagecache.py
+popuputil.py
+PyMailGui.py
+PyMailGuiHelp.html
+PyMailGuiHelp.py
+textConfig.py
+ViewWindows.py
+wraplines.py
+py33patch.py
+SharedNames.py
+PP4E-Examples-1.4\Examples\PP4E\Internet\Email\PyMailGui\altconfigs ...
+launch_PyMailGui.py
+mailconfig.py
+mailconfig_book.py
+mailconfig_rmi.py
+mailconfig_train.py
+PyMailGui.py
+PP4E-Examples-1.4\Examples\PP4E\Internet\Email\PyMailGui\altconfigs\TempParts ...
+about-pp.html
+lp4e-pref.html
+onEditPageSend.py
+PP4E-Examples-1.4\Examples\PP4E\Internet\Email\PyMailGui\media ...
+about-pp.html
+lp4e-pref.html
+PP4E-Examples-1.4\Examples\PP4E\Internet\Email\PyMailGui\media\from-pyedit ...
+PP4E-Examples-1.4\Examples\PP4E\Internet\Email\PyMailGui\media\html2text-test ...
+htmlmail1.html
+htmlmail2.html
+htmlmail3.html
+htmlmail4.html
+PP4E-Examples-1.4\Examples\PP4E\Internet\Email\PyMailGui\media\i18n-filenames-tests ...
+PP4E-Examples-1.4\Examples\PP4E\Internet\Email\PyMailGui\SavedMail ...
+PP4E-Examples-1.4\Examples\PP4E\Internet\Email\PyMailGui\SavedMail\TempParts ...
+PP4E-Examples-1.4\Examples\PP4E\Internet\Email\PyMailGui\SavedMail\TempParts\i18n-filenames-to-send-recv ...
+PP4E-Examples-1.4\Examples\PP4E\Internet\Email\PyMailGui\TempParts ...
+__init__.py
+about-pp.html
+html2text.py
+lp4e-pref.html
+lp4e-preface-preview.html
+PyMailGui.py
+selftest.py
+PP4E-Examples-1.4\Examples\PP4E\Internet\Ftp ...
+__init__.py
+getfile.py
+getfilegui.py
+getone-modular.py
+getone-urllib.py
+getone.py
+putfile.py
+putfilegui.py
+PyFtpGui.pyw
+sousa.py
+PP4E-Examples-1.4\Examples\PP4E\Internet\Ftp\Mirror ...
+cleanall.py
+downloadflat.py
+downloadflat_modular.py
+ftptools.py
+uploadall.py
+uploadflat.py
+uploadflat_modular.py
+PP4E-Examples-1.4\Examples\PP4E\Internet\Ftp\Mirror\diffs ...
+PP4E-Examples-1.4\Examples\PP4E\Internet\Ftp\Mirror\test ...
+PP4E-Examples-1.4\Examples\PP4E\Internet\Ftp\test ...
+about-pp.html
+PP4E-Examples-1.4\Examples\PP4E\Internet\Other ...
+about-pp.html
+books.html
+CxxSyntax.html
+http-getfile-urllib1.py
+http-getfile-urllib2.py
+http-getfile.py
+languages.py
+readnews.py
+PP4E-Examples-1.4\Examples\PP4E\Internet\Sockets ...
+__init__.py
+class-server.py
+echo-client-5008.py
+echo-client.py
+echo-server-sleep.py
+echo-server.py
+fork-server-signal.py
+fork-server.py
+form.py
+getfile.py
+getfilegui-1.py
+getfilegui-2.py
+getfilegui.py
+multi-server.py
+pipe-unbuff-reader.py
+pipe-unbuff-writer.py
+select-server.py
+signal-demo.py
+socket-unbuff-client.py
+socket-unbuff-server.py
+socket_stream_redirect.py
+test-socket_stream_redirect.py
+test-stream-modes.py
+testecho-messages.py
+testecho.py
+thread-server.py
+PP4E-Examples-1.4\Examples\PP4E\Internet\Sockets\old ...
+_py2x-echo-server.py
+_py2x-fork-server.py
+PP4E-Examples-1.4\Examples\PP4E\Internet\Sockets\testdir ...
+PP4E-Examples-1.4\Examples\PP4E\Internet\Web ...
+badlink.html
+getfile.html
+languages.html
+putfile.html
+PyInternetDemos.html
+test-cgi-uploads-bug.html
+test-cgi-uploads-bug0.html
+test-cgi-uploads-bug1.html
+test-cgi-uploads-bug2.html
+test-cookies.py
+test-escapes.html
+test-escapes2.html
+tutor0.html
+tutor3-minimal.html
+tutor3.html
+tutor4.html
+tutor5a.html
+tutor5b.html
+tutor5c.html
+tutor5d.html
+webserver.py
+PP4E-Examples-1.4\Examples\PP4E\Internet\Web\cgi-bin ...
+badlink.py
+cookies.py
+formMockup.py
+getfile.py
+languages-src.py
+languages.py
+languages2.py
+languages2common.py
+languages2reply.py
+putfile.py
+test-cgi-uploads-bug.py
+test-cgi-uploads-bug0.py
+test-cgi-uploads-bug1.py
+test-cgi-uploads-bug2.py
+test-context.py
+tutor0.py
+tutor1.py
+tutor2.py
+tutor3.py
+tutor4.py
+tutor5.py
+tutor5_mockup.py
+PP4E-Examples-1.4\Examples\PP4E\Internet\Web\dev ...
+PP4E-Examples-1.4\Examples\PP4E\Internet\Web\dev\PyMailCGI_2.1 ...
+pymailcgi.html
+PP4E-Examples-1.4\Examples\PP4E\Internet\Web\dev\PyMailCGI_2.1\cgi-bin ...
+commonhtml.py
+externs.py
+loadmail.py
+mailconfig.py
+onEditPageSend.py
+onRootSendLink.py
+onRootViewLink.py
+onViewListLink.py
+onViewPageAction.py
+onViewPswdSubmit.py
+secret.py
+PP4E-Examples-1.4\Examples\PP4E\Internet\Web\PyErrata ...
+browse.py
+browseComments.cgi
+browseComments.html
+browseErrata.cgi
+browseErrata.html
+dbcommon.py
+dbfiles.py
+dbshelve.py
+dbswitch.py
+index.cgi
+pyerrata.html
+resourcePatchfiles.html
+resourcePythonchanges.html
+resourceSupplements.html
+submit.py
+submitComment.cgi
+submitComment.html
+submitErrata.cgi
+submitErrata.html
+PP4E-Examples-1.4\Examples\PP4E\Internet\Web\PyErrata\AdminTools ...
+backupFiles.py
+backupShelve.py
+dbaseindexed.py
+dumpFiles.py
+dumpShelve.py
+verifycommon.py
+verifyFiles.py
+verifyShelve.py
+PP4E-Examples-1.4\Examples\PP4E\Internet\Web\PyErrata\AdminTools\DbaseFilesIndexed ...
+PP4E-Examples-1.4\Examples\PP4E\Internet\Web\PyErrata\AdminTools\DbaseFilesIndexed\commentDB ...
+PP4E-Examples-1.4\Examples\PP4E\Internet\Web\PyErrata\AdminTools\DbaseFilesIndexed\errataDB ...
+PP4E-Examples-1.4\Examples\PP4E\Internet\Web\PyErrata\AdminTools\temp ...
+browse-alt1.py
+PP4E-Examples-1.4\Examples\PP4E\Internet\Web\PyErrata\Chapter ...
+PP4E-Examples-1.4\Examples\PP4E\Internet\Web\PyErrata\DbaseFiles ...
+PP4E-Examples-1.4\Examples\PP4E\Internet\Web\PyErrata\DbaseFiles\commentDB ...
+PP4E-Examples-1.4\Examples\PP4E\Internet\Web\PyErrata\DbaseFiles\errataDB ...
+PP4E-Examples-1.4\Examples\PP4E\Internet\Web\PyErrata\DbaseShelve ...
+PP4E-Examples-1.4\Examples\PP4E\Internet\Web\PyErrata\Mutex ...
+__init__.py
+launch-mutex-simple.py
+launch-mutex.py
+launch-test.py
+mutexcntl.py
+testread-mutex.py
+testread.py
+testwrite-mutex.py
+testwrite.py
+PP4E-Examples-1.4\Examples\PP4E\Internet\Web\PyMailCgi ...
+pymailcgi.html
+sendurl.py
+PP4E-Examples-1.4\Examples\PP4E\Internet\Web\PyMailCgi\cgi-bin ...
+commonhtml.py
+externs.py
+loadmail.py
+mailconfig.py
+onEditPageSend.py
+onRootSendLink.py
+onRootViewLink.py
+onViewListLink.py
+onViewPageAction.py
+onViewPswdSubmit.py
+secret.py
+PP4E-Examples-1.4\Examples\PP4E\Internet\Web\PyMailCgi\partsdownload ...
+about-pp.html
+onEditPageSend.py
+PP4E-Examples-1.4\Examples\PP4E\Internet\Web\PyMailCgi\partsupload ...
+about-pp.html
+onEditPageSend.py
+PP4E-Examples-1.4\Examples\PP4E\Internet\Web\uploads ...
+about-pp3e.html
+badlink.html
+cgi.py
+getfile.html
+languages.html
+putfile.html
+PP4E-Examples-1.4\Examples\PP4E\Lang ...
+__init__.py
+cheader.py
+pygrep1.py
+re-basics.py
+re-groups.py
+re-subst.py
+rules.py
+rules2.py
+summer.py
+summer2.py
+summer3.py
+test.h
+PP4E-Examples-1.4\Examples\PP4E\Lang\Calculator ...
+__init__.py
+calc0.py
+calc0emb.py
+calc0ext.py
+calculator.py
+calculator_plus_emb.py
+calculator_plus_ext.py
+calculator_plusplus.py
+calculator_test.py
+PP4E-Examples-1.4\Examples\PP4E\Lang\Parser ...
+__init__.py
+parser1.py
+parser2.py
+scanner.py
+testparser.py
+PP4E-Examples-1.4\Examples\PP4E\Lang\Xml ...
+dombook.py
+etreebook.py
+htmlparser.py
+rebook.py
+saxbook.py
+PP4E-Examples-1.4\Examples\PP4E\Preview ...
+attachgui.py
+cgi101.html
+customizegui.py
+dump_db_classes.py
+dump_db_file.py
+dump_db_pickle.py
+dump_db_pickle_recs.py
+dump_db_shelve.py
+fungui.py
+initdata.py
+make_db_classes.py
+make_db_file.py
+make_db_pickle.py
+make_db_pickle_recs.py
+make_db_shelve.py
+manager.py
+peoplecgi.html
+peoplegui--frame.py
+peoplegui--old.py
+peoplegui.py
+peopleinteract_query.py
+peopleinteract_update.py
+person.py
+person_alternative.py
+person_start.py
+tkinter001.py
+tkinter101.py
+tkinter102.py
+tkinter103.py
+update_db_classes.py
+update_db_file.py
+update_db_pickle.py
+update_db_pickle_recs.py
+update_db_shelve.py
+webserver.py
+PP4E-Examples-1.4\Examples\PP4E\Preview\cgi-bin ...
+cgi101.py
+peoplecgi.py
+PP4E-Examples-1.4\Examples\PP4E\System ...
+__init__.py
+helloshell.py
+more.py
+testargv.py
+testargv2.py
+whereami.py
+PP4E-Examples-1.4\Examples\PP4E\System\Environment ...
+echoenv.py
+setenv.py
+PP4E-Examples-1.4\Examples\PP4E\System\Exits ...
+temp.py
+testexit-threading.py
+testexit_fork.py
+testexit_os.py
+testexit_sys.py
+testexit_thread.py
+PP4E-Examples-1.4\Examples\PP4E\System\Filetools ...
+__init__.py
+bigext-tree.py
+bigpy-dir.py
+bigpy-path.py
+bigpy-tree.py
+commands.py
+cpall.py
+diffall.py
+dirdiff.py
+filters.py
+join.py
+lister_recur.py
+lister_walk.py
+scanfile.py
+site-forward.py
+split.py
+template.html
+PP4E-Examples-1.4\Examples\PP4E\System\Media ...
+__init__.py
+lp4e-preface-preview.html
+playfile.py
+priorcalendar.html
+testpil.py
+testpil2.py
+PP4E-Examples-1.4\Examples\PP4E\System\Media\lp4e-preface-preview_files ...
+PP4E-Examples-1.4\Examples\PP4E\System\Processes ...
+child.py
+fork-count.py
+fork-exec.py
+fork1.py
+makewords.py
+multi-badq.py
+multi1.py
+multi2.py
+multi3.py
+multi4.py
+multi5.py
+multi6.py
+pipe-thread.py
+pipe1.py
+pipe2.py
+pipefifo.py
+pipes-testchild.py
+pipes.py
+signal1.py
+signal2.py
+socket-preview-progs.py
+socket_preview.py
+spawnv.py
+PP4E-Examples-1.4\Examples\PP4E\System\Streams ...
+adder.py
+adder2.py
+adder3.py
+adderSmall.py
+hello-in.py
+hello-out.py
+moreplus.py
+reader.py
+redirect.py
+sorter.py
+sorterSmall.py
+teststreams.py
+writer.py
+writer2.py
+PP4E-Examples-1.4\Examples\PP4E\System\temp ...
+PP4E-Examples-1.4\Examples\PP4E\System\Tester ...
+tester.py
+PP4E-Examples-1.4\Examples\PP4E\System\Tester\Args ...
+PP4E-Examples-1.4\Examples\PP4E\System\Tester\Errors ...
+PP4E-Examples-1.4\Examples\PP4E\System\Tester\Inputs ...
+PP4E-Examples-1.4\Examples\PP4E\System\Tester\Outputs ...
+PP4E-Examples-1.4\Examples\PP4E\System\Tester\Scripts ...
+test-basic-args.py
+test-basic-stdout.py
+test-basic-streams.py
+test-basic-this.py
+test-errors-runtime.py
+test-errors-syntax.py
+test-status-bad.py
+test-status-good.py
+PP4E-Examples-1.4\Examples\PP4E\System\Tester\xxold ...
+regrtest0.py
+regrtest1.py
+regrtest2.py
+regrtest3.py
+PP4E-Examples-1.4\Examples\PP4E\System\Threads ...
+four-threads-more.py
+four-threads.py
+queuetest.py
+queuetest2.py
+queuetest3.py
+thread-add-random.py
+thread-add-synch.py
+thread-alts.py
+thread-classes.py
+thread-count-mutex.py
+thread-count-threading.py
+thread-count-wait1.py
+thread-count-wait2.py
+thread-count-wait3.py
+thread-count.py
+thread1.py
+PP4E-Examples-1.4\Examples\PP4E\TempParts ...
+calendar.html
+part-000.html
+PP4E-Examples-1.4\Examples\PP4E\Tools ...
+__init__.py
+cleanpyc-find-py.py
+cleanpyc-find-shell.py
+cleanpyc.py
+cleanpyc0.py
+find.py
+search_all.py
+visitor.py
+visitor_bigpy.py
+visitor_cleanpyc.py
+visitor_collect.py
+visitor_cpall.py
+visitor_edit.py
+visitor_poundbang.py
+visitor_replace.py
+visitor_sloc.py
+PP4E-Examples-1.4\Examples\PP4E\__pycache__ ...
+PP4E-Examples-1.4\extensions ...
+Visited 1572 files and 175 dirs
+--------------------------------------------------------------------------------
+Source files=>893, lines=>111624
+By Types:
+{'.c': {'files': 33, 'lines': 9467},
+ '.cgi': {'files': 5, 'lines': 122},
+ '.cxx': {'files': 3, 'lines': 3838},
+ '.h': {'files': 5, 'lines': 230},
+ '.html': {'files': 101, 'lines': 44497},
+ '.i': {'files': 3, 'lines': 36},
+ '.py': {'files': 733, 'lines': 52899},
+ '.pyw': {'files': 10, 'lines': 535}}
+
+Check sums: 111624 893
+
+Python only walk:
+{'.py': {'files': 733, 'lines': 52899}, '.pyw': {'files': 10, 'lines': 535}}

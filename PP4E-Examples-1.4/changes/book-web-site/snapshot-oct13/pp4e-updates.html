@@ -1,0 +1,2293 @@
+﻿<HTML>
+<TITLE>
+Programming Python 4th Edition: Updates Page
+</TITLE>
+<BODY>
+
+<H1><I>Programming Python 4th Edition</I>: Updates Page</H1>
+
+<P>
+I've started collecting notes, updates, and errata related to the book
+on this page.  This page may eventually grow to the have a more sophisticated
+multipage structure like that of the Learning Python 4E updates pages, but I'm
+adopting a simpler, informal policy here for now, partly because the book was 
+just released, and partly because this book's more advanced audience will probably 
+be more tolerant of the few inevitable typos along the way in a 1600-page book.
+</P>
+
+<p>
+Below are the current and official lists of general notes 
+and corrections for this edition of the book:
+
+<UL>
+<LI><A HREF="#notes"><B>Book Notes and Clarifications</B></A><BR>
+<LI><A HREF="#fixes"><B>Book Corrections</B></A><BR>
+</UL>
+
+<p>
+Only the last of these lists is true errata -- corrections,
+intended to be patched in future reprints.  The first list
+represents an informal book "blog" of sorts.  If you find an 
+issue you wish to report, please post it on O'Reilly's 
+<A HREF="http://oreilly.com/catalog/errata.csp?isbn=9780596158118">errata list page</A>
+for this book; I'm automatically emailed such posts.
+
+
+
+<H2>Highlights</H2>
+<P>
+Here are some of the main topics on this page:
+<UL>
+
+
+<LI>Bonus examples here:  
+<UL>
+<LI><A HREF="#lotto">PyLotto</A> &mdash; email/website system
+<LI><A HREF="#examples">cleansite</A> &mdash; unused website file finder 
+<LI><A HREF="#flatten">flatten-iTunes</A> &mdash; directory shape utility
+<LI><A HREF="#tagpix">tagpix</A> &mdash; image file metadata tag tool
+<LI><A HREF="pystockmood">pystockmood</A> &mdash; simple webpage scraper
+</UL>
+<BR>
+
+
+<LI>Newer items here:
+<UL>
+<LI><A HREF="README-PP4E-PY33.html">Summary: How to run PP4E book examples with Python 3.3</A>
+<LI><A HREF="#py33emailfix">A patch for running PyMailGUI under Python 3.3</A>
+<LI><A HREF="#webserverport">Default port numbers in preview's webserver.py</A>
+<LI><A HREF="python-changes-2014-plus.html">Changes in Python 3.4+ (LP5E crosspost)</A>
+<LI><A HREF="#py33">Python 3.3, and its impacts on book examples</A>
+<LI><A HREF="#pil">Running PIL examples under Python 3.2+: Pillow</A>
+</UL>
+<BR>
+
+
+<LI>Other highlights here:
+<UL>
+<LI><A HREF="#notes32">Changes in Python 3.2</A> 
+<LI><A HREF="#pymailguiall">Latest release of the book's PyMailGUI client</A>
+<LI><A HREF="#picklerules">Pickle and bound methods</A>
+<LI><A HREF="#printerrors">More on printing non-ASCII filenames: PYTHONIOENCODING</A>
+<LI><A HREF="#timeoutnote">Timeouts for email server connections</A>
+<LI><A HREF="#filenames">More on encoded email attachment filenames</A>
+<LI><A HREF="#timezones">Adjusting date/time strings to local time</A>
+<LI><A HREF="#smtp">Using SMTP servers for email examples</A>
+<LI><A HREF="#py320inputbug">Python 3.2.0 breaks scripts using input() on Windows</A>
+<LI><A HREF="#py32structchange">Python 3.2 removes struct.pack functionality for str</A>
+</UL>
+
+
+</UL>
+
+
+
+
+</P>
+<HR>
+<H1><A name="notes"><I>Book Notes and Clarifications</I></A></H1>
+
+<P>
+I use this section to post general notes about the book,  
+supplemental materials, and clarifications about book topics
+and examples.  If any of these also deal with bugs or typos
+to be patched in the book itself, their formal fix is listed 
+in the <A HREF="#fixes">book corrections</A> section.  If this
+list ever had a specific ordering, it has been long lost 
+to the ravages of time and edits; today, its items are loosely 
+grouped by topic only -- latest notes, bonus examples, Python 
+changes, example program updates, and miscellaneous.
+</P>
+
+
+
+
+
+
+<HR>
+<H2><A NAME="py33emailfix">[Sep-15-13] A patch for running PyMailGUI under Python 3.3</A></H2>
+
+<P>
+Per the description
+<A HREF="#py33emailbug">elsewhere on this page</A>, a Python 3.3 standard library change broke
+some email address displays of non-ASCII names in 
+<A HREF="#pymailguiall">PyMailGUI</A>, the largest example in the book.  
+In short, the Python 3.3 email package's <B>formataddr</B> utility function now applies a new 
+automatic MIME encoding for names, which it did not in the past&mdash;a curious and undocumented
+incompatible change, which did not account for display-oriented use cases, and can break code that
+worked well under Pythons 3.0 through 3.2 (including some in this book).  Luckily, this is fairly
+easy to repair.
+
+<P>
+<B>To apply and use the patch</B> for this Python change, simply fetch the following two files, 
+and copy them to the PP4E\Internet\Email\PyMailGui folder in your book examples tree, 
+per the more detailed instructions in the first of these:
+
+<OL>
+<LI><A HREF="py33patch.py">py33patch.py</A>&mdash;the patch to import, with self-test and docs
+<LI><A HREF="SharedNames.py">SharedNames.py</A>&mdash;replacement for this file with required patch import
+</OL>
+
+The first file updates the email package to be backward compatible for the duration 
+of the PyMailGUI program's run only.  The second file, an existing part of PyMailGUI, 
+is simply augmented to import the first.  The first file also has additional 
+documentation on the issue and its patch&mdash;see its comments for more details.
+
+
+
+
+
+</P>
+<HR>
+<H2><A NAME="webserverport">[Aug-22-13] Default port numbers in preview's webserver.py</A></H2>
+
+<P>
+Because it may be a FAQ, I've posted the important bits from a dialog 
+with a reader who was having trouble running the web examples in the 
+preview chapter of the book: see
+<A HREF="pp4e-webserver-faq.txt">webserver.py pointers</A>.  
+In short, on some machines you may need to change the hardcoded port number
+used in this script to something other than "80", and list it in the URL
+explicitly (and read ahead to the full coverage of this later in the book).
+
+
+
+
+
+
+</P>
+<HR>
+<H2><A NAME="pymailguiall">[Oct-1-11] PyMailGUI enhancements summary, examples 1.3, screenshots</A></H2>
+
+
+<H3>Update, Sep-15-13: patch for running on Python 3.3</H3>
+<P>
+There is a simple patch for an address display issue introduced by a change in 
+Python 3.3's email package.  For details, 
+see <A HREF="#py33emailbug">the bug</A>, as well as <A HREF="#py33emailfix">its fix</A>.
+</P>
+
+
+<H3>Update, Oct-19-11: new examples release 1.3</H3>
+<P>
+I've posted a new release of the book examples package, version 1.3, which has patches
+for all 6 of the <I>PyMailGUI</I> updates listed in this section below.  The first two of these
+were already patched in release 1.2, but the rest are new in 1.3.  Get the change log and the complete
+new examples  zip file at <A HREF="http://examples.oreilly.com/9780596158118/">O'Reilly's site</A>, or 
+fetch just the files changed within it in <A HREF="patched-files-13.zip">this zip file</A>.  See the book 
+for details on running PyMailGUI in the examples package (via auto launchers, command lines, etc.). 
+I don't distribute this program standalone, partly because it uses many other files in the 
+book examples tree, and partly because the book is its documentation.
+
+<P>
+One admin note: Some of the changes made in version 1.3 of the examples package are too large 
+to find their way into reprints of the book itself, but I recommend using the new version in 
+general, and studying the files changed to see what was involved; it's a fair example of code
+maintenance in action.  For changes too big to merge into the book, versions of the changed
+source files which mirror the code in the book are retained in the examples package with 
+a "BOOK-" name prefix.  For details, see the 
+<A HREF="http://examples.oreilly.com/9780596158118/CHANGES.txt">change log</A> which is also
+file changes\CHANGES.txt in the examples package.
+</P>
+
+
+<H3>PyMailGUI post-publication changes summary</H3>
+<P>
+After using the book's PyMailGUI email client for just over a year, I've collected 
+a list of additional enhancements beyond those already described in the book (see 
+the original enhancements list at the end of PyMailGUI's Chapter 14).  I am the 
+entire testing department and user base for this program, so some issues have taken
+longer to shake out than others.  The following is a list of all these additional 
+PyMailGUI enhancements discovered and applied after the book was published, for 
+completeness; their write-ups are located elsewhere on this page:
+
+<P>
+<table border=1 cellpadding=3>
+<tr><th>1 <td>[Feb-01-11] <td>Using POP and SMPT timeout parameters (patched in 1.2, and book) <td><A HREF="#timeoutnote">write-up</A>
+<tr><th>2 <td>[Jan-10-11] <td>Closing temporary output files for HTML-only emails (patched in 1.2, and book) <td><A HREF="#closenote">write-up</A>
+<tr><th>3 <td>[Aug-08-11] <td>Decoding and encoding non-ASCII attachment filenames (patched in 1.3, and book) <td><A HREF="#filenames">write-up</A>
+<tr><th>4 <td>[Oct-01-11] <td>Improved sent-time display in list windows (patched in 1.3) <td><A HREF="#timezones">write-up</A>
+<tr><th>5 <td>[Sep-29-11] <td>Delete and Save timing issue, rare bug (patched in 1.3) <td><A HREF="#deletefix">write-up</A>
+<tr><th>6 <td>[Jul-29-11] <td>Using authenticating SMTP servers for sends in mailconfig (patched in 1.3) <td><A HREF="#smtp">write-up</A>
+</table>
+
+<P>
+Interestingly, two of these changes, #1 and #3, are also inherited by the less functional <I>PyMailCGI</I> 
+webmail example of Chapter 16, because they were applied in the common mailtools package.  There were a handful 
+of additional changes made in the examples package and their book listings (e.g., a
+<A HREF="#focuspatch">focus fix</A> in the <I>PyEdit</I> component used by PyMailGUI); see the 
+<A HREF="http://examples.oreilly.com/9780596158118/CHANGES.txt">change log</A> as well as the changes' 
+write-ups on this page for more details.
+
+
+<H3><A name="pymailguishots">Screenshots</A></H3>
+<P>
+To sample the effect of changes #3 and #4 above, see the following PyMailGUI screenshots:
+<UL>
+<LI><A HREF="pp4e-examples13-view.jpg">Mail view</A>: a mail both sent from and viewed in PyMailGUI, with non-ASCII attachment filenames
+<LI><A HREF="pp4e-examples13-raw.jpg">Mail text</A>: raw text of this mail (doubleclicked), giving i18n filename encodings and date/time as sent 
+<LI><A HREF="pp4e-examples13-list.jpg">Mail list</A>: the mail list window, showing converted date time for this mail relative to my timezone
+<LI><A HREF="pp4e-examples13-view-many.jpg">Mail view</A>: another mail sent and viewed in PyMailGUI, adding non-ASCII content and other headers
+<LI><A HREF="pp4e-examples13-raw-many.jpg">Mail text</A>: raw text of this mail, giving MIME encodings for content, headers, and attachment names 
+</UL>
+
+<P>
+The support for non-ASCII attachment filenames and local-relative time in these is new in the 1.3 example
+package, but the rest is original behavior.  See the book for more on PyMailGUI's i18n and Unicode 
+support in other headers and mail content.
+</P>
+
+
+
+
+
+
+
+</P>
+<HR>
+<H2><A NAME="py320inputbug">[Jan-4-12] Python 3.2.0 breaks scripts using input() on Windows [LP4E]</A></H2>
+
+<P>
+If a book example which uses the <B>input()</B> built-in seems to be failing,
+and you are using Python 3.2.0 in a Windows console window, see 
+<A HREF="http://www.rmi.net/~lutz/lp4e-updates-notes-recent.html#py320inputbug">this post</A>
+on Learning Python 4E's update pages.  
+
+<P>
+This built-in was apparently broken temporarily in 3.2.0 (3.2) in Windows 
+console mode, but has been fixed in later Python releases.  The quickest fix 
+is to upgrade to 3.2.1 or later, or try a different environment; the book 
+examples work fine in all other Pythons and most other contexts such as IDLE.
+Scripts in both books may be impacted by this regression.
+
+
+
+
+
+
+
+</P>
+<HR>
+<H2><A NAME="py32structchange">[Jan-11-12] Python 3.2 removes struct.pack functionality for str [LP4E]</A></H2>
+
+<P>
+Another cross-post from the Learning Python update pages about a Python change
+which impacts examples in Programming Python too &mdash; see 
+<A HREF="lp4e-updates-notes-recent.html#py32structchange">this note</A> 
+for details on Python 3.2's decision to drop support of <I>str</I> strings
+for the "s" type code in <B>struct.pack</B>.  
+
+<P>
+This impacts a variety of examples in this book.  The simplest fix is to manually
+encode <I>str</I> Unicode strings to <I>bytes</I> byte strings when passing to 
+struct.pack, per the referenced note.  You can also run these examples in 3.1 
+or earlier if that's an option, though newer Pythons are generally better Pythons.
+
+
+
+
+
+
+
+</P>
+<HR>
+<H2><A NAME="py33">[October-2012] Python 3.3, and its impacts on book examples</A></H2>
+
+
+<H3>An overview of Python 3.3</H3>
+
+<P>
+I've started testing the book's examples under Python 3.3, 
+the latest release which features:
+
+<UL>
+<LI>A reduced <B>memory footprint</B> that is more in line with 2.X, 
+thanks mainly to its new variable-length string storage scheme, 
+and also to its attribute name-sharing system; 
+<BR><BR>
+
+<LI>A new <B>namespace package</B> model, where new-style packages 
+may span multiple directories and require no __init__.py file;
+<BR><BR>
+
+<LI>
+New syntax for delegating to subgenerators (<B>yield from ...</B>), 
+suppressing exception context (<B>raise ... from None</B>), and 
+accepting 2.X's Unicode literals to ease migration (3.3 now treats
+2.X's Unicode literal <B>u'xxxx'</B> the same as its normal str 
+<B>'xxxx'</B>, similar to the way 2.X treats 3.X's bytes literal
+<B>b'xxxx'</B> the same as its normal str <B>'xxxx'</B>);
+<BR><BR>
+
+<LI>
+Reworked OS and IO <B>exception hierarchies</B>, which provide more inclusive 
+general superclasses, as well as new subclasses for common errors which 
+can obviate the need to inspect exception object attributes;
+<BR><BR>
+
+<LI>
+A browser-based interface to <B>PyDoc documentation</B>, replacing its former
+standalone GUI client search interface ("pydoc -b");
+<BR><BR>
+
+<LI>
+Changes to some longstanding <B>standard library</B> modules, including ftplib,
+time, and email;
+<BR><BR>
+
+<LI>  
+New utility in the Windows 3.3 installer which extends the system <B>PATH</B> 
+setting to include 3.3's directory as an install-time option to simplify 
+commandlines;
+<BR><BR>
+ 
+<LI>
+A new <B>Windows launcher</B>, which attempts to interpret Unix-style "#!..."
+lines for dispatching Python scripts on Windows, and allows both "#!" lines 
+and new "py" commandlines to select between Python 2.X and 3.X explicitly on
+both a per-file and per-command basis;
+
+</UL>
+
+<B>Plus more</B> changes I won't list or repeat here.  See my earlier 
+<A HREF="http://rmi.net/~lutz/lp4e-updates-notes-recent.html#py33">3.3 preview</A>,
+on the <I>Learning Python</I> update pages, as well as the official 
+<A HREF="http://docs.python.org/py3k/whatsnew/3.3.html">3.3 What's New</A>
+document at python.org for additional details on 3.3 changes.
+</P>
+
+
+
+
+<H3>More on the new Windows launcher: off page</H3>
+
+<P>
+Of these, the last 3.3 enhancement listed above will probably
+have the broadest impact (in fact, it affects <I>every</I> Python 
+3.3+ user on Windows), and merits a few more words.  Those 
+words have grown too large for this page, however, so I've 
+moved them to this separate article:
+
+<P>
+<UL>
+<LI><A HREF="py33-windows-launcher.html">The New Windows Launcher in Python 3.3</A>
+</UL>
+
+<P>
+The very short story on the launcher is that it registers new
+executables which are installed on your system path normally;
+attempts to parse "#!" Unix-style lines at the top of scripts to 
+determine which version of Python run; and supports commandline
+arguments that give Python version numbers.  The net effect is 
+to better support multiple Pythons coexisting on the same machine,
+by allowing Python version numbers to be specified on both a 
+per-file and per-commandline basis, and in both full and partial 
+form.  It's quite a useful trick, though not without the pitfalls
+described below.  For much more on the launcher in general,
+see the link above, or the new appendix on the subject in 2013's
+<A HREF="about-lp5e.html">Learning Python, 5th Edition</A>.
+
+
+
+
+<H3>Python 3.3's impacts on book examples</H3>
+
+<P>
+The book's examples were initially developed on 3.1, but tested
+successfully on 3.2 alpha before publication.  In general, most examples
+tested so far appear to work well on 3.3 and as shown in the book.  As 
+expected, though, the evolution in the 3.X line has impacted some behaviors.  
+Among the most notable 3.3 changes that affect book examples:
+
+
+<UL>
+<LI>
+<B><U>Standard library changes</U></B>:
+The standard library has undergone a number of changes which may affect this
+book's examples, including changes to the <B>ftplib</B> and <B>time</B> modules.
+See my earlier <A HREF="http://rmi.net/~lutz/lp4e-updates-notes-recent.html#py33">3.3 preview</A>
+for details.  The <B>email</B> package has also changed, but merits its own bullet here.
+<BR><BR>
+
+
+<LI>
+<B><U><A NAME="py33emailbug">Email package changes</A></U></B>:
+As anticipated and described by the book, changes in Python's email package
+have broken some aspects of the book's email examples, including the 
+larger <I>PyMailGui</I> program.  Most of PyMailGui works fine as is under 3.3, 
+which is surprising given the scope of email changes.  But non-ASCII (I18N) 
+email addresses in header lines which decoded properly in 3.0 through 3.2 
+no longer decode under 3.3.  
+<BR><BR>
+
+For a graphical representation of this 3.3 regression, see this 
+<A HREF="py33emailbug.jpg">screen shot</A> &mdash; the PyMailGui window on the
+left is the book's I18N saved-mail file open under 3.3, and the window on the
+right is the same open in 3.2.  The 3.3 version on the left fails to decode the
+non-ASCII addresses which 3.2 handled, most likely reflecting an incompatible
+API change.  More details on a fix, as well as additional 3.3 email issues, as 
+they emerge.
+<BR><BR>
+
+<B><I>UPDATE, 9/2013</I></B>: A patch for this 3.3 incompatibility is now available,
+as described <A HREF="#py33emailfix">elsewhere on this page</A>.
+<BR><BR>
+
+
+<LI>
+<B><U>Windows launcher pitfalls</U></B>:
+This is probably the most prominent change in 3.3, as it has the 
+potential to impact <I>everyone</I> using Python on Windows, 
+and not just the book's examples.  As for its general description, 
+though, the generic coverage of its pitfalls here has been moved 
+off-page to the last section of the launcher write-up.  For the
+full story, see:
+<BR><BR>
+
+<UL>
+<LI><A HREF="py33-windows-launcher.html#pitfalls">The New Windows Launcher in Python 3.3</A>
+</UL>
+
+<BR> 
+The short story in this department is that the new launcher:
+<BR><BR>
+
+<UL>
+<LI>Will now fail to run scripts having unrecognized "#!" Unix lines,
+which causes a dozen book example files to fail in 3.3 (including 
+the top-level <I>PyGadgets</I> and <I>PyDemos</I> demo launcher scripts).
+<BR><BR>
+
+<LI>
+Will default to running Python 2.X for contexts that give no specific
+Python version, which may cause many 3.X scripts to fail (including
+files whose "#!" names just "python", as well as files with no "#!" 
+line at all &mdash; the normal case on Windows).
+</UL>
+
+<BR>
+With respect to book examples, the first point requires changing 
+"#!/bin/env" to "#!/usr/bin/env" in a dozen examples files, and
+the second point can be addressed by setting the launcher's default
+to 3.X, via "set PY_PYTHON=3" (or the equivalent in Control Panel).
+The Python 3.3 installer also has an optional PATH extension 
+feature, which seems contradictory to the new launcher's goals,
+but shouldn't cause scripts to fail in general.
+
+<BR><BR>
+As the off-page launcher write-up concludes, the new launcher is 
+net Good Thing, but you need to be aware that it may break some 
+formerly valid scripts with "#!" lines, and may choose a default 
+version you don't expect which causes many scripts to fail initially.
+</UL>
+
+<P>
+More here on 3.3 in general as testing continues.
+
+
+
+
+
+
+
+</P>
+<HR>
+<H2><A NAME="pil">[Apr-21-12+] Running PIL examples under Python 3.2 and later: Pillow</A></H2>
+
+<p>
+<A name="tagpix2">
+<I><B><U>Update, May 2013</U></B></I>: It looks like the PIL ports at the site 
+described below are now an official fork named <B>Pillow</B>, and is now also available at 
+<A HREF="https://pypi.python.org/pypi/Pillow/">the PyPI site</A>.  Despite the name and
+location changes, this package is still imported as "PIL", and is fully compatible with PIL
+for the book's examples, and others.  I've also used it successfully to extract EXIF metadata 
+tags from photos <A HREF="tagpix.py">in this script</A> (tagpix.py).
+
+
+<HR width=25%>
+
+
+<p>
+<I><B><U>Update, July 2012</U></B></I>: I've now verified that the "unofficial" PIL ports for 
+Python 3.X described in the prior update do <B>work correctly</B>, at least on 
+Windows under Python <B>3.2</B> and <B>3.3</B> and for the PIL subset used by the book's 
+examples &mdash; tkinter image display, thumbnail generation, and resize operations.  
+Specifically:
+
+<UL>
+<LI>
+The installer named PIL-1.1.7.win-amd64-py3.2.‌exe at the site  
+<A HREF="http://www.lfd.uci.edu/~gohlke/pythonlibs/">http://www.lfd.uci.edu/~gohlke/pythonlibs/</A>
+runs fine for me in the book's <B>PyPhoto</B> program under Python 3.2.3 on a 
+64-bit Windows ultrabook laptop.  
+<BR><BR>
+
+<LI>
+The installer named PIL-fork-1.1.7.win-amd64-py3.3.exe, which follows the newer naming 
+scheme at this site, was later shown to work with Python 3.3.0 on this same machine as well.
+</UL>
+
+Presumably, the 32 bit installers and those for other versions at this site also
+work as expected.  Thanks to both those who took time to port and post PIL, as well as 
+readers who asked me about this issue.
+</P>
+
+
+<P>
+<I><B><U>Update, May 2012</U></B></I>: a quick web search says that there are unofficial PIL installers for 
+Python 3.2 and 3.3, including those here:
+<A HREF="http://www.lfd.uci.edu/~gohlke/pythonlibs/">http://www.lfd.uci.edu/~gohlke/pythonlibs/</A>,
+though I have yet to test their operation with book examples.
+</P>
+
+
+<HR width=25%>
+
+<P>
+This book uses the PIL (Python Imaging Library) extension for some image-based examples,
+both to render thumbnail images, and to display additional image file types in tkinter GUIs.
+Because PIL was not yet ported to 3.X, the book employed a custom installer provided by 
+PIL's creator, and included this installer in its examples package as a temporary measure
+pending an official 3.X port. 
+
+<P>
+A reader wrote recently to note that the PIL installer in the book's examples package 
+works only under Python 3.1, and not for 3.2.  I don't track PIL's progress, but it has 
+much more utility than the book leverages, and I suspect that this has held up the 3.X 
+port (naturally, this is a non-issue for 2.X readers, for which PIL installers are 
+available).  Since this is a general issue which other readers have asked about too, 
+the relevant portion of my reply follows:
+
+<PRE>
+...
+
+About a PIL installer for 3.2: an official 3.X PIL port has 
+yet to materialize; it was considered imminent two years ago.
+The stop-gap installer I was given by PIL's creator and shipped
+in the book examples package is an executable for 3.1 only, 
+which I unfortunately have no way to update.
+
+I recommend contacting PIL's creator, Fredrik Lundh, about
+this, and/or browsing the archives of and posting your query 
+to PIL's email list to see what may be possible today.  
+
+Fredrik's last known email address (two years ago):
+
+    (please search pythonware.com)
+
+and the image-sig email list for PIL lives here:
+ 
+    <A HREF="http://mail.python.org/mailman/listinfo/image-sig">http://mail.python.org/mailman/listinfo/image-sig</A>
+
+If you get a resolution on this and can spare the time, I'd
+appreciate a copy on what you find; other readers have run 
+into the same issue.  If I'm able to uncover anything myself,
+I'll follow-up. 
+
+In the worst case, you can always install 3.1 alongside 3.2 
+to experiment with PIL examples, or take the examples' code 
+as demonstrative if not runnable. 
+
+...
+</PRE>
+
+
+
+
+
+
+
+
+</P>
+<HR>
+<H2><A NAME="picklerules">[Oct-15-11] More on pickle module constraints: bound methods [LP4E]</A></H2>
+
+<P>
+I posted a note about pickling and bound methods on the clarifications page of the book
+<I>Learning Python 4th Edition</I> which provides some additional background on how and why 
+bound methods cannot be pickled.  
+
+<P>
+Since that note also pertains to the coverage of pickling in this book -- in 
+Chapter 1's quick tour, Chapter 5's multiprocessing module section, and 
+Chapter 17's in-depth database material -- I'm posting a cross reference to it 
+here too: read this 
+<A HREF="lp4e-updates-clarifications-recent.html#picklerules">related note here</A>.
+</P>
+
+
+
+
+
+
+
+</P>
+<HR>
+<H2><A NAME="printerrors">[Oct-28-11] More on printing non-ASCII filenames in 3.X: PYTHONIOENCODING</A></H2>
+
+<P>
+On Pages 279-282, the book discusses in substantial depth how
+print calls can fail for some Unicode filenames in Python 3.X, 
+and uses a try statement to catch such failures in the tree walker
+script on page 276.  As described in the book, scripts should 
+generally print filenames with care in 3.X if those names might 
+ever be non-ASCII, by either catching print call exceptions or 
+changing the <B>PYTHONIOENCODING</B> environment variable to allow for 
+specific Unicode encodings in the standard streams.  For simplicity,
+though, some of the scripts in the book do not take this advice: 
+they simply print filenames blindly, and assume that you understand 
+the issue given the general description starting at Page 279, and
+will configure your environment if/as needed.
+</P>
+
+
+<H3>Filename print failures</H3>
+
+<P>
+As an illustrative example, I recently noticed a print failure 
+in the <B>diffall.py</B> directory comparison script on pages 311-313 
+after I added a few files with non-ASCII names to the examples 
+tree (tests for PyMailGUI enhancements described elsewhere on 
+this page).  As is and without environment configurations, the book's
+version of the script dies with an exception on Windows when printing
+non-ASCII filenames, even if the output is redirected to a file (which
+sometimes avoids such errors):
+
+<PRE>
+c:\...\PP4E\System\Filetools>diffall.py e: C:\SD-card-xfer-oct2711 > temp
+Traceback (most recent call last):
+  File "C:\...\PP4E\System\Filetools\diffall.py", line 80, in &lt;module>
+    comparetrees(dir1, dir2, diffs, True)      # changes diffs in-place
+  File "C:\...\PP4E\System\Filetools\diffall.py", line 69, in comparetrees
+    comparetrees(path1, path2, diffs, verbose)
+  ...
+  File "C:\...\PP4E\System\Filetools\diffall.py", line 56, in comparetrees
+    if verbose: print(name, 'matches')
+  File "C:\Python31\lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+UnicodeEncodeError: 'charmap' codec can't encode characters in position 0-6: 
+character maps to &lt;undefined>
+</PRE>
+
+<P>
+The end of the temp output file reflects the location of the failure:
+
+<PRE>
+--------------------
+Comparing e:Books\4E\PP4E\examples-official\1.3\unpacked\PP4E-Examples-1.3\changes\detailed-diffs\1.3\patched-files-13\i18n-filenames-tests to C:\SD-card-xfer-oct2711\Books\4E\PP4E\examples-official\1.3\unpacked\PP4E-Examples-1.3\changes\detailed-diffs\1.3\patched-files-13\i18n-filenames-tests
+Directory lists are identical
+Comparing contents
+Mail-saved-after-sent--OpenMeInGUI.txt matches
+</PRE>
+</P>
+
+
+<H3>Fix 1: setting PYTHONIOENCODING</H3>
+
+<P>
+Now, as suggested in the book's footnote on Page 282, this script works as 
+is without errors if you simply change your PYTHONIOENCODING environment 
+variable to UTF-8 Unicode encoding for the standard streams.  No code
+changes are needed, and the script winds up printing Unicode text to the 
+output file.  On Windows (where you also set this once and for all via
+the System icon in your Control Panel):
+
+<PRE>
+c:\...\PP4E\System\Filetools>set PYTHONIOENCODING=utf-8
+c:\...\PP4E\System\Filetools>diffall.py e: C:\SD-card-xfer-oct2711 > temp
+c:\...\PP4E\System\Filetools>notepad temp
+</PRE>
+
+<P>
+Here is part of the temp output file, at the place where the prints 
+failed before the environment setting:
+
+<PRE>
+--------------------
+Comparing e:Books\4E\PP4E\examples-official\1.3\unpacked\PP4E-Examples-1.3\changes\detailed-diffs\1.3\patched-files-13\i18n-filenames-tests to C:\SD-card-xfer-oct2711\Books\4E\PP4E\examples-official\1.3\unpacked\PP4E-Examples-1.3\changes\detailed-diffs\1.3\patched-files-13\i18n-filenames-tests
+Directory lists are identical
+Comparing contents
+Mail-saved-after-sent--OpenMeInGUI.txt matches
+Поворот IMG_1412.txt matches
+从~技~术~走~向~管~理.xls matches
+金牌销售2天一夜实战训练.xls matches
+--------------------
+</PRE>
+</P>
+
+
+<H3>Fix 2: catching encoding exceptions</H3>
+
+<P>
+Alternatively, it might be a bit more robust and convenient in some scenarios
+to catch the exception in the script itself and print as raw bytes, instead of
+printing Unicode text that must be encodable per the print setting.  A modified
+version of this script that does this and works without environment setting
+changes is available here: <A HREF="diffall-SAFE.py">diffall-SAFE.py</A>. 
+Here are the parts added and modified in <B>diffall.py</B>:
+
+<PRE>
+def tryprint(*args):
+    """
+    Added Oct-27-11, post publication and post examples 1.3:
+    Don't fail with an exception for unprintable filenames;
+    See pages 279-282, and the similar tryprint on page 276;
+    Started failing for non-ASCII filenames in email test dirs;
+    In general, any filename printers in 3.X may require this,
+    unless PYTHONIOENCODING is set as needed (e.g., to utf-8);
+    """
+    try:
+        print(*args)                 # filenames might fail to encode
+    except UnicodeEncodeError:
+        print('--UNPRINTABLE FILE NAME--', *(arg.encode() for arg in args))
+
+def comparetrees(dir1, dir2, diffs, verbose=False):
+    ...
+                if (not bytes1) and (not bytes2):
+                    if verbose: tryprint(name, 'matches')
+                    ...
+                if bytes1 != bytes2:
+                    diffs.append('files differ at %s - %s' % (path1, path2))
+                    tryprint(name, 'DIFFERS')
+    ...
+    for name in missed:
+        diffs.append('files missed at %s - %s: %s' % (dir1, dir2, name))
+        tryprint(name, 'DIFFERS')
+
+if __name__ == '__main__':
+...
+        for diff in diffs: tryprint('-', diff)
+</PRE>
+
+<P>
+This changed script still makes some assumptions (it must be able 
+to encode the filename per the platform default, which is UTF-8 on 
+Windows) and may need further honing on some platforms.  When run,
+though, it avoids print failures explicitly; here's what it does 
+with non-ASCII filenames in the printed output in the temp file:
+
+<PRE>
+--------------------
+Comparing e:Books\4E\PP4E\examples-official\1.3\unpacked\PP4E-Examples-1.3\changes\detailed-diffs\1.3\patched-files-13\i18n-filenames-tests to c:\SD-card-xfer-oct2711\Books\4E\PP4E\examples-official\1.3\unpacked\PP4E-Examples-1.3\changes\detailed-diffs\1.3\patched-files-13\i18n-filenames-tests
+Directory lists are identical
+Comparing contents
+Mail-saved-after-sent--OpenMeInGUI.txt matches
+--UNPRINTABLE FILE NAME-- b'\xd0\x9f\xd0\xbe\xd0\xb2\xd0\xbe\xd1\x80\xd0\xbe\xd1\x82 IMG_1412.txt' b'matches'
+--UNPRINTABLE FILE NAME-- b'\xe4\xbb\x8e~\xe6\x8a\x80~\xe6\x9c\xaf~\xe8\xb5\xb0~\xe5\x90\x91~\xe7\xae\xa1~\xe7\x90\x86.xls' b'matches'
+--UNPRINTABLE FILE NAME-- b'\xe9\x87\x91\xe7\x89\x8c\xe9\x94\x80\xe5\x94\xae2\xe5\xa4\xa9\xe4\xb8\x80\xe5\xa4\x9c\xe5\xae\x9e\xe6\x88\x98\xe8\xae\xad\xe7\xbb\x83.xls' b'matches'
+--------------------
+</PRE>
+
+<P>
+This works, but it many cases it might be simpler and will require
+much less code to set your PYTHONIOENCODING as needed, rather than 
+trying to safeguard all your filename prints with try statements
+on the off chance that they may someday fail.  Even in the diffall.py
+case, other modules that this script uses could potentially fail on 
+filename prints too, and may require additional error trapping code
+unless we use the simpler and broader PYTHONIOENCODING scheme. 
+
+<P>
+I'm not going to mark this for changing in reprints or new example
+releases, partly because this is a general issue which is already 
+well documented in the book; partly because this is not the only 
+book example that takes a loose approach to printing filenames; 
+and mostly because such scripts will work without changes if you set 
+your PYTHONIOENCODING as needed.  In other words, one can make a 
+very strong case that this is more an operational issue than a program
+bug, and so does not merit a code change.  As usual, if your scripts 
+fail on filename prints in Python 3.X, fix as prescribed.
+</P>
+
+
+
+
+
+
+
+</P>
+<HR>
+<H2><A name="examples">[Dec-28-10] Bonus example: web site maintenance, with HTML and URL parsing, FTP</A></H2>
+
+<P>
+As a sort of reward for stumbling onto this page, I've uploaded an extra example 
+script here which would have appeared with the book's HTML parsing coverage 
+in Chapter 19, had this book project enjoyed unlimited time and space.  
+This script uses Python's HTML and URL parsing tools to try to isolate all 
+the unused files in a web site's directory.  
+
+<p>
+I use this script for my training web site, as well as my book support site (the 
+latter after fixing some HTML errors that rendered the script inaccurate when 
+Python's strict HTML parser failed and caused some used files to be missed).  This
+script also includes code to delete the unused files from a remote site by FTP if 
+you wish to enable it (pending a resolution on the parser failures issue), and 
+includes suggestions for parsing with patttern matching instead of the HTML parser.
+
+<P>
+<i>Download:</I> The script itself lives here: <B><A HREF="cleansite.py">cleansite.py</A></B>.  
+To see what it does, read its docstring, and see two sample runs provided
+in a zip file here: <A HREF="testruns.zip">testruns.zip</A>.
+
+
+
+
+
+
+
+</P>
+<HR>
+<H2><A name="lotto">[Jan-11-11] Bonus example: book lottery, with POP, email, SMTP, and CGI</A></H2>
+
+<H3>Update Feb-22-11: New version: rewrite for more usage modes</H3>
+
+<P>
+In light of security constraints in a recent class, I've completely rewritten 
+the <I>PyLotto</I> script for worst-case scenarios.  It can now select from both emails, 
+and a names file created manually or via web form submits, and can be run in both
+console and remote CGI modes.  In pathological cases, it can be run locally to
+select from a local names file (and in fact had to in a recent class somewhere in
+the wilds of California).  I've also updated to port the single script to work on 
+both Python 3.X and 2.X, and to properly escape student names in the reply HTML.
+Here's the new code -- use the "view source" option to view the form's HTML:
+
+<UL>
+<LI><B><A HREF="pylotto.py">pylotto.py</A></B>, the main script, in a CGI directory in remote mode
+<LI><A HREF="pylotto.html">pylotto.html</A>, the sign-up form web page, on the server
+<LI><A HREF="pylotto-run.txt">pylotto-run.txt</A>, output from the script's -test option
+</UL>
+
+Read the script's docstring for all the details.  Among other things, it demonstrates 
+how to implement simple state retention in CGI scripts, using flat files and locks for 
+possible concurrent updates to the players file.  You can also view the 
+sign-up instructions files:  
+<A HREF="lotto-howto-email.txt">lotto-howto-email.txt</A> and
+<A HREF="lotto-howto-web.txt">lotto-howto-web.txt</A>,  
+as well as a last-resort script which became a class exercise and
+gave rise to (and is subsumed by) this new generalized
+Pylotto: <A HREF="simple-pylotto.py">simple-pylotto.py</A>.  
+
+<p>
+The rest of this section describes the original, now defunct version, but also gives
+the back story.  The new version has the same goals, but supports web form and local file 
+sign-up modes in addition to emails.
+</P>
+
+
+
+<H3>Original version and description</H3>
+<P>
+Here's another supplemental example that might have appeared in the book, 
+if not for time and its conceptual dependencies.  I wrote this script, <I>PyLotto</I>, 
+in order to give away free books in some of the classes I teach.  O'Reilly always
+sends a batch of free copies to authors, and if I kept a dozen copies of every one
+of the 12 Python books I've written, some of which are not exactly small, I'd 
+probably need a bigger house.
+
+<p>
+To enter the book lottery, students send an email message to the book's account,
+with "PYLOTTO" in the subject line.  At the end of the class, the script scans, 
+parses, and deletes these emails, and selects a set of their "From" addresses 
+at random as winners.  It's not Vegas, but it's fair, and serves as a nice example
+of practical Python programming that ties together a number of tools presented in
+the book.  This script also has a test mode that sends test emails, and an as-CGI 
+mode for running on a Web server if the training site doesn't allow POP email access
+or SSH (many don't).
+
+<P>
+<i>Download:</I> Fetch the script here: <B><A HREF="pylotto-orig.py">pylotto-orig.py</A></B>.  
+To see what it does, read its docstring, and see the text file that traces
+its outputs in its various modes here: <A HREF="pylotto-orig-run.txt">pylotto-orig-run.txt</A>.
+
+<P>
+<i>New:</I> See also <A HREF="pylotto-orig-24.py">pylotto-orig-24.py</A>, a version of 
+pylotto.py modified to run remotely as a CGI script on a Python 2.4 web 
+server (that's the latest Python available on godaddy.com, as of January 2011!).
+
+
+<P>
+Naturally, I don't give away books in every class I teach (this basically 
+depends on how many freebies O'Reilly has given to me, and how willing I 
+am to lug around a big, giant book in my checked luggage).  Even so, scripts 
+such as this one and others in the book which address real, practical needs 
+can go far to help illustrate Python applications in action once students or 
+readers have mastered Python language fundamentals.  As stated in the book,
+Python tends to become a sort of <i>enabling technology</i> for most people 
+who've learned to use it well.
+
+
+
+
+
+
+
+</P>
+<HR>
+<H2><A name="flatten">[Feb-3-11] Bonus example: Extracting music files from an iTunes directory tree</A></H2>
+
+
+<H3>Update Nov-5-11: New version: resolving disparate collections</H3>
+
+<P>
+I've written a new and very different version of this script to be used
+to isolate differences in iTunes collections on different laptops or 
+archives, rather than just flatten directories and detect protected files.  
+Grab the new 2.X/3.X version here: <B><A HREF="flatten-itunes-2.py">flatten-itunes-2.py</A></B>.
+
+<P>
+I wrote this version to help resolve differences between iTunes collections 
+on multiple machines that have fallen out of sycnc over time.  It's easy to 
+get in this state if you buy songs on whatever laptop you have at the moment
+and don't synchronize religiously (cloud storage addresses this in theory, 
+though not without potential downsides of its own).  Because iTunes may 
+accumulate different files and directory structures on different machines, 
+it's nearly impossible to synchronize unless you normalize its files into 
+a simpler, uniform structure.  
+
+<P>
+This new version addresses this by sorting all files in the iTunes directory 
+tree into 4 flat directories (playable, protected, irrelevant, and other), 
+for each collection it's run against.  This makes it simpler both to run later
+comparisons to spot differences (e.g., using the book's 
+<B><A HREF="dirdiff.py">dirdiff.py</A></B> or more in-depth
+diffall.py scripts of Chapter 6), and to copy merged collections from device 
+to device.  This version also retains all files in the tree; renames duplicates
+with a numeric suffix; produces a richer
+<A HREF="amazon-results.txt">report</A>; and was updated to run on both Python 
+2.X and 3.X.  It's safe to run against an iTunes location just to experiment,
+because it only copies files from there, and does not modify the iTunes tree 
+itself in any way.
+
+<P>
+After collecting files into flat directories with this script, I later merged 
+the playable files directories with manual drag-and-drop operations, and also 
+ran a simpler script, <B><A HREF="renamer.py">renamer.py</A></B>, on the result
+to strip the leading track/disk numbers at the front of some filenames, making 
+it easier to compare and sort, and islolate more duplicates (e.g., "02 xxx.mp3" 
+and "xxx.mp3").  The end result is a single, flat directory of song files to 
+use on multiple devices.
+
+<P>
+Note: this is only an iTunes <I>utility</I>, for analysing your collections' 
+content or moving your music files.  It's not a player or iTunes replacement,
+and although its result directories retain all iTunes music files, they may not 
+retain all iTunes information.  For example, due to the way the script flattens 
+music directory trees, its result directories may lose some associations between 
+music files and their album artwork images, at least for images not embedded in
+music files themselves (e.g., via ID3v2 frames for MP3 files).  Writing a full 
+replacement for iTunes in Python (<I>PyTunes?</I>) would be an interesting 
+project, and others have already made progress along these lines -- check out:
+
+<UL>
+<LI>The Python-coded 
+<A HREF="http://www.unrealvoodoo.org/hiteck/projects/albumart/">albumart finder</A>
+
+<LI>The
+<A HREF="http://pyid3.sourceforge.net/">PyID3</A> 
+reader/writer for MP3 file tags and frames 
+
+<LI>The <A HREF="http://pymedia.org/">PyMedia</A> 
+toolkit for audio and video files
+
+<LI>The (tT)kinter-based <A HREF="http://www.speech.kth.se/snack/">Snack</A> sound toolkit
+
+<LI>A wxPthon-based <A HREF="http://www.blog.pythonlibrary.org/2010/04/20/wxpython-creating-a-simple-mp3-player/">player</A>
+
+<LI>The PyGame-based <A HREF="http://www.kibosh.org/pykaraoke/">PyKaraoke</A>
+
+<LI>The <A HREF="http://wiki.python.org/moin/PythonInMusic">PythonInMusic</A> links page
+
+</UL>
+and lots more in the results of any web search for "Python MP3 player,"
+"Python iTunes," or the like -- but I've already spent more time on this script
+than I meant to.
+</P>
+
+
+
+<H3>Original version and description</H3>
+
+<P>
+Here's something similarly practical, but a bit simpler than the prior two sections' 
+programs -- a Python script which walks all the folders and subfolders in an iTunes 
+directory tree, to copy all music files in the tree to a flat directory.  I use 
+this to create a single directory of all my music on a memory stick, so it can be 
+used conveniently on the harddrive in a vehicle I drive.  iTunes seems fond of nested 
+directories, and the vehicle in question doesn't do well in their presence.  This example
+might have appeared in the larger systems examples chapter, if not for time, space, 
+and the fact that it's not too much different from tree-walkers already in that chapter.
+
+<P>
+<i>Download:</I> Fetch the script here: <B><A HREF="flatten-itunes.py">flatten-itunes.py</A></B>.  
+To see what it does, read its code and docstring, and see the text file that traces
+its outputs here: <A HREF="flatten-itunes.out.txt">flatten-itunes.out.txt</A>.
+
+
+</P>
+<H3><A name="tagpix">Related script</A></H3> 
+
+<P>
+For another directory-walker media tool, see also 
+<B><A HREF="tagpix.py">tagpix.py</A></B>, which extracts EXIF metadata tags 
+from photos with PIL, and is referenced <A HREF="#tagpix2">elsewhere</A> on this page.
+
+
+
+
+
+</P>
+<HR>
+<H2><A name="notes32">[Dec-31-10] Python 3.2 updates</A></H2>
+
+<P>
+As described in its Preface, this book was written under Python 3.1, and its major
+examples were retested and verified to work under Python 3.2 alpha just before 
+publication.  Because of that, this book is technically based on both 3.1 and 3.2, 
+though it addresses the entire 3.X line in general.
+
+<P>
+That said, you will find some discussion of 3.1 library issues in the book that 
+have changed or improved in the upcoming 3.2 version, which is due to be released 
+roughly two months after this book's release date (3.2 final is currently 
+scheduled for mid February 2011).  Some of the issues in 3.1's <B>email</B> 
+package which the book must workaround, for instance, have been improved or 
+repaired in 3.2.  
+
+<P>
+In fact, many or most of the issues of the 3.1 email package described in Chapter
+13 are fixed in 3.2.  The email workarounds coded in that chapter still work under
+3.2 (and were verified and even enhanced to do so before publication), but some 
+are no longer required with 3.2.  Notably, the email package in 3.2 now supports 
+parsing the raw <i>bytes</i> returned by the SMTP module, thereby eliminating the 
+need for the partially heuristic and potentially error prone pre-parse decoding 
+to <i>str</i> that the book's 3.1-based examples must perform.  The next section 
+explains how this works in 3.2.
+
+<H3>Email and bytes in 3.2: the surrogates replacement trick</H3>
+
+<P>
+As a prominent example of email's improvements, 3.2's <I>What's New</I> document 
+states that the 3.2 email package's "New functions <B>message_from_bytes()</B> and
+<B>message_from_binary_file()</B>, and new classes <B>BytesFeedParser</B> and 
+<B>BytesParser</B> allow binary message data to be parsed into model objects".  
+Interestingly, the 3.2 email parser still does not parse bytes internally.  
+Insted, these extensions work their magic by decoding raw binary bytes data to 
+Unicode str text prior to parsing, using the ASCII encoding and passing 
+"<B>surrogateescape</B>" for the decoding call's errors flag.
+
+<P>
+In short, the <B>surrogateescape</B> error replacement scheme translates undecodable bytes to 
+Unicode codepoint escape sequences, which allow the bytes' original values to be recovered when 
+the text is encoded back again to bytes by compatible software.  When parsed message parts are 
+later fetched through the Message API, re-encoding back to binary form with the same errors 
+replacement scheme is expected to restore the original data.  At least potentially, this 
+arguably clever trick could resolve the initial decode-to-str issue for parsing email messages
+in Chapter 13.
+
+<P>
+On the <B>downside</B>, because this scheme assumes that message data is both decoded to Unicode text 
+and re-encoded to bytes later using the surrogateescape error handler for both steps, this 
+trick works for data passed through Python's APIs which follow this translation protocol, but 
+can fail for data which is not.  Moreover, this scheme also assumes that any data mangled by 
+the surrogates replacement step is not significant to the parser's analysis, as it might not 
+match expected characters in the stream -- a non-issue for binary data or encoded text parts,
+but potentially significant for some forms of full-message raw text (though non-ASCII bytes
+are unlikely to mean much to a message parser in any form). 
+
+<P>
+Also note that while this change may be a first step towards addressing the related 
+<B>CGI uploads</B> issue described in Chapters 15 and 16, this issue still exists in Python 3.2. 
+As described in the book, CGI uploads are somewhat broken in 3.X today because Python's CGI 
+module uses the email parser, but its uploaded data can be arbitrary combinations of both binary 
+data and text of a variety of Unicode encodings, with or without MIME encodings and content type 
+headers.  Such data cannot be decoded to str in 3.1 as required by its email parser.  
+Unfortunately, the CGI module in Python 3.2 still uses the <i>str</i>-based email parsing API, 
+not the new <i>bytes</i>-based API, so this CGI uploads limitation appears to <I>still be present
+in 3.2</I>.  I verified that this is the case in 3.2 final: cgi does not use the email's new bytes
+parser interface, but still performs a pre-parse decoding from bytes to str per UTF-8, which may 
+fail for some data streams.  A resolution to this appears to await a future Python.
+
+<P>
+For <B>email</B>, though, 3.2's library fixes represent a significant improvement over 3.1: the 
+decode-to-str preparse issue for email, as well as other Chapter 13 email package workarounds,
+may have been rendered superfluous in 3.2.  On the other hand, the book's 3.1 workarounds code is 
+harmless under 3.2, and is representative of the sorts of dilemas faced by real-world development
+in general --  a major theme of this book.  Unless you're lucky enough to use the same version
+of software for all time, change is probably an inevitable part of your job description.
+
+
+<H3>Other 3.2 changes</H3>
+
+<P>
+For more on the Python 3.2 release, including its new <B>__pycache__</B> subdirectory 
+bytecode storage model, please see 
+<A HREF="lp4e-updates-notes-recent.html#s1b">its note on this site</A> 
+in the Learning Python 4E updates page (a book less impacted by 3.2, since 3.2 
+was supposed to change only libraries, not core language -- and nearly succeeded).
+
+<p>
+Not covered in that note is the <i>very</i> late 3.2 addition of its 
+<B>concurrent.futures</B> library.  This library, based upon a Java package, provides 
+yet another way to generalize the notion of multitasking with threads and processes, 
+in addition to the existing <i>subprocess</i> and <i>multiprocessing</i> modules which
+are covered in this book.  This new library is also a bit of a work in progress, 
+intended for future expansion.  For more details, please see 3.2 release details and 
+manuals.
+
+<P>
+While you're at the Learning Python site, see also its preview of mid-2012's expected 
+<A HREF="lp4e-updates-notes-recent.html#py33">Python 3.3</A>. 
+
+
+
+
+
+
+
+
+</P>
+<HR>
+<H2>[Mar-3-11] Chapter 13, page 926, Unicode and email: See 3.2 changes note above</A></H2>
+
+<P>
+As a cross-reference, be sure to see the Python 3.2 updates note <A HREF="#notes32">above</A> 
+for changes in Python 3.2's email package which bear on the discussion in the section that 
+starts on page 926.  Most notably, the preparse decode from raw <i>bytes</i> to Unicode <i>str</i>
+needed in 3.1 is no longer required (but is harmless) in 3.2, because the email package can now 
+parse bytes data directly, using the errors replacement scheme described at the note.  I'd mark 
+this as an insert for future reprints, but the book can't possibly track all future Python 
+changes (especially with a new and incompatible email package under development); instead, 
+this web page is meant to serve as a virtual and more easily updated appendix to the book.
+
+
+
+
+
+
+
+</P>
+<HR>
+<H2><A name="timezones">[Oct-1-11] Sent time display in PyMailGUI list windows (patched in 1.3)</A></H2>
+
+<P>
+<I>(Update Oct-19-11: I couldn't resist fixing this one after all: 
+see the <A HREF="#pymailguiall">release</A> description above for more on 
+version 1.3 of the examples package in which this fix appears. This fix 
+was too large to add to the book itself.)</I>
+
+<P> 
+As is, message sent time is not displayed very usefully in PyMailGUI's list windows.
+The GUI blindly displays the full, raw text of the Date header field.  Worse, the time 
+portion of this header is truncated by the display such that the "+NNNN" field which 
+denotes what the sent time really is relative to GMT is not shown.  The net effect is that 
+you can't tell in the GUI when a message was sent or which messages were sent before others
+without looking at the raw text and deciphering the Date time string manually.  The GUI 
+lists emails in order received at the mail server only.  
+
+<P>
+To fix: the time in the Date field of list windows should be shown in full, and shown 
+relative to either the local time zone or GMT uniformly for all emails received.  See 
+the Python email package for pointers and possible tools; this doesn't seem crucial enough 
+to detail the code fix here.  As a hint, though, formatting dates for use in new mails can
+be either relative to GMT or the local time zone:
+
+<PRE>
+>>> from email.utils import formatdate      # in Python 3.2
+
+>>> formatdate()
+'Thu, 29 Sep 2011 17:27:53 -0000'           # relative to gmt
+
+>>> formatdate(localtime=True)
+'Thu, 29 Sep 2011 13:27:55 -0400'           # relative to local (us eastern, -4 hours) 
+
+>>> formatdate(usegmt=True)
+'Thu, 29 Sep 2011 17:27:59 GMT'             # explict gmt relative for http
+</PRE>
+
+<P>
+Applying the corresponding technique for adjusting a received date/time string 
+to the local time zone in PyMailGUI's code is officially delegated to suggested 
+exercise, but the following might help.  To convert a GMT-based date/time string
+to a date/time string in the local US Eastern time zone, try this (it's 5:45 PM
+GMT and 1:45 PM locally):
+
+<PRE>
+>>> from email.utils import formatdate
+>>> from email._parseaddr import parsedate_tz, mktime_tz
+
+>>> now = formatdate()                               # gmt-based => local (eastern)
+>>> now                                         
+'Thu, 29 Sep 2011 17:45:26 -0000'
+>>> parsedate_tz(now)                                # time string => time tuple
+(2011, 9, 29, 17, 45, 26, 0, 1, -1, 0)
+>>> mktime_tz(parsedate_tz(now))                     # time tuple => to utc timestamp
+1317318326.0
+
+>>> formatdate(mktime_tz(parsedate_tz(now)))         # utc timestamp => time string
+'Thu, 29 Sep 2011 17:45:26 -0000'
+>>> formatdate(mktime_tz(parsedate_tz(now)), localtime=True)
+'Thu, 29 Sep 2011 13:45:26 -0400'
+</PRE>
+
+<P>
+Using this scheme to convert from local to GMT, or local to local 
+could proceed as follows:
+
+<PRE>
+>>> here = formatdate(localtime=True)                # eastern => gmt or local (eastern)
+>>> here
+'Thu, 29 Sep 2011 13:45:47 -0400'
+>>> formatdate(mktime_tz(parsedate_tz(here)))
+'Thu, 29 Sep 2011 17:45:47 -0000'
+>>> formatdate(mktime_tz(parsedate_tz(here)), localtime=True)
+'Thu, 29 Sep 2011 13:45:47 -0400'
+</PRE>
+
+<P>
+And finally, converting a date/time string from the US Pacific time zone
+to either GMT or the local US Eastern time zone might be done this way
+(it's now 10:46 AM Pacific, 5:46 PM GMT, and 1:46 Eastern/local):
+
+<PRE>
+>>> there = 'Thu, 29 Sep 2011 10:46:32 -0700'        # pacific => gmt or local (eastern)
+>>> formatdate(mktime_tz(parsedate_tz(there)))
+'Thu, 29 Sep 2011 17:46:32 -0000'
+>>> formatdate(mktime_tz(parsedate_tz(there)), localtime=True)
+'Thu, 29 Sep 2011 13:46:32 -0400'
+</PRE>
+</P>
+
+
+
+
+
+
+
+</P>
+<HR>
+<H2><A name="deletefix">[Sep-29-11] Delete and Save timing issue in PyMailGUI, rare bug (patched in 1.3)</A></H2>
+
+<P>
+<I>(Update Oct-19-11: I wound up patching this in version 1.3 of the examples package;
+see the <A HREF="#pymailguiall">release</A> description above.  There appeared to also
+be a similar potential for timing issues for Saves due to their file selection dialog, 
+which was also patched to check for blocking state before the dialog instead of after, 
+though this seemed much less likely or harmful.  These fixes were too large to 
+add to the book itself.)</I>
+
+<P>
+The short story: though unlikely, it's possible that deletes may delete the wrong 
+message if you request a new delete while one is already running.  <I>Don't do this</I>, 
+or read ahead to see how to fix this potential issue in code. 
+
+<P>
+Here's the longer story.  There is an obscure timing issue related to delete operations. 
+As coded in the book, it's not impossible that a deletion thread's exit action may be 
+allowed to run and clear the delete-in-progress flag, before a new delete request has a
+chance to check this flag.  This can occur apparently because the new delete's 
+confirmation dialog popup releases control to the GUI event stream, which can then run
+a prior delete's exit action from an after() timer callback event.  Unfortunately, the
+new delete issues the confirmation dialog <I>before</I> checking the delete-in-progress flag, 
+and after fetching message numbers to be deleted from the GUI.  
+
+<P>
+The net result is that a new delete might overlap with one in progress, and incorrectly 
+delete the wrong POP message numbers made invalid in the GUI by the prior delete -- a 
+scenario the book and code both explicitly state must be avoided.  Note that the system
+does go to great lengths to compare mail headers so as to ensure that each message being
+deleted in the GUI matches the message being deleted on the server once deletions begin,
+in case the server's inbox changes before a selected message is deleted (see method
+<B>deleteMessagesSafely</B> in <B>mailFetcher.py</B>).  That doesn't help in this 
+scenario, though, because the <I>GUI client's</I> mail list has been updated after selected 
+message numbers were fetched, such that the prior selections no longer match the GUI or the
+server.
+
+<P>
+This behavior is timing dependent, rare, and can occur only if you issue a new delete 
+request while one is already in progress, and then only if you're unlucky enough to 
+have the prior request's exit action run exactly after the time you press Delete for 
+the new request and before you're able to click "OK" in the delete confirmation popup.  
+However, this is also a classic and even illustrative timing bug; it reflects both the
+lack of broader testing for a book's examples, and a misconception of the confirmation
+dialog's modality -- the program assumed this dialog was truly <I>modal</I> (blocking), such 
+that all the code from the start of a new delete callback handler through its 
+delete-in-progress test ran atomically.  This must not be case, as I've seen a few 
+incorrect mails deleted when running many deletes in parallel.
+
+<P>
+To avoid this potential entirely, <I>don't run overlapping delete requests</I>.  To fix the
+code to avoid it in all cases, run the delete-in-progress test immediately in the 
+delete callback handler, and before the confirmation dialog is issued.  Because the 
+delete-in-progress test logic differs between the server and file list windows, this 
+can be done by either moving the confirmation dialog call into each subclass's code, 
+or adding a subclass-specific okay-to-delete method called from the superclass 
+delete callback code.  For more details, see <B>onDeleteMail</B> in the 
+<B>ListWindow</B> class on Page <B>1074</B>, as well as its two subclass's 
+<B>doDelete</B> methods on Pages <B>1079</B> and <B>1083</B>.
+I may patch this in the examples package eventually, and in a book reprint if 
+possible; for now, consider it a maintenance exercise, as well as a lesson on both 
+the need for rigorous testing and the complexity of code that may overlap in time.
+</P>
+
+
+
+
+
+
+
+</P>
+<HR>
+<H2><A NAME="filenames">[Aug-8-11] Page 1123: More on encoded email attachment filenames in PyMailGUI (patched in 1.3)</A></H2>
+
+<P>
+<I>(Update Oct-19-11: this was patched in release 1.3 of the examples package: 
+see the <A HREF="#pymailguiall">release</A> description above (which includes 
+screenshots of the fix), and the formal <A HREF="#filenamespatch">patch</A> 
+description below.  This fix was small enough that it will appear in the book
+itself in a future reprint.  
+
+Note that because the fix was applied in common mailtool package code it is 
+also inherited by the less functional PyMailCGI webmail example in Chapter 16, 
+but you may need to set your browser's encoding to UTF-8 to view the non-ASCII
+filenames embedded in the HTML reply stream.)</I>
+
+<P>
+After presenting the PyMailGUI client, Chapter 14 discusses a variety of 
+suggested improvements to this system.  Among them, its Unicode enhancements
+section on Page 1123 mentions that the filenames of attached parts might 
+also be in i18N encoded form in some rare cases, and require the same MIME 
+and Unicode decoding steps that are already applied to other primary email headers 
+such as <I>Subject</I>, <I>From</I>, and <I>To</I>.  In PyMailGUI the latter of these 
+are properly decoded for display and encoded for sends, but attachment filenames 
+are currently not.
+
+<P>
+Encoded attachment filenames weren't present in the test cases used to 
+develop this version of PyMailGUI, so they received only a brief mention
+in the improvements list.  Moreover, some minor Unicode issues were 
+intentionally given limited attention, partly because this book's size 
+and time constraints limit its scope, but also because this edition 
+uses the Python 3.1 <I>email</I> package which has well-known Unicode issues 
+and limitations described in the text.
+
+<P>
+Lately, however, I've noticed that encoded filenames are becoming more common. 
+This doesn't seem like a great feature of email in general -- Unicode filenames
+that are encoded in a way not supported by the receiving platform's filesystem
+won't work and would have to be renamed automatically (e.g., sending a Russian 
+or Chinese filename may fail when saved on an ASCII-only filesystem).  Because 
+of the increasing prevalence of such emails, though, I want to elaborate on 
+ways to address them here.
+</P>
+
+
+<H3>GUI workaround</H3>
+
+<P>
+As is, the only GUI-based way to handle parts with encoded filenames in the 
+client are to save the full enclosing email in a mail save file (list window: 
+select, and Save); edit the mail's text in its save file to rename the 
+attachment file name in its mail header line; and then reopen the mail from 
+its save file (list window: Open save file, select in popup file list window, 
+and View).  This works, but obviously isn't a very user-friendly procedure.
+</P>
+
+
+<H3>Coding fix</H3>
+
+<P>
+To do better, it might be simple to augment the <B>partName</B> method in 
+Chapter 13's <B>MailParser</B> class to route the raw filename fetched from 
+headers, to the <B>decodeHeader</B> header text decoding method already 
+present in this class.  This would apply the required email, MIME, and Unicode 
+decodings to such filenames, and yield a decoded Unicode filename string.  
+Since the result might use a character set that doesn't work on the underlying 
+platform's filesystem, though, this code would also need to try to encode it 
+per the local platform's filesystem encoding type, and come up with a different 
+name if the encode fails; it could follow the same naming pattern used for 
+attachments that don't have a filename or name header present ("partNNN.xxx").  
+
+<P>
+For the adventurous, the <B>MailParser</B> class, used by PyMailGUI and other 
+clients, appears on Page <B>976</B>; its <B>partName</B> method on Page <B>978</B>; 
+and the required <B>decodeHeader</B> method on Page <B>980</B>.  The platform's 
+filesystem encoding is described elsewhere in the book.  It's too late to add 
+this enhancement in the book, of course, but changing this would make a nice 
+exercise in code maintenance (or see the next section, unless you want to 
+try this on your own!).
+</P>
+
+
+<H3>Update, Aug-15-11: partial fix details</H3>
+<P>
+To help you get started, it appears that the first part of the coding fix, 
+decoding i18n filenames (but not also testing for their correctness on the 
+receiving platform), is simply a matter of changing the very last line of the 
+<B>partName</B> method in the <B>MailParser</B> class from the first of the 
+following to the second:  
+
+<PRE>
+        return (filename, contype)
+
+        return (self.decodeHeader(filename), contype) # aug 2011: decode fname
+</PRE>
+
+<P>
+At least per minimal testing so far, this does the trick -- Chinese and Russian 
+encoded attachment filenames are properly decoded, just like other encoded text 
+in primary email headers.  These decoded filenames also happen to work unchanged 
+on the Windows operating system (per UTF-8) in their decoded forms, though they may 
+not work on some platforms, and their original i18n undecoded string forms always 
+fail as filenames on Windows too and generate error popups in the GUI. 
+
+<P>
+For instance, a Russian email's jpeg image attachment whose i18n filename was given
+in its part headers with a non-ASCII character set ("KOI8-R"), base64 translation 
+("B"), and the encoded text ("8M/..."):
+
+<PRE>
+Content-Type: image/jpeg; name="=?KOI8-R?B?8M/Xz9LP1CBJTUdfMTQxMi5KUEc=?="
+Content-Disposition: attachment; filename="=?KOI8-R?B?8M/Xz9LP1CBJTUdfMTQxMi5KUA==?=
+	=?KOI8-R?B?Rw==?="
+Content-Transfer-Encoding: base64
+</PRE>
+
+with the patch is now correctly decoded to filename: <B>Поворот IMG_1412.JPG</B>.  
+The original encoded filename text in the headers does not work as is.  Similarly, 
+a Chinese spam email attachment's headers using UTF-8, base64 encoded values:
+
+<PRE>
+Content-Type: application/vnd.ms-excel;
+	name="=?utf-8?B?6YeR54mM6ZSA5ZSuMuWkqeS4gOWknOWunuaImOiuree7gy54bHM=?="
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment;
+	filename="=?utf-8?B?6YeR54mM6ZSA5ZSuMuWkqeS4gOWknOWunuaImOiuree7gy54bHM=?="
+</PRE>
+
+now decodes to filename <B>金牌销售2天一夜实战训练.xls</B> (which will look right in this 
+web page if your browser understands UTF-8 text).  With this patch, these decoded 
+filenames now appear correctly in the GUI's part buttons and its Parts list pop-up, 
+and when saved to files and opened in other applications.  Non-encoded filenames 
+pass though the decoder unchanged as expected, so this should not break any cases
+that worked previously.
+
+<P>
+Because this is a simple change that doesn't alter line numbers, and because encoded
+filenames are becoming more common, I may mark this as a future reprints update, but 
+be sure to patch your code copy this way if it does not include the enhancement
+and you start seeing encoded filenames in emails which you care to view.  
+
+
+<H3>TBD: filesystem limitations, encoding for sends too?</H3>
+
+<P>
+Also keep in mind that the prior section's fix is partial: it still does not address 
+filenames which won't work on the underlying platform's file system and may need to be 
+renamed.  Perhaps just as glaring, the fix handles <i>decoding</i> for <i><B>display</B></i> 
+of fetched emails only; there is no special logic for <i>encoding</i> non-ASCII attachment 
+filenames per i18n standards for <i><B>sends</B></i> -- something which might have to be very
+similarly addressed near the end of the <B>MailSender</B> class's <B>addAttachments</B> method 
+by passing filenames through that class's <B>encodeHeader</B> method, which modifies non-ASCII
+text only.  As is, on sends non-ASCII attachment filenames cause smtplib to raise ASCII encoding
+exceptions for the full mail text in which the filename is embedded.  Given that such encoding 
+is not supported by Python's <i>email</i> package automatically, the change may be as simple as 
+this -- on Page <B>964</B>:
+
+<PRE>
+            basename = os.path.basename(filename)
+
+            basename = self.encodeHeader(os.path.basename(filename))   # aug 2011
+</PRE>
+
+This should suffice: filenames that encode as ASCII are left intact and others 
+are encoded per the UTF-8 default, though it would ideally also apply the <B>mailconfig</B>
+module's <B>headersEncodeTo</B> setting if present.  But I'll leave this in the to-be-tested
+column; I don't send such emails, and doing so seems a bit dubious in any event on the portability 
+grounds mentioned above.  In other words, there is still plenty of room for 
+improvement.  Enhance as desired.
+</P>
+
+
+<H3>The standard futurisms caveat</H3>
+
+<P>
+Ideally, Python's <I>email</I> package would decode filename header contents 
+automatically and provide an alternative call for the rare cases when the raw 
+text is required, and encode filenames for sends automatically in non-ASCII cases.  
+Unfortunately, a future version of the <I>email</I> package may either decode
+and encode filenames this way or not, so it's impossible to predict the optimal 
+resolution to this in future Pythons (as stated in the book, this was a primary 
+reason some email issues were not addressed as completely as they might have been).  
+As usual for software dependent on external libraries, be sure to watch for changes 
+on this front.
+</P>
+
+
+
+
+
+
+
+</P>
+<HR>
+<H2><A NAME="smtp">[Jul-29-11] Email examples: using SMTP servers with logins and ports (patched in 1.3)</A></H2>
+
+<I>(Update Oct-19-11: per the <A HREF="#pymailguiall">release</A> description above,
+there is now a demo of the ideas here in release 1.3 of the examples package.
+The changes were too large to add to the book itself.)</I>
+
+<P>
+As stated in the book, you may need to change your SMTP mail server
+configurations to use the book's email clients to send email directly.
+This is especially true when you try to send mail by SMTP on public
+networks.  Some of this is ISP-specific, but here are a few pointers.
+
+<P>
+This recently resurfaced for me because my email sends stopped working
+after my broadband provider changed their network.  In short,
+they locked down the standard SMTP send port 25 in order to prevent spam,
+but this prevented direct sends using the server configurations I had been 
+using.  In the <B>mailconfig.py</B> file used by the PyMailGUI example,
+my SMTP server configurations were originally the following -- a simple 
+non-authenticating server at one of my third-party ISPs (godaddy), which 
+worked fine on my home network and some others:
+
+<PRE>
+smtpuser       = None                        # per your ISP, None = no login
+smtppasswdfile = ''                          # if login, set to '' to be asked
+smtpservername = 'smtpout.secureserver.net'  # if port 25 open for SMTP on network
+</PRE>
+
+This no longer worked after the SMTP port lockdown.  To send emails, I
+had to change my SMTP server details to use an authenticating SMTP server
+at another third-party ISP, running on a non-standard port number (this
+server runs on earthlink, which is different from my broadband provider):
+
+<PRE>
+smtpuser       = 'lutz@rmi.net'                         # login, authenticate
+smtppasswdfile = ''                                     # ask for password in GUI
+smtpservername = 'smtpauth.hosting.earthlink.net:587'   # 3rd party ISP, port 587
+</PRE>
+
+When so configured, I have to login to my email account at this ISP on the 
+first email send in a session (PyMailGUI pops up a prompt for password
+input), but Python's smtplib module automatically parses off and converses
+over the custom SMTP port number included at the end of the server name string. 
+This all just works in both PyMailGUI and smtplib, with no code changes required.
+
+<P>
+With these authenticated SMTP settings, email sends seem to work on many 
+more networks than before, and I avoid having to resort to webmail with 
+all its annoying advertising.  As an alternative, I could have routed email 
+sends through the broadband provider's SMTP server directly, but this scheme
+can sometimes be tagged as spam, and may require a direct connection to the 
+provider's network which may not always be possible:
+
+<PRE>
+smtpuser       = None                     # per your ISP
+smtppasswdfile = ''                       # set to '' to be asked
+smtpservername = 'mail.mailmt.com'        # your isp or local network's server
+</PRE>
+
+See your ISP for more on your server settings, and the comments in 
+mailconfig.py and the book for more on client configuration setings.
+
+<P>
+<I>Postscript</I>: I recently had to change servers yet again to use a broadband
+provider account when Earthlink's SMTP server started timing out -- the 
+following works in all contexts now for me, but your mileage will certainly 
+vary (and possibly, very often!):
+
+<PRE>
+smtpuser       = 'myloginname'            # nonblank=authenticated
+smtppasswdfile = ''                       # ''=ask in GUI once
+smtpservername = 'smtp.comcast.net:587'
+</PRE>
+
+
+
+
+
+
+
+</P>
+<HR>
+<H2><A name="closenote">[Jan-10-11] Close of a temporary file seems too implicit in PyMailGUI (patched in 1.2)</A></H2>
+
+<P>
+<I>(Update Oct-19-11: per the <A HREF="#pymailguiall">release</A> description above,
+this was patched in release 1.2 of the examples package, as well as in reprints of
+the book itself.  See the formal <A HREF="closepatch">patch</A> description ahead.)</I>
+
+<P>
+I recently spotted something unusual in Chapter 14's PyMaillGUI, in module
+<B>ListWindows.py</B>, method <B>PyMailCommon.contViewFmt</B> (after about a year, 
+you get to be your own code reviewer!).  This method's latter part opens an HTML-only 
+email in a web browser after displaying its extracted plain text in a PyEdit frame, 
+and has worked well for my email ever since it was coded.  To be robust and explicit, 
+though, it should probably run a <B>tmp.close()</B> after its <B>tmp.write(asbytes)</B>, 
+to ensure that the output file's buffers are flushed to disk before the browser opens it.  
+
+<P>
+This isn't a bug and the code works as is, but apparently only because of fortunate
+timing: the browser started by the <B>webbrowser</B> module doesn't get around to 
+opening the temporary file until well after this method exits, which deletes its local 
+variables, thereby reclaiming the temporary file object and automatically closing and
+hence flushing it in the process.  This works, but seems too implicit in retrospect, and 
+may not be the best coding pattern to emulate in any event.  In general, you should run
+an output file's <B>close</B> or <B>flush</B> methods (or use the <B>with</B> statement 
+or unbuffered open modes) to flush output buffers to disk if you expect to be able to 
+read the file in the same program.  
+
+<P>
+See Chapter 4 for much more on output file closes (including rules of thumb which
+I failed to heed in this context), especially pages 137-141 and 145.  The prior
+edition strung the open and write calls together: <B>open(tempname, 'w').write(content)</B>, 
+which, though still somewhat implicit, made the automatic close of the temporary file 
+on collection more apparent and immediate, and not as dependent on timing.  
+
+
+</P>
+<H3><I><U>Update, Feb-1-11: explicit close required on some machines</U></I></H3> 
+<P>
+After seeing this issue manifest itself for very small HTML-only emails on a 
+much faster machine running a different operating system, I'm reclassifying this
+as a correction to be patched in reprints and next example package version (1.2);
+please see the 
+<A HREF="#closepatch">patch below</A>.  
+When and where this problem occurs, an HTML-only email may open as a blank web 
+page, because its temporary file has not been flushed to disk.  Oddly, on the 
+faster machine, the web browser somehow opens and reads the temporary file before
+the GUI method has a chance to close it on exit.  Moreover, this only happens for
+very small emails (< 10K), suggesting a buffer size role.  Adding an explicit 
+close() ensures proper behavior for all platforms and emails.
+
+<P>
+This issue is platform- and timing-specific; impacts just one minor aspect of a 
+very large program; and, even when it does, can always be worked around in the 
+user interface in three different ways -- by pressing the web brower's 
+refresh/reload, by viewing the extracted plain-text in the GUI's main window, 
+and by clicking the sole HTML's part button in the main GUI window to open it 
+on demand.  Still, it's annoying and simple enough to merit a patch.
+
+<P>
+For detail-minded readers, the faster machine with the incorrect behavior was a 
+multicore Windows Vista machine; the book test machine where the code works as is
+was a single core Atom Windows 7 machine (a beefy netbook).  Since the Python 
+method in question returns immediately after this code, on Vista a web browser 
+apparently starts and opens a local web page faster than a Python method function
+can exit.  This may reflect differences in the implementations of start commands
+in the two systems.  I'd be surprised if this occurred on other platforms which 
+spawn processes to open browsers; on the other hand, unpredictable timing has a
+way of being unpredictable.
+
+<P>
+As described in the book, there are other issues related handling of HTML-only
+emails which I've left up to an interested reader to address.  As is, display of
+such emails employs a somewhat temporary scheme in lieu of an HTML-enabled text
+viewer, which was tested and used by just a single user on a single platform.  
+For example, its single temporary file model means only the last such email 
+viewed is ever stored at any one point in time, regardless of how many are
+opened.  Such oddness does not occur for HTML parts opened on demand, because 
+their files are resaved and closed correctly in mailtools each time an open 
+is requested.  As for much of this system, impove as desired.
+
+
+
+
+
+
+
+</P>
+<HR>
+<H2><A name="timeoutnote">[Feb-1-11] Using timeouts for poplib and smtplib connections (patched in 1.2)</A></H2>
+
+<P>
+<I>(Update Oct-19-11: per the <A HREF="#pymailguiall">release</A> description above,
+this was patched in release 1.2 of the examples package, as well as in reprints of
+the book itself.  See the formal <A HREF="timeoutpatch">patch</A> description ahead.)</I>
+
+<P>
+The email-based code in Chapters 13 (and its clients in Chapters 14 and 16)
+should probably pass timeout arguments to the poplib and smtplib connection 
+calls, to avoid waiting indefinitely.  I've recently seen the book's PyMailGUI 
+desktop client get stuck waiting for a poplib connection call that never 
+returns, for example.  This is rare, but without a timeout argument, your only
+recourse is to wait seemingly forever, or kill and restart the GUI.  See Python's
+library manuals for more about passing timeout arguments in these modules.
+
+
+</P>
+<H3><I><U>Update, Feb-22-11: add timeouts patch for next reprint</U></I></H3> 
+<P>
+I've added the timeout arguments as patches to be made in the next
+reprint and examples package version (1.2): see the <A HREF="#timeoutpatch">patch below</A>.  
+This became a priority when I started seeing the email server at my ISP suddenly 
+failing to respond to connect requests on a very regular basis; probably a 
+temporary problem at the ISP, but killing and restarting the email
+client's process manually was much more painful than patching to use timeouts for 
+server connections.
+
+
+</P>
+<H3><I><U>Update, Mar-17-11: more on email server connection timeout arguments</U></I></H3> 
+
+<P>
+<B><I>Please Note</I></B>:
+If you wish to use PyMailGUI for real email work, you may 
+need to increase its email transfer timeout values to accommodate 
+slower Internet access speeds.  As patched and shipped in the 1.2
+examples package, both POP and SMTP timeouts are set to 20
+seconds, which suffices in most cases.  Especially for <I>sending</I> 
+large emails over slow connections or slow servers, though, a 
+higher SMTP timeout value such as 60 or more seconds may be required.
+See the <A HREF="#timeoutpatch">patch ahead</A> for the location of 
+this value in the example code.
+
+<P>
+<I><B>Discussion</B></I>: 
+This is a surprisingly subtle issue, not covered in the book.  POP and 
+SMTP timeout values were added after the book's publication to avoid 
+transfer threads hanging indefinitely -- a scenario which may require 
+manually killing the email client's process in worst cases.  For instance,
+failure to contact the server on mail Load requests can render the GUI 
+largely inoperative (loads preclude most other operations, including Quit).
+This is despite the fact that the load is run in a thread; the GUI itself 
+remains active, but cannot perform most server-based email processing 
+in this state.  
+
+<P>
+Passing timeouts when connected to email servers avoids this by triggering 
+exceptions when server transactions hang, thereby terminating the server
+transfer thread and producing an error pop-up in the GUI.  However, Python's 
+library currently applies these timeouts to <I><B>every</B></I> server 
+interaction step performed on the socket created for an email transfer: not 
+just the initial connection calls, but also later data sends and receives.  
+This makes the timeout setting sensitive to the speeds of email servers, the
+speed of your own Internet connection on the client, and message size in general.
+This is true for both fetches and sends (POP and SMTP), though it is more 
+crucial for <I>sends</I>, which transfer a message's text all at once, 
+than for <I>fetches</I>, which read messages line by line.  
+
+<P>
+Unfortunately, this seems a bit of a <I><B>Catch-22</B></I> -- larger 
+timeout values allow larger mails to be transferred on slow connections, 
+but also mean that email transfer threads will be hung longer when servers 
+are truly inactive.  Moreover, the timeouts can't generally be omitted 
+altogether, or the transfer threads may hang interminably -- as mentioned, 
+in worst cases this may block other user operations in the GUI, and require
+the email client's process to be killed manually when email servers become 
+unresponsive (this was the original motivation for the timeout patch).
+Really, Python's email library modules should probably support different
+timeout settings for different operations; one for all doesn't quite
+make sense -- sending a large email requires very different timeout 
+treatment than initial connection -- but that's the API that exists today.
+
+<P>
+Although it's possible to implement more <i><b>custom</b></i> transfer timeouts manually
+instead of relying on the existing library module support (e.g., add top-level 
+timer code around initial connect calls only), this would require too many 
+post-publication code changes, and would not suffice if later operations hang.
+In principle, it's also possible to selectively enable and disable timeouts for
+the socket embedded in and used by the smtplib's object (e.g., disabling them 
+with server.sock.settimeout(None) for sends), but this is less than ideal from
+a software perspective, as it makes smtplib module clients too dependent on the
+module's internals: the module's API is intended to <i>encapsulate</i> and hide the 
+underlying socket object used.  This would also fail to address servers which
+become unresponsive during sends.
+
+<P>
+For sends, timeouts also trigger what looks like a <I><B>bug</B></I> 
+in Python 3.1's standard library -- the mail send appears to fail after
+the mail's text has been fully sent and while tring to read the server's
+truncated reply to it, but only because the socket sendall() call 4 levels 
+down from the book's code seems to simply stop sending data and truncate 
+it when the timeout expires, without correctly raising an exception to 
+signal this error (on a Windows Vista client, talking to my ISP's server, 
+at least).  This leads later to a confusing SMTPServerDisconnected
+exception with the error text "Connection unexpectedly closed" reported in
+the GUI and the console, even though the true cause was the earlier data 
+send's timeout.  (This is complex: I don't have time to explore it fully, 
+or space to explain it here; for the full story, you'll have to trace 
+through Python's source-code that raises this error, including its socket
+module's C code).  Increasing the timeout allows sendall() to finish sending
+the data without truncation, and is required in some contexts in any event, 
+but it is also effectively a workaround for this erroneous behavior in 
+Python itself.
+
+<P>
+<I><B>Summary:</B></I>
+Because of all this, in one of my own contexts, I had to bump up the 
+SMTP timeout to 60 seconds to allow for sending a large email on a slow
+network; otherwise, the send failed with an exception and an error pop-up.
+Change likewise if and as needed for your context.  Ideally, the mail 
+server timeouts would be configurable in the <I>mailconfig</I> module 
+instead of in executable source code files, but they were added after
+publication when larger-scale changes in book code listings were no 
+longer possible (examples in books are ultimately meant to be demonstrative,
+and don't enjoy, and may not even warrant, the level of update flexibility 
+common to software at large).  Also ideally, Python's email library modules' 
+APIs would support different timeout settings for different operations as 
+mentioned above, but this will have to await a core developer's attention.  
+For better and worse, software dependencies make your software, well, dependent.
+</P>
+
+
+
+
+
+
+
+</P>
+<HR>
+<H2>[Jan-9-11] Minor usability tweaks for PyEdit: suggested changes, (1 patched in 1.2)</H2>
+
+<P>
+<I>(Update Oct-19-11: per the <A HREF="#pymailguiall">release</A> description above,
+one of the otems here (focus loss) was patched in release 1.2 of the examples package,
+as well as in reprints of  the book itself.  See the formal <A HREF="focuspatch">patch</A> 
+description ahead.)</I>
+
+<P>
+Chapter 11's PyEdit text editor is a large program with lots of functionality,
+which I use nearly every day in one context or another.  Besides text edits, 
+it's also a key component in the book's PyMailGUI email client.  Still, like 
+most non-trivial user interfaces, there are plenty of ways its interaction might 
+be customized or improved, depending on its users' preferences.  After using it 
+recently with the more critical eye afforded by the passage of time, five items
+seem prime candidates for improvement; all are minor nits and not bugs,
+but would be simple to improve:
+
+<UL>
+<LI>
+<B><I>Respond to Enter in some dialogs.</I></B>
+It might be nice if some of the nonmodal popup dialogs (Change, Grep, and 
+so on) would respond to Enter key presses too, instead of requiring button
+clicks for activation as they do now.  This should be easy to add, by 
+binding a keyboard event on these dialogs; see earlier in the GUI part's
+chapters and examples for pointers on <B>bind</B> method events.
+<BR><BR>
+
+<LI>
+<B><I>Show CWD in Grep dialog.</I></B>
+In the new Grep dialog, a threaded and Unicode-aware file and directory 
+searcher, the root directory is preset to ".", meaning the current working 
+directory (CWD).  In retrospect, this might be better set to the full 
+<B>os.getcwd()</B> path, as it's not always obvious where the program was
+started ("." may not mean much if you don't know which program opened the 
+editor interface).  The downside here is that the absolute path might be a
+bit long for this dialog to display well.  Of course, allowing a full 
+regular expression pattern for the search key would be nicer too, but 
+this potential upgrade is noted in the book already. 
+<BR><BR>
+
+<LI>
+<B><I>Disabling Unicode prompt popups.</I></B>
+As shipped, the textConfig module configures PyEdit to always ask for a 
+Unicode encoding on Opens and Saves, when the encoding type is unknown
+(and prefills with the platform default as a suggestion).  It was shipped 
+this way because of PyEdit's role in Chapter 14's PyMailGUI, where the 
+Unicode encoding of some text items in email may be unknown; the best the 
+system can do is ask.  Still, for most standalone use cases, it's a 
+bit of a bother to have to OK the Unicode encoding prompt dialog for every 
+Open and new Save, when the platform default will apply most (or all) of 
+the time.  To disable the Unicode encoding prompt popups and apply the 
+platform's encoding default to your text files, simply change the values
+of variables <B>opensAskUser</B> and <B>savesAskUser</B> from True to False 
+in file <B>textConfig.py</B>.  See that file's comments and the book for 
+details.
+<BR><BR>
+
+<LI>
+<B><I><A name="focusnote">Text loses focus after Unicode prompt popups (patched in 1.2).</A></I></B>
+As coded, the Unicode prompt popups issued on Opens and Saves may cause 
+focus to be lost: you may need to click once in the text area before you 
+can start typing text or navigating with arrow keys, though not if you next 
+use scrollbars or view.  This is a minor annoyance at worst, but seems to stem
+from a buglet in the standard dialogs used for the popups (they should ideally
+save and restore focus, as other standard dialogs do).  It's also a non-issue 
+if you disable these Unicode popups altogether per the prior note's suggestion.  
+To force the issue for all cases, though, it's trivial to add a call to 
+<B>self.text.focus()</B> just after the dialog calls in the Open and Save callback
+handler methods; see the Find and Goto dialog handlers for more hints.  This
+is assuming that focus is a desired feature, of course; in some cases, users 
+might proceed to scrollbars instead of arrow keys after an Open, and view 
+rather than edit.
+<BR><BR>
+
+<I><B><U>Update Feb-1-11</U></B></I>: This is trivial to improve, so I'm posting this to 
+be patched in book reprints and the next book example package release (1.2).  Please
+see the <A HREF="#focuspatch">patch details</A> below. 
+<BR><BR>
+
+<LI>
+<B><I>Clone might be better in the File menu.</I></B>
+The Clone action, which creates a new, independent edit window, is currently 
+located in the Tools menu.  To some, it might seem more typical and prominent 
+in the File menu instead.  Moving it to File has a subtle downside, though: 
+because the File menu is removed (or disabled) when PyEdit is used in attached 
+component mode, Clone would be unavailable.  For instance, in Chapter 14's 
+PyMailGUI email client, the PyEdit component has a Clone in Tools which currently 
+works fine -- it creates a new PyEdit in a new Toplevel window, with the Frame-based 
+menus used in component mode.  This can be useful for saving bits of text cut 
+from the mail message, and so on.  Clone works the same in Chapter 11's PyView, 
+though its role there seems less compelling.  Still, moving Clone implies tradeoffs.
+
+</UL>
+
+<P>
+Because PyEdit is a book example, written and provided in easily scriptable 
+Python code, I'll leave applying these items as suggested exercise, along
+with anything else you might care to tweak.  This is Python, after all.   
+
+
+
+
+
+
+
+</P>
+<HR>
+<H2><A name="shelvenote">[Feb-1-11] Shelves close() calls for non-update script in Example 1-19? (No)</A></H2>
+
+<P>
+A reader posted an errata report for this book on O'Reilly's site, which 
+claimed that a <B>db.close()</B> call is required to avoid file corruption 
+at the end of a Chapter 1 script that displays but does not update a shelve.
+Per the report, the shelve file triggers errors later, after it is updated 
+by the next script and then displayed again.  Here is the post's text:
+
+<PRE>
+Type: Minor technical mistake
+Description: There are no page numbers when using the Kindle version of 
+the text.
+
+In the discussion of building dictionaries using classes, Example 1-19 
+(dump_db_classes.py) requires closing the db at the end of the script.  
+The final line of the code example should be:
+
+db.close()
+
+If the db is not closed, the subsequent updating (Example 1-20) and then 
+re-printing of the db (using dump_db_classes.py again) will fail, giving 
+an error code:
+
+Traceback (most recent call last):
+  File "C:\Python31\dump_db_classes.py", line 6, in <module>
+    print(key, '=>\n', db[key].name, db[key].pay)
+  File "C:\Python31\lib\shelve.py", line 113, in __getitem__
+    value = Unpickler(f).load()
+EOFError
+</PRE>
+
+<P>
+I have not been able to reproduce this error, and suspect that the poster's
+kindle cut-and-paste simply dropped the close() call that appears at the end of 
+the update script in Example 1-20.  In my testing, the scripts in question work 
+without error and as shown, both in Python 3.1 (using the "dumb" DBM file 
+interface default in 3.X), as well as in Python 2.7 (using the bundled "bsddb" 
+file interface default in 2.X).  Moreover, these examples worked fine under 
+Python 2.5 for the prior edition of this book, and similar scripts have been 
+used successfully in earlier editions dating back to 1995.  In general, shelves
+should not require close() calls unless the shelve has been updated.  By this 
+rule, a close() is not required in Example 1-19 (though it wouldn't hurt if 
+added); however, all shelve update scripts in the book do call close() before
+exiting as required.
+
+<P>
+Because I can't reproduce this issue, I'm posting this as a clarification
+instead of a correction for now, barring a more detailed reader report.
+If you do see the same error, please email me with full context; the platform, 
+Python version, and underlying DBM interface in use may factor into behavior
+too, and there are too many possible combinations for me to test exhaustively.  
+In the poster's defense, shelves are notoriously error-prone; it's not impossible
+that file paths may have differed between scripts (the current working directory
+can sometimes change unexpectedly in IDLE), or that a bad cut-and-paste 
+dropped the close() call in either the creation script of Example 1-18 or the
+update script of Example 1-20.
+
+<P>
+<I>Update</I>: The reader who posted this note was later unable to reproduce
+the error in question by repeating the steps which led to it, but believes 
+it existed initially.  That may close the case, though there are too many
+variables related to shelves to be certain.
+
+
+
+
+
+
+
+</P>
+<HR>
+<H2>[Jan-10-11] General book question replies</H2>
+
+<P>
+O'Reilly recently asked me for written replies on a few questions related to 
+this book's scope, audience, and goals.  Since this might help both current and
+prospective readers understand the book in general, I've cut and paste the 
+replies on <A HREF="pp4e-marketing-replies.html">this page</A>.
+
+
+
+
+
+
+
+</P>
+<HR>
+<H1><A name="fixes"><I>Book Corrections</I></A></H1>
+
+<P>
+In a book this large there are bound to be a significant number of typos,
+and I don't plan on listing them all here.  Instead, this section will 
+collect those typos that seem most grievous to me on purely subjective
+grounds (of course, your subjective grounds may vary).  The items here 
+reflect patches made to the book itself in reprints; code patches too large 
+for the book appear in the <A HREF="#pymailguiall">example package</A> only.  See 
+<A HREF="http://oreilly.com/catalog/9780596158101/">O'Reilly's webpage</A>
+and its formal
+<A HREF="http://oreilly.com/catalog/errata.csp?isbn=9780596158118">errata list</A>
+for this book for the full list of typos collected and patched in reprints over time.
+</P>
+<HR>
+<BR>
+
+
+<P>
+<OL>
+
+
+
+<LI>
+<B>Page xxviii, line 3 from page top: two typos in same sentence</B><BR>
+This text's 
+"<B>larger and more compete example</B>" should be 
+"<B>larger and more complete examples</B>".
+<BR><BR>
+
+
+
+
+<HR><BR>
+<LI>
+<B>Page 678 in Chapter 11, line 3 of last paragraph on page, figure description off</B><BR>
+The text misstates Figure 11-4's content here: it does not show a Clone
+window (the original version of this screenshot did, but was retaken very
+late in the project to show Grep dialogs with different Unicode encodings).
+To fix, change this line's 
+"<B>a window and its clone</B>" to read 
+"<B>a main window</B>".
+<BR><BR>
+
+
+
+
+<HR><BR>
+<LI><A name="focuspatch">
+<B>Page 702 and 704, PyEdit: add text.focus() calls after askstring() Unicode popups</B></A><BR>
+For convenience, and per the <A HREF="#focusnote">detailed description above</A>, we should 
+add a call to reset focus back to the text widget after the Unicode encoding prompt popups which
+may be issued on Open and Save/SaveAs requests (depending on texconfig settings).  As is, 
+the code works, but requires the user to click in the text area if they wish to resume 
+editing it immediately after the Unicode popup is dismissed; this standard popup itself 
+should  probably restore focus, but does not.  To fix, add focus calls in two places. 
+<B>First</B>, on page 702, at code line 21 at roughly mid page, change:
+<PRE>
+            if askuser:
+                try:
+                    text = open(file, 'r', encoding=askuser).read()
+</PRE>
+to the following, adding the new first line (the rest of this code is unchanged):
+<PRE>
+            self.text.focus() # else must click
+            if askuser:
+                try:
+                    text = open(file, 'r', encoding=askuser).read()
+</PRE>
+<B>Second</B>, on page 704, at code line 8 near top of page, similarly change:
+<PRE>
+            if askuser:
+                try:
+                    text.encode(askuser)
+</PRE>
+to the following, again just adding the new first line:
+<PRE>
+            self.text.focus() # else must click
+            if askuser:
+                try:
+                    text.encode(askuser)
+</PRE>
+Reprints: please let me know if there is not enough space for the inserts;
+I'd rather avoid altering page breaks in the process.  This patch will also
+be applied to future versions of the book's examples package; in the 
+package, the code in question is in file 
+<B>PP4E\Gui\TextEditor\textEditor.py</B>, at lines 298 and 393.
+
+<BR><BR>
+<B><I>Update Feb-24-11</I></B>: Patched in version 1.2 of the book examples package (PP4E-Examples-1.2.zip). 
+<BR><BR>
+
+
+
+
+
+
+
+
+<HR><BR>
+<LI><A name="timeoutpatch">
+<B>Page 963 line 9, and page 970 line 4: add timeout arguments to email server connect calls</B></A><BR>
+For robustness, and per the <A HREF="#timeoutnote">detailed description above</A>, add
+"timeout=15" arguments to the POP and SMTP connect calls, so that email clients don't 
+hang when email servers fail to respond.  In the book, change code line 9 on page 963 
+from the first of the following to the second:
+<PRE>
+        server = smtplib.SMTP(self.smtpServerName)           # this may fail too
+        server = smtplib.SMTP(self.smtpServerName, timeout=15)  # this may fail too
+</PRE>
+
+Similarly, change code line 4 on page 970 from the first of the following to the second:
+<PRE>
+        server = poplib.POP3(self.popServer)
+        server = poplib.POP3(self.popServer, timeout=15)
+</PRE>
+In the book examples package, these changes would be applied to 
+line 153 of mailSender.py, and line 34 of file mailFetcher.py, 
+both of which reside in directory PP4E\Internet\Email\mailtools.
+They'll be patched in a future examples package version.
+
+<BR><BR>
+<B><I>Update Feb-24-11</I></B>: Patched in version 1.2 of the book examples package 
+(PP4E-Examples-1.2.zip).  I made the timeout 20 seconds in the examples package, to allow 
+for slower email servers; 15 is more than enough to detect a problem with mine, but tweak
+this as desired.
+
+<BR><BR>
+<B><I>Update Mar-17-11</I></B>: Because timeout settings are used for <i>every</i> server 
+interaction step, you may need to use a bigger timeout value (e.g., 60 or more seconds) 
+in some contexts, especially when sending a large email over a slow client-side connection.
+See the update at the <A HREF="#timeoutnote">detailed description above</A> for more on this. 
+<BR><BR>
+
+
+
+
+
+
+<HR><BR>
+<LI><A name="closepatch">
+<B>Page 1072, code line 10 from top of page, PyMailGUI: add a close() for HTML mail files</B></A><BR>
+For portability, and per the <A HREF="#closenote">detailed description above</A>, we 
+should add an explicit close() call to flush the temporary file of an HTML-only email 
+before starting a web browser to view it, so that this code works in all contexts.  
+As is, it works on the test platform used for the book, and likely works on 
+most others, because the method in question exits and thus reclaims, closes, 
+and flushes the file before the spawned web browser gets around to reading it.  
+However, this is timing and platform dependent, and may fail on some machines 
+that start browsers more quickly; its been seen to fail on a fast Vista machine.
+To fix in the book, change the middle line of the following three current code 
+lines:
+<PRE>
+                        tmp = open(tempname, 'wb')      # already encoded
+                        tmp.write(asbytes)
+                        webbrowser.open_new('file://' + tempname)
+</PRE>
+to read as follows, adding the text that starts with the semicolon 
+(I'm combining statements to avoid altering page 
+breaks):
+<PRE>
+                        tmp = open(tempname, 'wb')      # already encoded
+                        tmp.write(asbytes); tmp.close() # flush output now
+                        webbrowser.open_new('file://' + tempname)
+</PRE>
+In the book's examples package, this code is located at line 209 in file 
+<B>PP4E\Internet\Email\PyMailGUI\ListWindows.py</B>; it will be patched 
+there too in a future examples package release (version 1.2, date TBD).
+
+<BR><BR>
+<B><I>Update Feb-24-11</I></B>: Patched in version 1.2 of the book examples package (PP4E-Examples-1.2.zip). 
+<BR><BR>
+
+
+
+
+<HR><BR>
+<LI>
+<B>Page 1226, two filename typos in same sidebar</B><BR>
+This will probably be obvious to most readers who inspect the external example files
+referenced here, but in this sidebar: 
+"<B>test-cgiu-uploads-bug*</B>" should read 
+"<B>test-cgi-uploads-bug*</B>",
+and the bullet item text
+"<B>test-cgi-uploads-bug.html/py saves the input stream</B>" should read 
+"<B>test-cgi-uploads-bug2.html/py saves the input stream</B>".
+<BR><BR>
+
+
+
+
+<HR><BR>
+<LI>
+<B>Page 1555, top of page, quotes are misplaced in heading line</B><BR>
+A typo inherited from the prior edition: the quotes and question mark
+in the heading line at the very top of this page are slightly off.  Change the
+heading line:
+<B>So What's "Python: The Sequel"?</B> to read as:
+<B>"So What's Python?": The Sequel</B>.  Quotes are angled in the original
+and revision.  This header refers back to the 
+sidebar in the Preface titled "So What's Python?".  Arguably trivial,
+as this sidebar was 1500 pages (and perhaps a few months) ago by this
+point in the book, but it would be better to get this right.  This header
+was broken by a copyedit change on the prior edition, and fell through the
+cracks on this one. 
+<BR><BR>
+
+
+
+
+<HR><BR>
+<LI><B><A name="filenamespatch">Pages 978 and 964, encode and decode i18n attachment filenames for display, save, send</A></B><BR>
+Per the <A HREF="#filenames">detailed description above</A>, the following two changes will 
+support both receipt and send of encoded i18n attachment filenames, assuming that such non-ASCII
+filenames are valid on the underlying platform (Windows is very liberal in this regard).  
+<B>First</B>, on Page 978, change the very last line of the <B>partName</B> method def statement 
+from the first of these to the second (this is mid page at code line 26, in file 
+PP4E\Internet\Email\mailtools\mailParser.py):
+<PRE>
+        return (filename, contype)
+
+        return (self.decodeHeader(filename), contype) # oct 2011: decode i18n fnames
+</PRE>
+
+<B>Second</B>, on Page 964, change the 5th and 4th last lines of the <B>addAttachments</B> method def 
+statement from the first of these to the second
+(this is mid page line -22, in file PP4E\Internet\Email\mailtools\mailSender.py):
+<PRE>
+            # set filename and attach to container
+            basename = os.path.basename(filename)
+
+            # set filename (ascii or utf8/mime encoded) and attach to container
+            basename = self.encodeHeader(os.path.basename(filename))   # oct 2011
+</PRE>
+
+<B><I>Update Oct-19-11</I></B>: Patched in version 1.3 of the book examples package (PP4E-Examples-1.3.zip),
+and scheduled to be applied in future reprints of the book itself. 
+<BR><BR>
+ 
+
+
+
+</OL>
+
+
+
+
+
+
+</P>
+<HR>
+<P>
+Back to this book's <A HREF="about-pp4e.html">main page</A>
+</P>
+</BODY></HTML>

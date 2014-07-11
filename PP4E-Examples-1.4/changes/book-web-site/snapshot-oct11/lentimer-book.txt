@@ -1,0 +1,29 @@
+# using the general timer function in the book, 2.X+3.X version, page 514
+
+c:\pyclass>c:\python32\python
+Python 3.2 (r32:88445, Feb 20 2011, 21:30:00) [MS32
+Type "help", "copyright", "credits" or "license"
+>>>
+>>> from mytimer import best
+>>> from lentimer import builtinFunc, underMethod
+>>> best(builtinFunc)
+(0.07019851685060496, 500000)
+>>> best(builtinFunc, _reps=50)
+(0.07051140577922688, 500000)
+>>> best(underMethod, _reps=50)
+(0.1147658431448697, 500000)
+>>> 
+
+c:\pyclass>C:\Python32\python lentimer.py
+3.2
+builtinFunc
+(0.07064654865352993, 500000)
+underMethod
+(0.11504597651377502, 500000)
+
+
+
+
+
+
+

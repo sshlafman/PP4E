@@ -1,0 +1,50 @@
+UPDATE OCTOBER 2013 (examples version 1.4)
+
+PIL is now Pillow.  As of today, PIL's functionality
+is provided in a fork named Pillow, available at:
+
+    https://pypi.python.org/pypi/Pillow/
+
+Pillow is a drop-in replacement for PIL, with installers
+for all Pythons in common use, incuding 3.3.  For example, 
+on Windows 32- and 64-bit systems, respectively, fetch and
+install the following for Python 3.3:
+
+    Pillow-2.2.1.win32-py3.3.exe
+    Pillow-2.2.1.win-amd64-py3.3.exe
+
+All book image examples work with the Pillow install under 
+Python 3.3 and 3.2, including PyPhoto, which uses tkinter 
+image display, thumbnail generation, and resize operations.
+I've also used Pillow for EXIF photo metadata tag processing.
+
+Do not use the partial PIL version in this folder unless
+you are runing Python 3.1 on Windows; fetch Pillow instead.
+
+
+
+--------------------------------------------------------------
+[Prior] UPDATE JULY, 2012 (examples version 1.3.1)
+
+The PIL installer here is for Python 3.1 only.  At this 
+writing (July, 2012) there is still no "official" PIL port
+for 3.1,or the later and newer Python 3.2 or 3.3.
+
+However, there are "unofficial" PIL ports for Python 3.X on 
+the web which do work correctly, at least on Windows under 3.2 
+and for the PIL subset used by the book's examples -- tkinter
+image display, thumbnail generation, and resize operations.
+
+Specifically, the installer named:
+    PIL-1.1.7.win-amd64-py3.2.exe
+
+at the site:
+    http://www.lfd.uci.edu/~gohlke/pythonlibs/ 
+
+runs fine for me in the book's PyPhoto program under Python 
+3.2.3 on a 64-bit Windows 7 ultrabook laptop.  Presumably, the 
+32 bit and Python 3.3 Windows installers as well as those for
+other platforms at this site also work as expected. 
+
+Thanks to both those who took time to port and post PIL, as well 
+as readers who asked me about this issue.

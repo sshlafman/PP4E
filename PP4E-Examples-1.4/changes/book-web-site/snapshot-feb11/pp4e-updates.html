@@ -1,0 +1,760 @@
+<HTML>
+<TITLE>
+Programming Python 4th Edition: Updates Page
+</TITLE>
+<BODY>
+
+<H1><I>Programming Python 4th Edition</I>: Updates Page</H1>
+
+<P>
+I've started collecting notes, updates, and errata related to the book
+on this page.  This page may eventually grow to the have a more sophisticated
+multipage structure like that of the Learning Python 4E updates pages, but I'm
+adopting a simpler, informal policy here for now, partly because the book was 
+just released, and partly because this book's more advanced audience will probably 
+be more tolerant of the few inevitable typos along the way in a 1600-page book.
+</P>
+
+<p>
+Below are the current and official lists of corrections and 
+general notes for this edition of the book:
+
+<UL>
+<LI><A HREF="#notes"><B>Book Notes</B></A><BR>
+<LI><A HREF="#clari"><B>Book Clarifications</B></A><BR>
+<LI><A HREF="#fixes"><B>Book Corrections</B></A><BR>
+</UL>
+
+<p>
+Only the last of these lists is true errata (corrections,
+intended to be patched in future reprints).  The first two
+lists represent an informal book "blog."  If you find an 
+issue you wish to report, please post it on O'Reilly's errata
+page for this book; I'm automatically emailed such posts.
+
+
+
+</P>
+<HR>
+<H1><A name="notes"><I>Book Notes</I></A></H1>
+
+<P>
+I use this section to post general notes about the book, and 
+supplemental materials.
+</P>
+<HR>
+
+
+
+
+</P>
+<H2>[Dec-28-10] Bonus example: web site maintenance, with HTML and URL parsing, FTP</H2>
+
+<P>
+As a sort of reward for stumbling onto this page, I've uploaded an extra example 
+script here which would have appeared with the book's HTML parsing coverage 
+in Chapter 19, had this book project enjoyed unlimited time and space.  
+This script uses Python's HTML and URL parsing tools to try to isolate all 
+the unused files in a web site's directory.  
+
+<p>
+I use this script for my training web site, as well as my book support site (the 
+latter after fixing some HTML errors that rendered the script inaccurate when 
+Python's strict HTML parser failed and caused some used files to be missed).  This
+script also includes code to delete the unused files from a remote site by FTP if 
+you wish to enable it (pending a resolution on the parser failures issue), and 
+includes suggestions for parsing with patttern matching instead of the HTML parser.
+
+<P>
+<i>Download:</I> The script itself lives here: <A HREF="cleansite.py">cleansite.py</A>.  
+To see what it does, read its docstring, and see two sample runs provided
+in a zip file here: <A HREF="testruns.zip">testruns.zip</A>.
+
+
+
+
+</P>
+<HR>
+<H2><A name="lotto">[Jan-11-11] Bonus example: book lottery, with POP, email, SMTP, and CGI</A></H2>
+
+<H3>Update Feb-22-11: New version, rewrite for more usage modes</H3>
+
+<P>
+In light of security constraints in a recent class, I've completely rewritten 
+the <I>PyLotto</I> script for worst-case scenarios.  It can now select from both emails, 
+and a names file created manually or via web form submits, and can be run in both
+console and remote CGI modes.  In pathological cases, it can be run locally to
+select from a local names file (and in fact had to in a recent class somwhere in
+the wilds of California!).  I've also updated to port the single script to work on 
+both Python 3.X and 2.X, and to properly escape student names in the reply HTML.
+Here's the new code -- use the "view source" option to view the form's HTML:
+
+<UL>
+<LI><A HREF="pylotto.py">pylotto.py</A>, the main script, in a CGI directory in remote mode
+<LI><A HREF="pylotto.html">pylotto.html</A>, the sign-up form web page, on the server
+<LI><A HREF="pylotto-run.txt">pylotto-run.txt</A>, output from the script's -test option
+</UL>
+
+Read the script's docstring for all the details.  You can also view the 
+sign-up instructions files:  
+<A HREF="lotto-howto-email.txt">lotto-howto-email.txt</A> and
+<A HREF="lotto-howto-web.txt">lotto-howto-web.txt</A>,  
+as well as a last-resort script which became a class exercise and
+gave rise to (and is subsumed by) this new generalized
+Pylotto: <A HREF="simple-pylotto.py">simple-pylotto.py</A>.  
+
+<p>
+The rest of this section describes the original, now defunct version, but also gives
+the back story.  The new version has the same goals, but supports web form and local file 
+sign-up modes in addition to emails.
+</P>
+
+
+<H3>Older (original) version description</H3>
+<P>
+Here's another supplemental example that might have appeared in the book, 
+if not for time and its conceptual dependencies.  I wrote this script, <I>PyLotto</I>, 
+in order to give away free books in some of the classes I teach.  O'Reilly always
+sends a batch of free copies to authors, and if I kept a dozen copies of every one
+of the 12 Python books I've written, some of which are not exactly small, I'd 
+probably need a bigger house.
+
+<p>
+To enter the book lottery, students send an email message to the book's account,
+with "PYLOTTO" in the subject line.  At the end of the class, the script scans, 
+parses, and deletes these emails, and selects a set of their "From" addresses 
+at random as winners.  It's not Vegas, but it's fair, and serves as a nice example
+of practical Python programming that ties together a number of tools presented in
+the book.  This script also has a test mode that sends test emails, and an as-CGI 
+mode for running on a Web server if the training site doesn't allow POP email access
+or SSH (many don't).
+
+<P>
+<i>Download:</I> Fetch the script here: <A HREF="pylotto-orig.py">pylotto-orig.py</A>.  
+To see what it does, read its docstring, and see the text file that traces
+its outputs in its various modes here: <A HREF="pylotto-orig-run.txt">pylotto-orig-run.txt</A>.
+
+<P>
+<i>New:</I> See also <A HREF="pylotto-orig-24.py">pylotto-orig-24.py</A>, a version of 
+pylotto.py modified to run remotely as a CGI script on a Python 2.4 web 
+server (that's the latest Python available on godaddy.com, as of January 2011!).
+
+
+<P>
+Naturally, I don't give away books in every class I teach (this basically 
+depends on how many freebies O'Reilly has given to me, and how willing I 
+am to lug around a big, giant book in my checked luggage).  Even so, scripts 
+such as this one can help illustrate Python applications in action once students
+or readers have mastered Python language fundamentals; it's important to spend
+some time running after you've learned to walk.
+
+
+
+
+
+</P>
+<HR>
+<H2>[Feb-3-11] Bonus example: Extracting music files from an iTunes directory tree</H2>
+
+<P>
+Here's something similarly practical, but a bit simpler than the prior two sections' 
+programs -- a Python script which walks all the folders and subfolders in an iTunes 
+directory tree, to copy all music files in the tree to a flat directory.  I use 
+this to create a single directory of all my music on a memory stick, so it can be 
+used conveniently on the harddrive in a vehicle I drive.  iTunes seems fond of nested 
+directories, and the vehicle in question doesn't do well in their presence.  This example
+might have appeared in the larger systems examples chapter, if not for time, space, 
+and the fact that it's not too much different from tree-walkers already in that chapter.
+
+<P>
+<i>Download:</I> Fetch the script here: <A HREF="flatten-itunes.py">flatten-itunes.py</A>.  
+To see what it does, read its code and docstring, and see the text file that traces
+its outputs here: <A HREF="flatten-itunes.out.txt">flatten-itunes.out.txt</A>.
+
+
+
+
+</P>
+<HR>
+<H2>[Jan-10-11] General book question replies</H2>
+
+<P>
+O'Reilly recently asked me for written replies on a few questions related to 
+the book's scope, audience, and goals.  I'm not sure if they'll post these 
+separately, but since this might help readers understand the book in general, 
+I've cut and paste the replies on <A HREF="pp4e-marketing-replies.html">this page</A>.
+
+
+
+
+</P>
+<HR>
+<H2><A name="notes32">[Dec-31-10] Python 3.2 updates</A></H2>
+
+<P>
+As described in its Preface, this book was written under Python 3.1, and its major
+examples were retested and verified to work under Python 3.2 alpha just before 
+publication.  Because of that, this book is technically based on both 3.1 and 3.2, 
+though it addresses the entire 3.X line in general.
+
+<P>
+That said, you will find some discussion of 3.1 library issues in the book that 
+have changed or improved in the upcoming 3.2 version, which is due to be released 
+roughly two months after this book's release date (3.2 final is currently 
+scheduled for mid February 2011).  Some of the issues in 3.1's <B>email</B> 
+package which the book must workaround, for instance, have been improved or 
+repaired in 3.2.  
+
+<P>
+In fact, many or most of the issues of the 3.1 email package described in Chapter
+13 are fixed in 3.2.  The email workarounds coded in that chapter still work under
+3.2 (and were verified and even enhanced to do so before publication), but some 
+are no longer required with 3.2.  Notably, the email package in 3.2 now supports 
+parsing the raw <i>bytes</i> returned by the SMTP module, thereby eliminating the 
+need for the partially heuristic and potentially error prone pre-parse decoding 
+to <i>str</i> that the book's 3.1-based examples must perform.  The next section 
+explains how this works in 3.2.
+
+<H3>Email and bytes in 3.2: the surrogates trick</H3>
+
+<P>
+As a prominent example of email's improvements, 3.2's <I>What's New</I> document 
+states that the 3.2 email package's "New functions <B>message_from_bytes()</B> and
+<B>message_from_binary_file()</B>, and new classes <B>BytesFeedParser</B> and 
+<B>BytesParser</B> allow binary message data to be parsed into model objects".  
+Interestingly, the 3.2 email parser still does not parse bytes internally.  
+Insted, these extensions work their magic by decoding raw binary bytes data to 
+Unicode str text prior to parsing, using the ASCII encoding and passing "<B>surrogateescape</B>" 
+for the decoding call's errors flag.  In short, this translates undecodable bytes to Unicode 
+codepoint escape sequences which allow the bytes' original values to be recovered when the text
+is encoded back again to bytes by compatible software -- a trick which works for data passed 
+through Python APIs which follow this translation protocol to decode to Unicode text and
+re-encode to bytes later using the surrogateescape error handler for both steps, but can 
+fail for data which is not.
+
+<P>
+At least potentially, this change could resolve the initial decode-to-str issue for 
+parsing email messages in Chapter 13, and may be a first step towards addressing (but is
+not a fix for) the related CGI uploads issue described in Chapters 15 and 16. The latter
+of these arises because the <B>CGI module</B> uses the email parser, but its uploaded 
+data can be arbitrary combinations of both binary data and text of a variety of Unicode 
+encodings, with or without content type headers; such data cannot be decoded to str in 
+3.1 as required by its email parser.  Unfortunately, the CGI module still uses the 
+str-based email parsing API in 3.2 beta2, so this CGI uploads limitation appears to 
+<I>still be present in 3.2</I>.  On the upside, the decode-to-str preparse issue for 
+email, as well as other Chapter 13 email package workarounds, may have been rendered 
+superfluous in 3.2, though they are harmless, and representative of the sorts of 
+dilemas faced by real-world development in general --  a major theme of this book.
+
+<H3>Other 3.2 changes</H3>
+
+<P>
+For more on the Python 3.2 release, please see 
+<A HREF="lp4e-updates-notes-recent.html#s1b">its note on this site</A> 
+in the Learning Python 4E updates page (a book less impacted by 3.2, since 3.2 
+was supposed to change only libraries, not core language -- and nearly succeeded).
+
+<p>
+Not covered in that note is the <i>very</i> late 3.2 addition of its 
+<B>concurrent.futures</B> library.  This library, based upon a Java package, provides 
+yet another way to generalize the notion of multitasking with threads and processes, 
+in addition to the existing <i>subprocess</i> and <i>multiprocessing</i> modules which
+are covered in this book.  This new library is also a bit of a work in progress, 
+intended for future expansion.  For more details, please see 3.2 release details and 
+manuals.
+
+
+
+
+</P>
+<HR>
+<H2>[Jan-9-11] Minor usability tweaks for PyEdit (suggested changes)</H2>
+
+<P>
+Chapter 11's PyEdit text editor is a large program with lots of functionality,
+which I use nearly every day in one context or another.  Besides text edits, 
+it's also a key component in the book's PyMailGUI email client.  Still, like 
+most non-trivial user interfaces, there are plenty of ways its interaction might 
+be customized or improved, depending on its users' preferences.  After using it 
+recently with the more critical eye afforded by the passage of time, five items
+seem prime candidates for improvement; all are minor nits and not bugs,
+but would be simple to improve:
+
+<UL>
+<LI>
+<B><I>Respond to Enter in some dialogs.</I></B>
+It might be nice if some of the nonmodal popup dialogs (Change, Grep, and 
+so on) would respond to Enter key presses too, instead of requiring button
+clicks for activation as they do now.  This should be easy to add, by 
+binding a keyboard event on these dialogs; see earlier in the GUI part's
+chapters and examples for pointers on <B>bind</B> method events.
+<BR><BR>
+
+<LI>
+<B><I>Show CWD in Grep dialog.</I></B>
+In the new Grep dialog, a threaded and Unicode-aware file and directory 
+searcher, the root directory is preset to ".", meaning the current working 
+directory (CWD).  In retrospect, this might be better set to the full 
+<B>os.getcwd()</B> path, as it's not always obvious where the program was
+started ("." may not mean much if you don't know which program opened the 
+editor interface).  The downside here is that the absolute path might be a
+bit long for this dialog to display well.  Of course, allowing a full 
+regular expression pattern for the search key would be nicer too, but 
+this potential upgrade is noted in the book already. 
+<BR><BR>
+
+<LI>
+<B><I>Disabling Unicode prompt popups.</I></B>
+As shipped, the textConfig module configures PyEdit to always ask for a 
+Unicode encoding on Opens and Saves, when the encoding type is unknown
+(and prefills with the platform default as a suggestion).  It was shipped 
+this way because of PyEdit's role in Chapter 14's PyMailGUI, where the 
+Unicode encoding of some text items in email may be unknown; the best the 
+system can do is ask.  Still, for most standalone use cases, it's a 
+bit of a bother to have to OK the Unicode encoding prompt dialog for every 
+Open and new Save, when the platform default will apply most (or all) of 
+the time.  To disable the Unicode encoding prompt popups and apply the 
+platform's encoding default to your text files, simply change the values
+of variables <B>opensAskUser</B> and <B>savesAskUser</B> from True to False 
+in file <B>textConfig.py</B>.  See that file's comments and the book for 
+details.
+<BR><BR>
+
+<LI>
+<B><I><A name="focusnote">Text loses focus after Unicode prompt popups.</A></I></B>
+As coded, the Unicode prompt popups issued on Opens and Saves may cause 
+focus to be lost: you may need to click once in the text area before you 
+can start typing text or navigating with arrow keys, though not if you next 
+use scrollbars or view.  This is a minor annoyance at worst, but seems to stem
+from a buglet in the standard dialogs used for the popups (they should ideally
+save and restore focus, as other standard dialogs do).  It's also a non-issue 
+if you disable these Unicode popups altogether per the prior note's suggestion.  
+To force the issue for all cases, though, it's trivial to add a call to 
+<B>self.text.focus()</B> just after the dialog calls in the Open and Save callback
+handler methods; see the Find and Goto dialog handlers for more hints.  This
+is assuming that focus is a desired feature, of course; in some cases, users 
+might proceed to scrollbars instead of arrow keys after an Open, and view 
+rather than edit.
+<BR><BR>
+
+<I><B><U>Update Feb-1-11</U></B></I>: This is trivial to improve, so I'm posting this to 
+be patched in book reprints and future book example package releases.  Please
+see the <A HREF="#focuspatch">patch details</A> below. 
+<BR><BR>
+
+<LI>
+<B><I>Clone might be better in the File menu.</I></B>
+The Clone action, which creates a new, independent edit window, is currently 
+located in the Tools menu.  To some, it might seem more typical and prominent 
+in the File menu instead.  Moving it to File has a subtle downside, though: 
+because the File menu is removed (or disabled) when PyEdit is used in attached 
+component mode, Clone would be unavailable.  For instance, in Chapter 14's 
+PyMailGUI email client, the PyEdit component has a Clone in Tools which currently 
+works fine -- it creates a new PyEdit in a new Toplevel window, with the Frame-based 
+menus used in component mode.  This can be useful for saving bits of text cut 
+from the mail message, and so on.  Clone works the same in Chapter 11's PyView, 
+though its role there seems less compelling.  Still, moving Clone implies tradeoffs.
+
+</UL>
+
+<P>
+Because PyEdit is a book example, written and provided in easily scriptable 
+Python code, I'll leave applying these items as suggested exercise, along
+with anything else you might care to tweak.  This is Python, after all.   
+
+
+
+
+
+
+</P>
+<HR>
+<H1><A name="clari"><I>Book Clarifications</I></A></H1>
+
+<P>
+This section provides clarifications for the book's material or code, 
+which don't qualify as errors, but may address some common reader 
+questions or concerns.
+
+
+
+
+</P>
+<HR>
+<H2><A name="closenote">[Jan-10-11] Close of a temporary file seems too implicit in PyMailGUI</A></H2>
+
+<P>
+I recently spotted something unusual in Chapter 14's PyMaillGUI, in module
+<B>ListWindows.py</B>, method <B>PyMailCommon.contViewFmt</B> (after about a year, 
+you get to be your own code reviewer!).  This method's latter part opens an HTML-only 
+email in a web browser after displaying its extracted plain text in a PyEdit frame, 
+and has worked well for my email ever since it was coded.  To be robust and explicit, 
+though, it should probably run a <B>tmp.close()</B> after its <B>tmp.write(asbytes)</B>, 
+to ensure that the output file's buffers are flushed to disk before the browser opens it.  
+
+<P>
+This isn't a bug and the code works as is, but apparently only because of fortunate
+timing: the browser started by the <B>webbrowser</B> module doesn't get around to 
+opening the temporary file until well after this method exits, which deletes its local 
+variables, thereby reclaiming the temporary file object and automatically closing and
+hence flushing it in the process.  This works, but seems too implicit in retrospect, and 
+may not be the best coding pattern to emulate in any event.  In general, you should run
+an output file's <B>close</B> or <B>flush</B> methods (or use the <B>with</B> statement 
+or unbuffered open modes) to flush output buffers to disk if you expect to be able to 
+read the file in the same program.  
+
+<P>
+See Chapter 4 for much more on output file closes (including rules of thumb which
+I failed to heed in this context), especially pages 137-141 and 145.  The prior
+edition strung the open and write calls together: <B>open(tempname, 'w').write(content)</B>, 
+which, though still somewhat implicit, made the automatic close of the temporary file 
+on collection more apparent and immediate, and not as dependent on timing.  
+
+
+</P>
+<H3><I><U>Update, Feb-1-11: explicit close required on some machines</U></I></H3> 
+<P>
+After seeing this issue manifest itself for very small HTML-only emails on a 
+much faster machine running a different operating system, I'm reclassifying this
+as a correction to be patched in reprints; please see the 
+<A HREF="#closepatch">patch below</A>.  
+When and where this problem occurs, an HTML-only email may open as a blank web 
+page, because its temporary file has not been flushed to disk.  Oddly, on the 
+faster machine, the web browser somehow opens and reads the temporary file before
+the GUI method has a chance to close it on exit.  Moreover, this only happens for
+very small emails (< 10K), suggesting a buffer size role.  Adding an explicit 
+close() ensures proper behavior for all platforms and emails.
+
+<P>
+This issue is platform- and timing-specific; impacts just one minor aspect of a 
+very large program; and, even when it does, can always be worked around in the 
+user interface in three different ways -- by pressing the web brower's 
+refresh/reload, by viewing the extracted plain-text in the GUI's main window, 
+and by clicking the sole HTML's part button in the main GUI window to open it 
+on demand.  Still, it's annoying and simple enough to merit a patch.
+
+<P>
+For detail-minded readers, the faster machine with the incorrect behavior was a 
+multicore Windows Vista machine; the book test machine where the code works as is
+was a single core Atom Windows 7 machine (a beefy netbook).  Since the Python 
+method in question returns immediately after this code, on Vista a web browser 
+apparently starts and opens a local web page faster than a Python method function
+can exit.  This may reflect differences in the implementations of start commands
+in the two systems.  I'd be surprised if this occurred on other platforms which 
+spawn processes to open browsers; on the other hand, unpredictable timing has a
+way of being unpredictable.
+
+<P>
+As described in the book, there are other issues related handling of HTML-only
+emails which I've left up to an interested reader to address.  As is, display of
+such emails employs a somewhat temporary scheme in lieu of an HTML-enabled text
+viewer, which was tested and used by just a single user on a single platform.  
+For example, its single temporary file model means only the last such email 
+viewed is ever stored at any one point in time, regardless of how many are
+opened.  Such oddness does not occur for HTML parts opened on demand, because 
+their files are resaved and closed correctly in mailtools each time an open 
+is requested.  As for much of this system, impove as desired.
+
+
+
+
+</P>
+<HR>
+<H2><A name="timeoutnote">[Feb-1-11] Using timeouts for poplib and smtplib connections</A></H2>
+
+<P>
+The email-based code in Chapters 13 (and its clients in Chapters 14 and 16)
+should probably pass timeout arguments to the poplib and smtplib connection 
+calls, to avoid waiting indefinitely.  I've recently seen the book's PyMailGUI 
+desktop client get stuck waiting for a poplib connection call that never 
+returns, for example.  This is rare, but without a timeout argument, your only
+recourse is to wait seemingly forever, or kill and restart the GUI.  See Python's
+library manuals for more about passing timeout arguments in these modules.
+
+</P>
+<H3><I><U>Update, Feb-22-11: add timeouts patch for next reprint</U></I></H3> 
+<P>
+I've added the timeout arguments as patches to be made in the next
+reprint and examples package version: see the <A HREF="#timeoutpatch">patch below</A>.  
+This became a priority when I started seeing the email server at my ISP suddenly 
+failing to respond to connect requests on a very regular basis; probably a 
+temporary problem at the ISP, but killing and restarting the email
+client was much more painful than patching to use timeouts for connects.
+
+
+
+
+</P>
+<HR>
+<H2><A name="shelvenote">[Feb-1-11] Shelves close() calls for non-update script in Example 1-19?</A></H2>
+
+<P>
+A reader posted an errata report for this book on O'Reilly's site, which 
+claimed that a <B>db.close()</B> call is required to avoid file corruption 
+at the end of a Chapter 1 script that displays but does not update a shelve.
+Per the report, the shelve file triggers errors later, after it is updated 
+by the next script and then displayed again.  Here is the post's text:
+
+<PRE>
+Type: Minor technical mistake
+Description: There are no page numbers when using the Kindle version of 
+the text.
+
+In the discussion of building dictionaries using classes, Example 1-19 
+(dump_db_classes.py) requires closing the db at the end of the script.  
+The final line of the code example should be:
+
+db.close()
+
+If the db is not closed, the subsequent updating (Example 1-20) and then 
+re-printing of the db (using dump_db_classes.py again) will fail, giving 
+an error code:
+
+Traceback (most recent call last):
+  File "C:\Python31\dump_db_classes.py", line 6, in <module>
+    print(key, '=>\n', db[key].name, db[key].pay)
+  File "C:\Python31\lib\shelve.py", line 113, in __getitem__
+    value = Unpickler(f).load()
+EOFError
+</PRE>
+
+<P>
+I have not been able to reproduce this error, and suspect that the poster's
+kindle cut-and-paste simply dropped the close() call that appears at the end of 
+the update script in Example 1-20.  In my testing, the scripts in question work 
+without error and as shown, both in Python 3.1 (using the "dumb" DBM file 
+interface default in 3.X), as well as in Python 2.7 (using the bundled "bsddb" 
+file interface default in 2.X).  Moreover, these examples worked fine under 
+Python 2.5 for the prior edition of this book, and similar scripts have been 
+used successfully in earlier editions dating back to 1995.  In general, shelves
+should not require close() calls unless the shelve has been updated.  By this 
+rule, a close() is not required in Example 1-19 (though it wouldn't hurt if 
+added); however, all shelve update scripts in the book do call close() before
+exiting as required.
+
+<P>
+Because I can't reproduce this issue, I'm posting this as a clarification
+instead of a correction for now, barring a more detailed reader report.
+If you do see the same error, please email me with full context; the platform, 
+Python version, and underlying DBM interface in use may factor into behavior
+too, and there are too many possible combinations for me to test exhaustively.  
+In the poster's defense, shelves are notoriously error-prone; it's not impossible
+that file paths may have differed between scripts (the current working directory
+can sometimes change unexpectedly in IDLE), or that a bad cut-and-paste 
+dropped the close() call in either the creation script of Example 1-18 or the
+update script of Example 1-20.
+
+<P>
+<I>Update</I>: The reader who posted this note was later unable to reproduce
+the error in question by repeating the steps which led to it, but believes 
+it existed initially.  That may close the case, though there are too many
+variables related to shelves to be certain.
+
+
+
+
+
+
+</P>
+<HR>
+<H1><A name="fixes"><I>Book Corrections</I></A></H1>
+
+<P>
+In a book this large there are bound to be a significant number of typos,
+and I don't plan on listing them all here.  Instead, this section will 
+collect those typos that seem most grievous to me on purely subjective
+grounds (of course, your subjective grounds may vary).  See 
+<A HREF="http://oreilly.com/catalog/9780596158101/">O'Reilly's webpage</A>
+for this book for the full list of typos collected and patched in reprints over time.
+</P>
+<HR>
+<BR>
+
+
+<P>
+<OL>
+
+
+
+<LI>
+<B>Page xxviii, line 3 from page top: two typos in same sentence</B><BR>
+This text's 
+"<B>larger and more compete example</B>" should be 
+"<B>larger and more complete examples</B>".
+<BR><BR>
+
+
+
+
+<HR><BR>
+<LI>
+<B>Page 678 in Chapter 11, line 3 of last paragraph on page, figure description off</B><BR>
+The text misstates Figure 11-4's content here: it does not show a Clone
+window (the original version of this screenshot did, but was retaken very
+late in the project to show Grep dialogs with different Unicode encodings).
+To fix, change this line's 
+"<B>a window and its clone</B>" to read 
+"<B>a main window</B>".
+<BR><BR>
+
+
+
+
+<HR><BR>
+<LI><A name="focuspatch">
+<B>Page 702 and 704, PyEdit: add text.focus() calls after askstring() Unicode popups</B></A><BR>
+For convenience, and per the <A HREF="#focusnote">detailed description above</A>, we should 
+add a call to reset focus back to the text widget after the Unicode encoding prompt popups which
+may be issued on Open and Save/SaveAs requests (depending on texconfig settings).  As is, 
+the code works, but requires the user to click in the text area if they wish to resume 
+editing it immediately after the Unicode popup is dismissed; this standard popup itself 
+should  probably restore focus, but does not.  To fix, add focus calls in two places. 
+<B>First</B>, on page 702, at code line 21 at roughly mid page, change:
+<PRE>
+            if askuser:
+                try:
+                    text = open(file, 'r', encoding=askuser).read()
+</PRE>
+to the following, adding the new first line (the rest of this code is unchanged):
+<PRE>
+            self.text.focus() # else must click
+            if askuser:
+                try:
+                    text = open(file, 'r', encoding=askuser).read()
+</PRE>
+<B>Second</B>, on page 704, at code line 8 near top of page, similarly change:
+<PRE>
+            if askuser:
+                try:
+                    text.encode(askuser)
+</PRE>
+to the following, again just adding the new first line:
+<PRE>
+            self.text.focus() # else must click
+            if askuser:
+                try:
+                    text.encode(askuser)
+</PRE>
+Reprints: please let me know if there is not enough space for the inserts;
+I'd rather avoid altering page breaks in the process.  This patch will also
+be applied to future versions of the book's examples package; in the 
+package, the code in question is in file 
+<B>PP4E\Gui\TextEditor\textEditor.py</B>, at lines 298 and 393.
+<BR><BR>
+
+
+
+
+
+
+
+
+<HR><BR>
+<LI><A name="timeoutpatch">
+<B>Page 963 line 9, and page 970 line 4: add timeout arguments to email server connect calls</B></A><BR>
+For robustness, and per the <A HREF="#timeoutnote">detailed description above</A>, add
+"timeout=15" arguments to the POP and SMTP connect calls, so that email clients don't 
+hang when email servers fail to respond.  In the book, change code line 9 on page 963 
+from the first of the following to the second:
+<PRE>
+        server = smtplib.SMTP(self.smtpServerName)           # this may fail too
+        server = smtplib.SMTP(self.smtpServerName, timeout=15)  # this may fail too
+</PRE>
+
+Similarly, change code line 4 on page 970 from the first of the following to the second:
+<PRE>
+        server = poplib.POP3(self.popServer)
+        server = poplib.POP3(self.popServer, timeout=15)
+</PRE>
+In the book examples package, these changes would be applied to 
+line 153 of mailSender.py, and line 34 of file mailFetcher.py, 
+both of which reside in directory PP4E\Internet\Email\mailtools.
+They'll be patched in a future examples package version.
+
+<BR><BR>
+<B><I>Update</I></B>: I made the timeout 20 seconds in the examples package
+release version 1.2, to allow for slower email servers; 15 is more than enough
+to detect a problem with mine, but tweak this as desired.
+<BR><BR>
+
+
+
+
+<HR><BR>
+<LI><A name="closepatch">
+<B>Page 1072, code line 10 from top of page, PyMailGUI: add a close() for HTML mail files</B></A><BR>
+For portability, and per the <A HREF="#closenote">detailed description above</A>, we 
+should add an explicit close() call to flush the temporary file of an HTML-only email 
+before starting a web browser to view it, so that this code works in all contexts.  
+As is, it works on the test platform used for the book, and likely works on 
+most others, because the method in question exits and thus reclaims, closes, 
+and flushes the file before the spawned web browser gets around to reading it.  
+However, this is timing and platform dependent, and may fail on some machines 
+that start browsers more quickly; its been seen to fail on a fast Vista machine.
+To fix in the book, change the middle line of the following three current code 
+lines:
+<PRE>
+                        tmp = open(tempname, 'wb')      # already encoded
+                        tmp.write(asbytes)
+                        webbrowser.open_new('file://' + tempname)
+</PRE>
+to read as follows, adding the text that starts with the semicolon 
+(I'm combining statements to avoid altering page 
+breaks):
+<PRE>
+                        tmp = open(tempname, 'wb')      # already encoded
+                        tmp.write(asbytes); tmp.close() # flush output now
+                        webbrowser.open_new('file://' + tempname)
+</PRE>
+In the book's examples package, this code is located at line 209 in file 
+<B>PP4E\Internet\Email\PyMailGUI\ListWindows.py</B>; it will be patched 
+there too in a future examples package release (version 1.2, date TBD).
+<BR><BR>
+
+
+
+
+<HR><BR>
+<LI>
+<B>Page 1226, two filename typos in same sidebar</B><BR>
+This will probably be obvious to most readers who inspect the external example files
+referenced here, but in this sidebar: 
+"<B>test-cgiu-uploads-bug*</B>" should read 
+"<B>test-cgi-uploads-bug*</B>",
+and the bullet item text
+"<B>test-cgi-uploads-bug.html/py saves the input stream</B>" should read 
+"<B>test-cgi-uploads-bug2.html/py saves the input stream</B>".
+<BR><BR>
+
+
+
+
+<HR><BR>
+<LI>
+<B>Page 1555, top of page, quotes are misplaced in heading line</B><BR>
+A typo inherited from the prior edition: the quotes and question mark
+in the heading line at the very top of this page are slightly off.  Change the
+heading line:
+<B>So What's "Python: The Sequel"?</B> to read as:
+<B>"So What's Python?": The Sequel</B>.  Quotes are angled in the original
+and revision.  This header refers back to the 
+sidebar in the Preface titled "So What's Python?".  Arguably trivial,
+as this sidebar was 1500 pages (and perhaps a few months) ago by this
+point in the book, but it would be better to get this right.  This header
+was broken by a copyedit change on the prior edition, and fell through the
+cracks on this one. 
+
+
+</OL>
+
+
+
+
+
+
+</P>
+<HR>
+<P>
+Back to this book's <A HREF="about-pp4e.html">main page</A>
+</P>
+</BODY></HTML>

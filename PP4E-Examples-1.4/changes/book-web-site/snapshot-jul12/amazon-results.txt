@@ -1,0 +1,50 @@
+********************************************************************************
+name => 'Playable'
+exts => ('.mp3', '.m4a')
+subdir => 'F:\\Music\\resolve-itunes-nov11\\amazon\\Playable'
+duplicates => 0
+members => 
+['03 - Beautiful Day.mp3',
+ '06 - Bang A Gong [Get It On].mp3',
+ '07 - Banditos.mp3',
+ '07 - Mack The Knife.mp3',
+ '11 - Mr  Blue Sky (Album Version).mp3',
+ '17 - Good Riddance (Time Of Your Life).mp3',
+ '24 - Follow You Follow Me.mp3',
+ '05 - Stayed Awake All Night.mp3',
+ '01 - Four Wheel Drive.mp3',
+ '01 - She Drives Me Crazy.mp3']
+dupnames => 
+[]
+********************************************************************************
+name => 'Protected'
+exts => ('.m4p',)
+subdir => 'F:\\Music\\resolve-itunes-nov11\\amazon\\Protected'
+duplicates => 0
+members => 
+[]
+dupnames => 
+[]
+********************************************************************************
+name => 'Irrelevant'
+exts => ('.jpg', '.ini', '.xml')
+subdir => 'F:\\Music\\resolve-itunes-nov11\\amazon\\Irrelevant'
+duplicates => 0
+members => 
+[]
+dupnames => 
+[]
+********************************************************************************
+name => 'Other'
+exts => None
+subdir => 'F:\\Music\\resolve-itunes-nov11\\amazon\\Other'
+duplicates => 0
+members => 
+[]
+dupnames => 
+[]
+================================================================================
+Total Playable  : 10
+Total Protected : 0
+Total Irrelevant: 0
+Total Other     : 0

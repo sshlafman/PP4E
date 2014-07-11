@@ -1,0 +1,84 @@
+E:\Books\4E\PP4E\examples-dev\unpack\PP4E-Examples-1.2\Examples\PP4E>fc Gui\Text
+Editor\textEditor.py e:\Books\4E\PP4E\examples-official\1.1\unpacked\PP4E-Exampl
+es-1.1\Examples\PP4E\Gui\TextEditor\textEditor.py
+Comparing files GUI\TEXTEDITOR\textEditor.py and E:\BOOKS\4E\PP4E\EXAMPLES-OFFIC
+IAL\1.1\UNPACKED\PP4E-EXAMPLES-1.1\EXAMPLES\PP4E\GUI\TEXTEDITOR\TEXTEDITOR.PY
+***** GUI\TEXTEDITOR\textEditor.py
+                                              sys.getdefaultencoding() or ''))
+            self.text.focus() # else must click
+            if askuser:
+***** E:\BOOKS\4E\PP4E\EXAMPLES-OFFICIAL\1.1\UNPACKED\PP4E-EXAMPLES-1.1\EXAMPLES
+\PP4E\GUI\TEXTEDITOR\TEXTEDITOR.PY
+                                              sys.getdefaultencoding() or ''))
+            if askuser:
+*****
+
+***** GUI\TEXTEDITOR\textEditor.py
+                                              sys.getdefaultencoding() or ''))
+            self.text.focus() # else must click
+            if askuser:
+***** E:\BOOKS\4E\PP4E\EXAMPLES-OFFICIAL\1.1\UNPACKED\PP4E-EXAMPLES-1.1\EXAMPLES
+\PP4E\GUI\TEXTEDITOR\TEXTEDITOR.PY
+                                              sys.getdefaultencoding() or ''))
+            if askuser:
+*****
+
+-------------------------------------------------------------------------------------
+
+E:\Books\4E\PP4E\examples-dev\unpack\PP4E-Examples-1.2\Examples\PP4E>fc Internet
+\Email\mailtools\mailFetcher.py e:\Books\4E\PP4E\examples-official\1.1\unpacked\
+PP4E-Examples-1.1\Examples\PP4E\Internet\Email\mailtools\mailFetcher.py
+Comparing files INTERNET\EMAIL\MAILTOOLS\mailFetcher.py and E:\BOOKS\4E\PP4E\EXA
+MPLES-OFFICIAL\1.1\UNPACKED\PP4E-EXAMPLES-1.1\EXAMPLES\PP4E\INTERNET\EMAIL\MAILT
+OOLS\MAILFETCHER.PY
+***** INTERNET\EMAIL\MAILTOOLS\mailFetcher.py
+        self.getPassword()                          # file, GUI, or console
+        server = poplib.POP3(self.popServer, timeout=20)
+        server.user(self.popUser)                   # connect,login POP server
+***** E:\BOOKS\4E\PP4E\EXAMPLES-OFFICIAL\1.1\UNPACKED\PP4E-EXAMPLES-1.1\EXAMPLES
+\PP4E\INTERNET\EMAIL\MAILTOOLS\MAILFETCHER.PY
+        self.getPassword()                          # file, GUI, or console
+        server = poplib.POP3(self.popServer)
+        server.user(self.popUser)                   # connect,login POP server
+*****
+
+---------------------------------------------------------------------------------
+
+E:\Books\4E\PP4E\examples-dev\unpack\PP4E-Examples-1.2\Examples\PP4E>fc Internet
+\Email\mailtools\mailSender.py e:\Books\4E\PP4E\examples-official\1.1\unpacked\P
+P4E-Examples-1.1\Examples\PP4E\Internet\Email\mailtools\mailSender.py
+Comparing files INTERNET\EMAIL\MAILTOOLS\mailSender.py and E:\BOOKS\4E\PP4E\EXAM
+PLES-OFFICIAL\1.1\UNPACKED\PP4E-EXAMPLES-1.1\EXAMPLES\PP4E\INTERNET\EMAIL\MAILTO
+OLS\MAILSENDER.PY
+***** INTERNET\EMAIL\MAILTOOLS\mailSender.py
+        self.trace(fullText[:self.tracesize])                # SMTP calls connect
+        server = smtplib.SMTP(self.smtpServerName, timeout=20)  # this may fail too
+        self.getPassword()                                   # if srvr requires
+***** E:\BOOKS\4E\PP4E\EXAMPLES-OFFICIAL\1.1\UNPACKED\PP4E-EXAMPLES-1.1\EXAMPLES
+\PP4E\INTERNET\EMAIL\MAILTOOLS\MAILSENDER.PY
+        self.trace(fullText[:self.tracesize])                # SMTP calls connect
+        server = smtplib.SMTP(self.smtpServerName)           # this may fail too
+
+        self.getPassword()                                   # if srvr requires
+*****
+
+--------------------------------------------------------------------------------
+
+E:\Books\4E\PP4E\examples-dev\unpack\PP4E-Examples-1.2\Examples\PP4E>fc Internet
+\Email\PyMailGUI\ListWindows.py e:\Books\4E\PP4E\examples-official\1.1\unpacked\
+PP4E-Examples-1.1\Examples\PP4E\Internet\Email\PyMailGUI\ListWindows.py
+Comparing files INTERNET\EMAIL\PYMAILGUI\ListWindows.py and E:\BOOKS\4E\PP4E\EXA
+MPLES-OFFICIAL\1.1\UNPACKED\PP4E-EXAMPLES-1.1\EXAMPLES\PP4E\INTERNET\EMAIL\PYMAI
+LGUI\LISTWINDOWS.PY
+***** INTERNET\EMAIL\PYMAILGUI\ListWindows.py
+                        tmp = open(tempname, 'wb')      # already encoded
+                        tmp.write(asbytes); tmp.close() # flush output now
+                        webbrowser.open_new('file://' + tempname)
+***** E:\BOOKS\4E\PP4E\EXAMPLES-OFFICIAL\1.1\UNPACKED\PP4E-EXAMPLES-1.1\EXAMPLES
+\PP4E\INTERNET\EMAIL\PYMAILGUI\LISTWINDOWS.PY
+                        tmp = open(tempname, 'wb')      # already encoded
+                        tmp.write(asbytes)
+                        webbrowser.open_new('file://' + tempname)
+*****
+
+---------------------------------------------------------------------------------

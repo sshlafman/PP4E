@@ -1,0 +1,325 @@
+-------------------------------------------------------------------------------------
+PP4E Example Package Changes Log   (see changes/detailed-diffs/ for specific changes)
+-------------------------------------------------------------------------------------
+
+Release Summary:
+
+1.4, October 14, 2013
+     Updated package for use under Python 3.3 (and all earlier 3.X), per the 
+     file README-PP4E-PY33.html.
+
+1.3.1, July 28, 2012 (no code changes)
+     Deleted 8 executables for some antivirus tools, and added notes about
+     newer PIL ports for 3.2 and 3.3, and unzip issues for non-ASCII filenames.
+
+1.3, October 19, 2011:
+     Four PyMailGUI patches: i18n filenames, delete/save fix, sent-time display, 
+     smtp ports in mailconfig (plus two in 1.2: server timeouts, html file close). 
+
+1.2, February 23, 2011: 
+     Three minor patches for robustness and usability, add book website snapshot.
+
+1.1, November 19, 2010: 
+     Release just before publication, with various patches and Py3.2 changes.
+
+1.0, July 23, 2010: 
+     Initial release, accompanying final book draft, prior to publication.
+
+Details of each release follow, from most recent to oldest.
+
+-------------------------------------------------------------------------------------
+
+Release 1.4, October 14, 2013
+
+Updated for running book examples under Python 3.3 and earlier 
+in the 3.X line.  Minor code changes, but includes backward
+compatible 3.3 patches, plus instructions for 3.3 users:
+
+1) [Windows only] Set PY_PYTHON=3 for new Windows launcher
+2) [Windows only] Fix #! lines unrecognized by new Windows launcher
+3) Install 2-file PyMailGUI patch required for 3.3 email package change
+4) Install the Pillow drop-in replacement for the PIL image library
+
+For more on changes applied in examples package 1.4 and required by 
+Python 3.3, see README-PP4E-PY33.html here and available online at:
+
+     http://www.rmi.net/~lutz/README-PP4E-PY33.html
+
+Also added new website snapshot files in changes/book-web-site,
+and new runs of code admin scripts in changes/detailed-diffs.
+
+-------------------------------------------------------------------------------------
+
+Release 1.3.1, Juy 28, 2012
+  
+This is a admin-only release: no code changes were made in this release.
+
+1) Deleted 8 executables in ..\Examples\PP4E\Integrate\*, which were the result
+of compiling harmless book extending/embedding examples for use on Windows +
+Cygwin only, but which may trigger malware warnings in some antivirus software.
+Recompile these per the book on your own machine to test/run as desired.
+
+2) Added note in ..\extensions about PIL ports for Python 3.2 and 3.3;
+see file ..\extensions\PIL-for-3.2-and-3.3-README.txt for details.
+
+3) Added note in ..\Examples\PP4E\Internet\Email\PyMailGUI\media\i18-filename-tests
+about some unzip tools mangling non-ASCII filenames here (Win7 does, WinZip doesn't).
+
+-------------------------------------------------------------------------------------
+
+Release 1.3, October 19, 2011
+
+Applied 4 PyMailGUI program patches described in the corrections section 
+of the book's updates page, at http://www.rmi.net/~lutz/pp4e-updates.html:
+
+1) Non-ASCII filnames support:
+   In mailtools (used by PyMailGUI), support i18n attachment filesnames: 
+   decode per MIME and email stanadards for displays and saves, and encode
+   for sends if non-ASCII per the same standards (just like other headers).
+
+   [File changed: PP4E\Internet\Email\mailtools\mailparser.py]
+   [File changed: PP4E\Internet\Email\mailtools\mailsender.py]
+
+2) Delete/Save timing issue fix:
+   In PyMailGUI, check for blocking action in progress before verify/select
+   dialogs (not after) in Delete/Save callbacks; else action's exit callback
+   may change GUI's mail list, invalidate selections, and process wrong mails.
+
+   [File Changed: PP4E\Internet\Email\PyMailGui\ListWindows.py]
+
+3) Better sent-time display:
+   In PyMalGUI, use email package tools to display mail sent-time relative 
+   to local timezone uniformly; else difficult to tell when mails sent in GUI.
+
+   [File Changed: PP4E\Internet\Email\PyMailGui\ListWindows.py]
+
+4) Demo SMTP port numbers:
+   In PyMailGUI, ship new version of mailconfig.py which demonstrates how
+   to give a port number for authemticating SMTP mail-send servers.
+
+   [File changed: PP4E\Internet\Email\PyMailGui\mailconfig.py]
+
+See also in this directory:
+--detailed-diffs\1.3\pp4e-updates-partial.html for more patch details
+--detailed-diffs\1.3\patched-files-13 for source files changed
+--detailed-diffs\1.3\patched-files-13\i18N-filenames-test for test files/mails
+
+Also added a new snapshot of the book's support web site files, as of
+October 2011, with supplemental examples, Python updates, and book 
+notes. See changes\book-web-site\snapshot-oct11\README.txt.
+
+**Source file naming conventions** 
+
+Only the first of the 4 changes above made in this examples release is likely
+to be patched in reprints of the book itself; the others' code changes are too
+involved.  For reference:
+
+--The original versions of the 2 changed source files whose changes won't appear
+in the book were retained, with a "BOOK-" prefix added to their names (e.g., 
+PP4E\Internet\Email\PyMailGui\BOOK-ListWindows.py matches this file in the book).  
+
+--The original versions of the 2 files changed for patches that will appear in
+reprints are retained as well with a "_PRIOR-" name prefix added (e.g., 
+PP4E\Internet\Email\mailtools\_PRIOR-mailparser.py)
+
+Also see the 1.2 release changes below, which include 2 PyMailGUI enhancements
+(file closes, server timeouts) which were incorporated into the book itself.
+
+-------------------------------------------------------------------------------------
+
+Release 1.2, February 23, 2011
+
+Applied 3 program patches described in the corrections section of the
+book's updates page, at http://www.rmi.net/~lutz/pp4e-updates.html#fixes:
+
+1) File close issue fix:
+   In PyMailGUI, explicitly close the temporary output file used to
+   save HTML-only emails for viewing in a web browser; else, the file
+   might not be flushed to disk in time on some (but not all) platforms.
+
+   [File changed: PP4E\Internet\Email\PyMailGui\ListWindows.py]
+
+2) Text editor focus:
+   In PyEdit (used by PyMailGUI and other), reset focus to the text widget
+   after the Open and Save Unicode encoding promp pop-ups are dismissed; 
+   else, users must click in the text area to edit.
+
+   [File changed: PP4E\Gui\TextEditor\textEditor.py]
+
+3) Mail server timeouts:
+   In mailtools (used by PyMailGUI), add timeout=N arguments to the POP 
+   and SMTP server connect calls; else, clients might hang too long while
+   waiting for a dead server to reply, and may need to kill the client.
+
+   [File changed: PP4E\Internet\Email\mailtools\mailFetcher.py]
+   [File changed: PP4E\Internet\Email\mailtools\mailSender.py]
+
+See also detailed-diffs\1.2\pp4e-updates-partial.html here for more patch
+details, and detailed-diffs\1.2\patched-files-12 for source files changed.
+
+Also added a snapshot of the book's support web site files, as of
+February 2011, with supplemental examples, Python updates, and book 
+notes. See changes\book-web-site\snapshot-feb11\README.txt.
+
+------------------------------------------------------------------------------------
+
+Release 1.1: November 4, 17, and 19, 2010
+
+Second release, just before publication (during QC1..QC2).  All changes 
+listed here were also made in the book itself before its first printing.  
+Index:
+
+1) [Ch12] reword echoserver socket example's bind() comment (trivial)
+2) [Ch19] remove PyCalc mail file bogus comment (trivial)
+3) [Ch13] Patch for Python 3.2: fix_encode_base64 in mailtools package mailsender.py
+4) [Ch13, 14] Fix for SMTP pswds: mailtools MailSenderAuth, PyMailGUI WriteWindow
+5) [tree] renamed two files from .txt.txt to .txt, tweaked READMEs/top dirs (trivial)
+6) [various] fixed typos in code comments of a few examples to match the book (trivial)
+
+================
+
+1) [Ch12] reword echoserver socket example's bind() comment
+
+Reword to clarify that "" means all available interfaces, not just local host.
+The book also now explans that this means all local and remote interfaces.
+
+Changed:
+myHost = ''     # server machine, '' means local host
+To:
+myhost = ''     # '' = all available interfaces on host
+
+================
+
+2) [Ch19] remove PyCalc main file bogus comment
+
+Delete bogus comment line about windows.py icon change (it was never made).
+
+Deleted line:
+-use windows.py module to get a window icon;
+
+================
+
+3) [Ch13] Patch for Python 3.2: fix_encode_base64 in mailtools package mailsender.py
+
+3A) Decrease indentaton in all lines of this function lines by 1 space (was 5).
+
+3B) Patch to work under Python 3.2 (due out in Jan '11): don't decode new str 
+    return type in 3.2, but do decode 3.1's bytes, and do still split lines of 
+    base64 data; tested under 3.2 alpha3; replaced 2 lines with 3.
+
+Changed:
+bytes = msgobj.get_payload()           # bytes fails in email pkg on text gen
+text  = bytes.decode('ascii')          # decode to unicode str so text gen works
+
+To:
+text = msgobj.get_payload()            # bytes fails in email pkg on text gen
+if isinstance(text, bytes):            # payload is bytes in 3.1, str in 3.2 alpha
+    text = text.decode('ascii')        # decode to unicode str so text gen works
+
+3C) [November 17]: last-minute additional change in this function to allow for the 
+    fact that email may be fixed in the future (post 3.2?) to split base64 data into 
+    lines on its own -- if the workaround splits already-split lines, the data will 
+    likely work, but will look odd.  To allow for this, inserted one line of code to
+    strip newline characters if they are ever present in the data in the future; they
+    are not in 3.1 or 3.2 alpha4, so this line is an unneeded but harmless no-op today:
+
+Changed:
+lines = []                           # split into lines, else 1 massive line
+
+To:
+lines = []                           # split into lines, else 1 massive line
+text  = text.replace('\n', '')       # no \n present in 3.1, but futureproof me!
+
+================
+
+4) [Ch13, 14] Fix for SMTP pswds: mailtools MailSenderAuth, PyMailGUI WriteWindow
+
+Store the smtp auth password on the class not self, so PyMailGUI doesn't 
+ask for it on each send (for password saves, there is only ever one fetcher 
+instance (use self), but one sender instance per compose window (use class)); 
+changed 5 total lines, and added 1 new (class data assignment).
+
+Changed lines:
+
+class WriteWindow(ViewWindow, MailSenderClass):
+    def onSendFail(self, exc_info, popup):
+        MailSenderClass.smtpPassword = None     # try again; 3.0/4E: not self
+
+class MailSenderAuth(MailSender):
+    smtpPassword = None    # 4E: on class, not self, shared by poss N instances
+
+    def __init__(self, smtpserver=None, smtpuser=None):
+        # self.smtpPassword = None   # 4E: makes pyMailGUI ask for each send!
+
+    def getPassword(self):
+        if not self.smtpPassword:
+            try:
+                MailSenderAuth.smtpPassword = localfile.readline()[:-1]     # 4E
+            except:
+                MailSenderAuth.smtpPassword = self.askSmtpPassword()        # 4E
+
+class MailSenderAuthConsole(MailSenderAuth):
+
+================
+
+5) [See changed files/dirs] 
+
+================
+
+[November 19, the final edits before first printing in release 1.1]
+
+6) [various] fixed typos in code comments of a few examples to match the book
+
+Files with comment typos repaired, and reflected in "diffs-all-nov19.txt";
+these were also fixed in the book before its first printing (we may have 
+never spellchecked code sections in prior editions in the past...):
+
+PP4E\Preview\webserver.py ("demon" -> "daemon")
+PP4E\System\Threads\thread-count-mutex.py ('mmake" -> "make")
+PP4E\System\Processes\multi2.py ("bidrectional" -> "bidirectional")
+PP4E\launchmodes.py ("spit" -> "split")
+PP4E\System\Filetools\diffall.py ("a trees" -> "as trees")
+PP4E\Tools\cleanpyc-find-py.py ("releases" -> "release")
+PP4E\System\Media\playfile.py ("resot" -> "resort")
+PP4E\Gui\Tour\demoAll-prg-multi.py (bad "multiprocessing", twice)
+PP4E\Gui\Tour\Grid\grid2.py ("colunm"; upper Label/Entry, "fixed-with")
+PP4E\Gui\Tour\canvasDraw_tags_after.py ("the GUI; the")
+PP4E\Gui\Tools\widgets.py ("e.g.," mising a .)
+PP4E\Gui\Tools\guimixin.py ("of False" -> "or False")
+PP4E\Gui\ShellGui\formrows.py ("seperate" -> "separate")
+PP4E\Gui\Tools\threadtools.py ("indefinately" -> "indefinitely")
+PP4E\Gui\Tools\threadtools-test-classes.py ("acces" -> "access")
+PP4E\Gui\TextEditor\textEditor.py ("enocding", "check check", "destoyed")
+PP4E\Gui\MovingPics\movingpics_threads.py (space before "(")
+PP4E\Internet\Sockets\echo-client.py ("sytstem's")
+PP4E\Internet\Sockets\select-server.py ("ommitted", "spocket")
+PP4E\Internet\Sockets\socket_stream_redirect.py ("an" -> "and", twice)
+PP4E\Internet\Ftp\putfile.py ("bainary" -> "binary")
+PP4E\Internet\Ftp\PyFtpGui.pyw ("ttansfers")
+PP4E\Internet\Email\mailconfig.py ("enccoding")
+PP4E\Internet\Email\mailtools\__init__.py ("encooded")
+PP4E\Internet\Email\mailtools\mailSender.py ("combinaton", "iserts")
+PP4E\Internet\Email\mailtools\mailFetcher.py ("cient's", "enocoding", "Rrror")
+PP4E\Internet\Email\mailtools\mailParser.py ("Mesasage", "is"->"if")
+PP4E\Internet\Email\PyMailGui\SharedNames.py ("simplisitc", "extact")
+PP4E\Internet\Email\PyMailGui\ListWindows.py ("fetcing", "seperat" * 2, "i18")
+PP4E\Internet\Email\PyMailGui\ViewWindows.py ("attachements", "stmptlib")
+PP4E\Internet\Email\PyMailGui\messagecache.py ("downlods")
+PP4E\Internet\Email\PyMailGui\mailconfig.py ("mmessage", "paleturqoise", "enccoding", "yur")
+PP4E\Internet\Web\webserver.py ("e.g.,", missing a .)
+PP4E\Internet\Web\cgi-bin\putfile.py (3 typos in 2nd paragraph of docstring)
+PP4E\Internet\Web\PyMailCgi\pymailcgi.html ("broswer")
+PP4E\Internet\Web\PyMailCgi\cgi-bin\loadmail.py ("ful")
+PP4E\Dstruct\Basic\typesubclass.py ("buult')
+PP4E\Lang\Parser\testparser.py ("Parser's" -> "Parsers")
+PP4E\Lang\Calculator\calculator.py ("higest" -> "highest')
+PP4E\Lang\Calculator\calculator_plus_ext.py ("be" -> "by")
+PP4E\Integrate\Extend\Swig\Shadow\main_subclass.py ("methoid")
+
+------------------------------------------------------------------------------------
+
+Release 1.0: July 23, 2010 
+
+Initial release, accompanying the final book draft.
+
+-------------------------------------------------------------------------------------

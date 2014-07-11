@@ -1,0 +1,408 @@
+<HTML>
+<TITLE>
+Python Pocket Reference 4th Edition: Updates Page
+</TITLE
+<BODY>
+
+
+
+<H1><I>Python Pocket Reference 4th Edition</I>: Updates Page</H1>
+
+
+<p>
+Below are the current and official lists of general notes and corrections
+for this edition of the book:
+
+<UL>
+<LI><A HREF="#notes"><B>Book Notes</B></A><BR>
+<LI><A HREF="#clari"><B>Book Clarifications</B></A><BR>
+<LI><A HREF="#fixes"><B>Book Corrections</B></A><BR>
+</UL>
+
+<p>
+Only the last of these is true errata (corrections).  The first and
+second contain notes, clarifications, and other supplemental information 
+for readers of this book.  The items in the last two lists are intended 
+to be patched in future reprints.
+
+<p>
+O'Reilly also maintains a (partly unmoderated) 
+<A HREF="http://oreilly.com/catalog/errata.csp?isbn=9780596158095">errata list</A>
+at its web site 
+which may or may not intersect with my own here, and can contain unconfirmed entries 
+which may or may not reflect genuine errors.  Because I don't generally have time to
+keep the two lists in synch, when in doubt, please consult both this page and O'Reilly's.
+I receive automatic email about posts at O'Reilly's site, but you may also 
+send reports to me directly by emailing <A href="mailto:lutz@rmi.net">lutz@rmi.net</A>.
+</P>
+
+
+<H2>Reprints News</H2>
+
+<P>
+<UL>
+<LI>
+[Dec 2009] A reprint was scheduled to occur in mid December 2009, so entries here
+dated before that time have likely been repaired in boooks printed after
+that time.
+<BR><BR>
+
+<LI>
+[Jan 2010] A reprint of this book was run in January 2010, but unfortunately,
+none of the items posted here or on O'Reilly's own errata site were fixed in
+that reprint (in either the paper or ebook forms).   I expect that this
+will receive more attention from O'Reilly in the next reprint.
+<BR><BR>
+
+<LI>
+[Aug 2010] Another reprint occurred in August 2010 (stamped with 08/10 in
+the initial pages of both paper and ebook forms), but this reprint picked up 
+only 1/4 to 1/3 of the items listed on this page.  It's possible that some items
+here didn't make it to O'Reilly's own site before the updates cutoff, and this
+page wasn't checked. 
+<BR><BR>
+
+<LI>
+[Mar 2012] There have been additional later reprints of this edition 
+(including June, 2011 and March, 2012) which picked up all remaining errata items.
+To see what was patched when, O'Reilly's 
+<A HREF="http://oreilly.com/catalog/errata.csp?isbn=9780596158095">errata site</A>, 
+described earlier, tags items with the date that they were patched in reprints. 
+</UL>
+</P>
+
+
+
+
+
+
+<HR>
+<h2><A name="notes">Book Notes</A></H2>
+
+<p>This section lists general book notes and supplements for
+readers of this book. It is ordered by and labeled with reporting
+date.
+</P>
+
+<h3>1) (None so far)</h3>
+<p>
+</p>
+
+
+
+
+
+
+<HR>
+<h2><A name="clari">Book Clarifications</A></H2>
+
+<p>This section lists book clarifications, ordered by page number and labeled 
+with reporting date.  These items are intended to be patched or inserted in 
+future reprints, unless begun with the text "<i>[No fix required]</i>".
+</P>
+
+<OL>
+<hr>
+<h3>Newer posts</h3>
+
+<LI><B>[Jan-11-12] Page 179, Python 3.2 removes struct.pack functionality for str</B><br>
+Per <A HREF="lp4e-updates-notes-recent.html#py32structchange">this note</A> at 
+Learning Python's update pages, the <B>struct.pack</B> call described near the 
+end of the book no longer accepts str strings as of 3.2, causing the example 
+near the top of page 179 to fail.  To fix, you must manually encode str strings
+to bytes strings per the note.  No book fix is required, as the example works as
+shown in 3.1.
+<br><br>
+</OL>
+
+
+<OL>
+<hr>
+<h3>Older posts</h3>
+
+
+
+<LI><B>[Oct-31-09] Page 38, list comprehensions: 3.X loop variable scope</B><br>
+This page states that names bound inside a list comprehension are created in the
+scope containing the comprehension.  True, but as clearly stated ahead on page 40, 
+3.X changes this to work like generator expressions, such that the loop variables 
+are not accessible outside list comprehensions either. 
+To clarify, at the very end of the 2nd paragraph under "List comprehension 
+expressions", change 
+"<B>where the comprehension resides.</B>" to
+"<B>where the comprehension resides in 2.X (but local to the expression 
+in 3.X).</B>".
+<br><br>
+
+
+<LI><B>[Nov-06-09] Page 43, adict.fromkeys() usually called on dict itself</B><br>
+This isn't a bug because fromkeys() may be called both on an actual dict instance
+({}.fromkeys('abc')) or on the type name dict itself (dict.fromkeys('abc')), but 
+the latter form is the far more typical usage. To clarify, in the list term 
+near mid page that reads
+"<B>adict.fromkeys(seq [, value])</B>", change "<B>adict</B>" to "<B>dict</B>".
+Also, at the end of this list entry's description,
+add the following text in parenthesis: 
+"<B>...set to value (callable on instance or type name).</B>".
+<br><br>
+
+
+<LI><B>[Oct-28-09] Page 46, infile.read() end-lines: default only</B><br>
+This section states that text mode files translate line-ends to '\n'.
+This is true, but only by default in Python 3.X; see the open() call
+on page 113 for its "newline" argument that can modify this.  To 
+clarify, under infile.read(), change 
+"<B>line ends are translated to '\n'.</B>" to 
+"<B>line ends are translated to '\n' by default.</B>".
+<br><br>
+
+
+<LI><B>[Oct-28-09] Page 47, outfile.write() end-lines: default only</B><br>
+This section states that text mode files translate '\n' to the platform's
+line-end separator.
+This is true, but only by default in Python 3.X; see the open() call
+on page 113 for its "newline" argument that can modify this.  To 
+clarify, under outfile.write(), change 
+"<B>line-end marker sequence.</B>" to 
+"<B>line-end marker sequence by default.</B>".
+<br><br>
+
+
+<LI><B>[Nov-06-09] Page 48, additional file attributes</B><br>
+<i>[No fix required]</i>
+This page lists 3 common file object data attributes: closed, mode, and name. 
+It's not intended to be complete, and there are many additional file
+attributes, the set of which varies widely between Python 2.X and 3.X. 
+For the full story, consult Python manuals or run a dir(F) call on any
+open file object F.
+<br><br>
+
+
+<LI><B>[Nov-14-09] Page 64 and 73, add "[decoration]" to def and class syntax formats</B><br>
+The book covers function and class decorators on pages 67 and 74.  Because they are
+tied to def and class statements syntactically, though, and because it looks like we
+have the room, I want to make this more explicit by adding a line that reads 
+"<B>[decoration]</B>" just before the "def name..." format listing on page 64,
+and just before the "class name..." format listing on page 73.  In other 
+words, these two code format layouts on these pages should look like:
+
+<pre>
+The def Statement
+
+   [decoration]
+   def name([arg,... arg=value,... *arg, **arg]):
+       suite
+
+The class Statement
+
+   [decoration]
+   class name [ ( super [, super]* [, metaclass=M] ) ]:
+       suite
+</pre>
+
+The two added lines should be fixed-with font, and their "decoration" should be 
+italics/replaceable.  This is all fairly obvious in the decorator descriptions that 
+follow these, and the syntax formats are not intended to be complete (they also 
+don't include 3.X keyword-only arguments and function annotations, which are similarly
+described a few pages ahead).  Still, given that decorators work in both 2.6 and 
+3.X and are used widely today, it would nice to include them in the syntax formats.
+<br><br>
+
+
+<LI><B>[Nov-13-09] Page 74, bullet 4, describes instance method default only</B><br>
+Strictly speaking, this bullet describes the <i>instance method</i> model, which is
+the normal case for methods in a class (self recieves the instance).  Keep in mind,
+though, that this is just the default; Python also has <i>static methods</i> (which
+receive no instance) and <i>class methods</i> (which receive a class in self).  
+Moreover, Python 3.X class methods may be called as simple functions through a class
+with no instance at all, and need be declared static only if they are called through
+an instance.  This is not an errata, because the description is correct for the
+normal case, and this brief summary isn't intended to be a complete coverage of all
+method variants.  The built-in functions section covers staticmethod() and 
+classmethod(), and the book <I>Learning Python</I> presents the full story on 
+all method types.
+
+<br><br>
+To clarify slightly, though, at the end of the 4th bullet on this page, add this:
+"<B>The staticmethod() and classmethod() built-ins support additional kinds of
+methods, and Python 3.X methods may be treated as simple functions when called 
+through a class.</B>"  In this, "staticmethod()" and "classmethod()" are literals
+in fixed-width font.  If this does not fit, delete the ", etc." at the end of 
+bullet 2 to free up a line.
+<br><br>
+
+
+<LI><B>[Oct-28-09] Page 111, 3.X open(), add link to 2.X version</B><br>
+Page 111 begins documenting the 3.X open() call.  Although it's implied
+by the book's contents, it would nice to note the location of the 
+corresponding 2.X open() description, given the prevalence of this
+call.  At the start of the first paragraph under open(...), add
+"<B>See also Python 2.X open() on page 123.</B>"
+<br><br>
+
+
+<LI><B>[Nov-06-09] Index, page 192, link to "def" at "functions"</B><br>
+In the index at "functions, 64", add "<B>(see also def statements)</B>".
+As is, most function details are indexed under "def", not "functions",
+but "functions" is the first place most readers will probably look.
+<br><br>
+
+</OL>
+</P>
+
+
+
+
+
+
+<HR>
+<h2><A name="fixes">Book Corrections</A></H2>
+
+<p>This section lists book errata to be repaired in future reprints.
+It is ordered by page number and labeled with reporting date.
+[Reprints: be sure to also check for changes in the clarifications 
+list earlier on this page; many of its items require reprint edits too.]
+</P>
+
+
+
+
+
+<OL>
+
+<hr>
+<h3>Newer posts</h3>
+
+
+
+<LI><B>[Feb-1-11] Page 11, first paragraph, typo inherited from Learning Python 4E</B><br>
+Change the text: "<B>X < Y < Z produces the same result as X < Y and Y < X</B>" to read as:
+                 "<B>X < Y < Z produces the same result as X < Y and Y < Z</B>". This text
+was copied from Learning Python, where it has already been patched and corrected.
+<br><br>
+
+
+
+<LI><B>[Jul-8-10] Page 27, "S.istitle(" should be "S.istitle()" (broken by production)</B><br>
+This method is missing a right parenthesis in the methods list on this page.  The right 
+parenthesis was present in the final draft I submitted, but was dropped somewhere during
+the production process.
+<br><br>
+
+
+
+<LI><B>[Jul-8-10] Page 50, second list item, "set('eggs')" should be "set('spam')"</B><br>
+Change the second list term "<B>aset = set('eggs')</B>" to read "<B>aset = set('spam')</B>",
+replacing 'eggs' with 'spam', so it matches the descriptions that follow this.
+<br><br>
+
+
+
+<LI><B>[Jul-8-10] Page 118, last paragraph: zip now allows no arguments; bogus "]" in text</B><br>
+Two fixes in the zip description in the last paragraph on this page.
+First, delete the bogus "]" character at the end of <B>'d')]</B> at the start of line 4. 
+Second, change the entire sentence immediately following this from
+"At least one iterable is required, or a TypeError is raised." to read
+"<B>At least one iterable is required, or the result is empty.</B>"
+<br><br>
+
+
+
+<LI><B>[Jul-8-10] Page 148, os.listdir: pass bytes to suppress Unicode filename decode</B><br>
+At the very end of the listdir description (paragraph 1 on this page), if we have space, 
+add the sentence:
+"<B>In 3.X, passed and returns bytes instead of str to suppress Unicode 
+filename decoding per platform default (also for glob, os.walk).</B>"
+This is a crucial point, as it's required to avoid exceptions for any undecodable
+filenames in 3.X.  If we don't have space to add anything here, this note is 
+clarification only; it's described in depth in Programming Python 4th Edition.
+<br><br>
+</OL>
+
+
+
+
+
+<OL>
+<hr>
+<h3>Older posts</h3>
+
+
+
+<LI><B>[Jan-13-09] Page 50, first list item, "empty dictionary" should be "empty set"</B><br>
+In the first list item on this page, under list heading "<B>set()</B>", the indented 
+text 
+"<B>An empty dictionary</B>" should be changed to 
+"<B>An empty set</B>".  This is stated clearly in the paragraph immediately
+preceding this, so it's a minor typo, but incorrect nonetheless.
+(It's not completely clear where this came from, though the fact that it reads 
+the same as the dictionary coverage on page 42 strongly suggests a cut-and-paste 
+gone awry, and the author who wrote it in the midst of a 2000-mile cross-country 
+move is considered to be a "person of interest"...).
+<br><br>
+
+
+<LI><B>[Nov-14-09] Page 89 minor wording typo in line 2</B><br>
+There's a bogus "as" in this line: change 
+"<B>with the same as constructor arguments</B>" to
+"<B>with the same constructor arguments</B>".
+<br><br>
+
+
+<LI><B>[Nov-13-09] Page 92 minor wording typo in line 2 of 4th paragraph</B><br>
+There are two typos in one sentence here (yes, yikes!).  In this paragraph, change 
+"<B>list attribute or access then</B>" to
+"<B>list attributes or access them</B>".
+<br><br>
+
+
+<LI><B>[Nov-11-09] Page 110 (and a few more): literal word split over line break</B><br>
+In the second-last paragraph of this page, the literal word "<b>iterator</b>" is 
+split across a line break badly, as "<b>itera|tor</b>".  This occurs in four other
+places as well: pages 47 (string literal <B>'a\0b|\0c'</B>); 120 ("<B>memory|view</B>"); 
+126 ("<B>Base|Exception</B>"); and 145 ("<B>os.envi|ron</B>").  Not a major issue, but all these
+terms should appear on a single line and not be split (or should at least be
+hyphenated if split, though this isn't ideal for literals).  This is a result of 
+O'Reilly's formatting process and I asked that these all be fixed during production.
+Most were, but a handful seem to have slipped through the cracks (alas, deadlines 
+are the Mother of many an errata...) 
+<br><br>
+
+
+<LI><B>[Nov-28-09] Page 113, print() default end='\n', not 'n' (minor typo)</B><br> 
+The call format given by the print() function's list header is missing a backslash.  
+In the middle of the 4th last line on page 113, change:
+"<B>[, end='n']</B>" to
+"<B>[, end='\n']</B>".
+This is present in the initial draft, so it's my bad.  Apparently, the call 
+format was copied from the Python 3.0 library manual entry for print(), 
+which contains the same typo.  The Python 3.1 library manual added the 
+required backslash, but this wasn't caught in the book.  The book does get 
+the '\n' default correct in its more complete coverage of print() on page 60.
+<br><br>
+
+
+<LI><B>[Nov-06-09] Page 165, dbm/shelve "has_key()" becomes "in" in 3.X</B><br>
+Change the second last line on this page from
+"<B>found = file.has_key('key')</B>" to
+"<B>found = 'key' in file (or has_key() in 2.X only)</B>" 
+As explained in the earlier sections on mapping operations and dictionaries
+(see pages 14, 41, and 43-44),
+the 2.X dict.has_key() method is replaced by the "in" membership operator in
+3.X (though both work in 2.X).  This holds true for the dictionary-like dbm and 
+shelve file interfaces as well, and this minor mention apparently was overlooked.
+<br><br>
+
+</OL>
+</P>
+
+
+
+
+
+
+<HR>
+<P>
+Back to this book's <A HREF="about-pyref4e.html">main page</A>
+</P>
+</BODY></HTML>

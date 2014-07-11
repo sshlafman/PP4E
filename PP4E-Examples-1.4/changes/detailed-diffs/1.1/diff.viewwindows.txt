@@ -1,0 +1,11 @@
+Comparing files 1.0\EXAMPLES\PP4E\INTERNET\EMAIL\PYMAILGUI\ViewWindows.py and 1.1\EXAMPLES\PP4E\INTERNET\EMAIL\PYMAILGUI\VIEWWINDOWS.PY
+***** 1.0\EXAMPLES\PP4E\INTERNET\EMAIL\PYMAILGUI\ViewWindows.py
+        printStack(exc_info)
+        self.smtpPassword = None        # try again
+        sendingBusy.decr()
+***** 1.1\EXAMPLES\PP4E\INTERNET\EMAIL\PYMAILGUI\VIEWWINDOWS.PY
+        printStack(exc_info)
+        MailSenderClass.smtpPassword = None        # try again; 3.0/4E: not self
+        sendingBusy.decr()
+*****
+

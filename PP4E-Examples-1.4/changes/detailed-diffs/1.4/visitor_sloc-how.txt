@@ -1,0 +1,16 @@
+# Run SLOC (source code line counts) metric on book examples tree. 
+# Uses Chapter 6's visitor.py class and visitor_sloc.py subclass examples.
+
+# First run scans entire release package; second is just the book's examples
+# tree, without any extras (examples, web site snapshots, errata pages, etc.).
+
+
+D:\Books\4E\PP4E\examples-dev\1.4>
+    c:\pp4e\PP4E-Examples-1.3.1\Examples\PP4E\Tools\visitor_sloc.py 
+    PP4E-Examples-1.4 
+    > PP4E-Examples-1.4\changes\detailed-diffs\1.4\visitor_sloc-output-package.txt
+
+D:\Books\4E\PP4E\examples-dev\1.4>
+    c:\pp4e\PP4E-Examples-1.3.1\Examples\PP4E\Tools\visitor_sloc.py 
+    PP4E-Examples-1.4\Examples 
+    > PP4E-Examples-1.4\changes\detailed-diffs\1.4\visitor_sloc-output-booktree.txt

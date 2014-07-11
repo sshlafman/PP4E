@@ -1,0 +1,109 @@
+Comparing files 1.0\EXAMPLES\PP4E\INTERNET\EMAIL\MAILTOOLS\mailSender.py and PP4E-EXAMPLES-1.1\EXAMPLES\PP4E\INTERNET\EMAIL\MAILTOOLS\MAILSENDER.PY
+***** 1.0\EXAMPLES\PP4E\INTERNET\EMAIL\MAILTOOLS\mailSender.py
+def fix_encode_base64(msgobj):
+     """
+     4E: workaround for a genuine bug in Python 3.1 email package that prevents
+     mail text generation for binary parts encoded with base64 or other email 
+     encodings;  the normal email.encoder run by the constructor leaves payload
+     as bytes, even though it's encoded to base64 text form;  this breaks email 
+     text generation which assumes this is text and requires it to be str;  net 
+     effect is that only simple text part emails can be composed in Py 3.1 email
+     package as is - any MIME-encoded binary part cause mail text generation to 
+     fail;  this bug seems likely to go away in a future Python and email package,
+     in which case this should become a no-op;  see Chapter 13 for more details;
+     """
+
+     linelen = 76  # per MIME standards
+     from email.encoders import encode_base64
+
+     encode_base64(msgobj)                # what email does normally: leaves bytes
+     bytes = msgobj.get_payload()         # bytes fails in email pkg on text gen
+     text  = bytes.decode('ascii')        # decode to unicode str so text gen works
+     lines = []                           # split into lines, else 1 massive line
+     while text:
+         line, text = text[:linelen], text[linelen:]
+         lines.append(line)
+     msgobj.set_payload('\n'.join(lines))
+
+***** PP4E-EXAMPLES-1.1\EXAMPLES\PP4E\INTERNET\EMAIL\MAILTOOLS\MAILSENDER.PY
+def fix_encode_base64(msgobj):
+    """
+    4E: workaround for a genuine bug in Python 3.1 email package that prevents
+    mail text generation for binary parts encoded with base64 or other email 
+    encodings;  the normal email.encoder run by the constructor leaves payload
+    as bytes, even though it's encoded to base64 text form;  this breaks email 
+    text generation which assumes this is text and requires it to be str;  net 
+    effect is that only simple text part emails can be composed in Py 3.1 email
+    package as is - any MIME-encoded binary part cause mail text generation to 
+    fail;  this bug seems likely to go away in a future Python and email package,
+    in which case this should become a no-op;  see Chapter 13 for more details;
+    """
+
+    linelen = 76  # per MIME standards
+    from email.encoders import encode_base64
+
+    encode_base64(msgobj)                # what email does normally: leaves bytes
+    text = msgobj.get_payload()          # bytes fails in email pkg on text gen
+    if isinstance(text, bytes):          # payload is bytes in 3.1, str in 3.2 alpha
+        text = text.decode('ascii')      # decode to unicode str so text gen works
+
+    lines = []                           # split into lines, else 1 massive line
+    text  = text.replace('\n', '')       # no \n present in 3.1, but futureproof me!
+    while text:
+        line, text = text[:linelen], text[linelen:]
+        lines.append(line)
+    msgobj.set_payload('\n'.join(lines))
+
+
+*****
+
+***** 1.0\EXAMPLES\PP4E\INTERNET\EMAIL\MAILTOOLS\mailSender.py
+    """
+    def __init__(self, smtpserver=None, smtpuser=None):
+***** PP4E-EXAMPLES-1.1\EXAMPLES\PP4E\INTERNET\EMAIL\MAILTOOLS\MAILSENDER.PY
+    """
+    smtpPassword = None    # 4E: on class, not self, shared by poss N instances
+
+    def __init__(self, smtpserver=None, smtpuser=None):
+*****
+
+***** 1.0\EXAMPLES\PP4E\INTERNET\EMAIL\MAILTOOLS\mailSender.py
+        self.smtpUser = smtpuser or mailconfig.smtpuser
+        self.smtpPassword = None
+
+***** PP4E-EXAMPLES-1.1\EXAMPLES\PP4E\INTERNET\EMAIL\MAILTOOLS\MAILSENDER.PY
+        self.smtpUser = smtpuser or mailconfig.smtpuser
+        # self.smtpPassword = None   # 4E: makes pyMailGUI ask for each send!
+
+*****
+
+***** 1.0\EXAMPLES\PP4E\INTERNET\EMAIL\MAILTOOLS\mailSender.py
+                localfile = open(mailconfig.smtppasswdfile)
+                self.smtpPassword = localfile.readline()[:-1]
+                self.trace('local file password' + repr(self.smtpPassword))
+***** PP4E-EXAMPLES-1.1\EXAMPLES\PP4E\INTERNET\EMAIL\MAILTOOLS\MAILSENDER.PY
+                localfile = open(mailconfig.smtppasswdfile)
+                MailSenderAuth.smtpPassword = localfile.readline()[:-1]     # 4E
+                self.trace('local file password' + repr(self.smtpPassword))
+*****
+
+***** 1.0\EXAMPLES\PP4E\INTERNET\EMAIL\MAILTOOLS\mailSender.py
+            except:
+                self.smtpPassword = self.askSmtpPassword()
+
+***** PP4E-EXAMPLES-1.1\EXAMPLES\PP4E\INTERNET\EMAIL\MAILTOOLS\MAILSENDER.PY
+            except:
+                MailSenderAuth.smtpPassword = self.askSmtpPassword()        # 4E
+
+*****
+
+***** 1.0\EXAMPLES\PP4E\INTERNET\EMAIL\MAILTOOLS\mailSender.py
+
+class MailSenderAuthConsole(MailSender):
+    def askSmtpPassword(self):
+***** PP4E-EXAMPLES-1.1\EXAMPLES\PP4E\INTERNET\EMAIL\MAILTOOLS\MAILSENDER.PY
+
+class MailSenderAuthConsole(MailSenderAuth):
+    def askSmtpPassword(self):
+*****
+

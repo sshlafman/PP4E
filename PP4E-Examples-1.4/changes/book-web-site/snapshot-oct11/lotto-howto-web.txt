@@ -1,0 +1,35 @@
+**To enter drawing for a free Python book**
+
+Enter your name and press Submit in web page:
+
+    http://learning-python.com/pylotto.html
+
+A confirmation page will verify your lottery sign-up.
+Duplicate sign-ups are filtered out during selection. 
+
+This page runs the pylotto script described below to 
+add your name to the players file on a web server. 
+
+------------------------------------------------------------
+
+Description:
+
+Winners will be selected from among sign-ups at random, 
+by a Python script which can be viewed online here:
+
+    http://www.rmi.net/~lutz/pp4e-updates.html#lotto
+
+As described there, the script's source code is also online:
+
+    http://www.rmi.net/~lutz/pylotto.py
+
+The instructor will run this script remotely on the web if 
+HTTP is allowed (you can run this URL on your own, but its 
+results will be ignored):
+
+    http://www.learning-python.com/cgi/pylotto.py?-show=cgi&-find=file
+
+A fully-local mode may be used if neither POP nor HTTP is 
+allowed on site:
+
+    pylotto.py -find file -show console

@@ -1,0 +1,305 @@
+E:\Websites\public_html>pylotto.py
+Usage:
+pylotto.py [-send | -reset | -test | -form player | [-show S] [-find F] ]
+        (S = console | cgi, F = email | file, defaults: console, email)
+
+
+E:\Websites\public_html>pylotto.py -reset
+Players file cleared.
+Run main logic to clear emails, with [-find email -show S].
+
+E:\Websites\public_html>pylotto.py -test
+********************************************************************************
+ <class '__main__.ShowConsole'> <class '__main__.FindFile'>
+Connecting...
+From: "Book support" <lutz@rmi.net>
+To: PP4E@learning-python.com
+Subject: PYLOTTO
+Date: Tue, 22 Feb 2011 21:54:25 -0000
+
+Signing up for lotto...
+
+Connecting...
+From: lutz@learning-python.com
+To: PP4E@learning-python.com
+Subject: PYLOTTO
+Date: Tue, 22 Feb 2011 21:54:26 -0000
+
+Signing up for lotto...
+
+Connecting...
+From: the book <PP4E@learning-python.com>
+To: PP4E@learning-python.com
+Subject: PYLOTTO
+Date: Tue, 22 Feb 2011 21:54:27 -0000
+
+Signing up for lotto...
+
+Running in console...
+
+================================================================================
+
+Players:
+
+"Book support" <lutz@rmi.net>
+lutz@learning-python.com
+the book <PP4E@learning-python.com>
+
+================================================================================
+
+Winners:
+
+"Book support" <lutz@rmi.net>
+Players file cleared.
+********************************************************************************
+ <class '__main__.ShowConsole'> <class '__main__.FindEmails'>
+Connecting...
+From: "Book support" <lutz@rmi.net>
+To: PP4E@learning-python.com
+Subject: PYLOTTO
+Date: Tue, 22 Feb 2011 21:54:40 -0000
+
+Signing up for lotto...
+
+Connecting...
+From: lutz@learning-python.com
+To: PP4E@learning-python.com
+Subject: PYLOTTO
+Date: Tue, 22 Feb 2011 21:54:41 -0000
+
+Signing up for lotto...
+
+Connecting...
+From: the book <PP4E@learning-python.com>
+To: PP4E@learning-python.com
+Subject: PYLOTTO
+Date: Tue, 22 Feb 2011 21:54:42 -0000
+
+Signing up for lotto...
+
+Running in console...
+pop email password?
+b'+OK <23675.1298411699@p3pop01-13.prod.phx3.gdg>'
+(b'+OK ', [b'1 1860', b'2 1049', b'3 1038', b'4 957', b'5 1037', b'6 984', b'7 3
+553', b'8 2109', b'9 572631', b'10 1272450', b'11 1502', b'12 1535', b'13 1476',
+ b'14 39425', b'15 59519', b'16 11673', b'17 60278', b'18 223678', b'19 908066',
+ b'20 944596', b'21 223654', b'22 263996', b'23 223933', b'24 288643', b'25 2236
+95', b'26 288645', b'27 264070', b'28 288659', b'29 27385', b'30 264006', b'31 2
+65377', b'32 225839', b'33 4179', b'34 1001', b'35 1016', b'36 1006', b'37 1005'
+], 360)
+message 1 of 37...
+message 2 of 37...
+message 3 of 37...
+message 4 of 37...
+message 5 of 37...
+message 6 of 37...
+message 7 of 37...
+message 8 of 37...
+message 9 of 37...
+message 10 of 37...
+message 11 of 37...
+message 12 of 37...
+message 13 of 37...
+message 14 of 37...
+message 15 of 37...
+message 16 of 37...
+message 17 of 37...
+message 18 of 37...
+message 19 of 37...
+message 20 of 37...
+message 21 of 37...
+message 22 of 37...
+message 23 of 37...
+message 24 of 37...
+message 25 of 37...
+message 26 of 37...
+message 27 of 37...
+message 28 of 37...
+message 29 of 37...
+message 30 of 37...
+message 31 of 37...
+message 32 of 37...
+message 33 of 37...
+message 34 of 37...
+message 35 of 37...
+message 36 of 37...
+message 37 of 37...
+
+================================================================================
+
+Players:
+
+"Book support" <lutz@rmi.net>
+the book <PP4E@learning-python.com>
+lutz@learning-python.com
+lutz@learning-python.com
+
+================================================================================
+
+Winners:
+
+"Book support" <lutz@rmi.net>
+Players file cleared.
+********************************************************************************
+ <class '__main__.ShowCGI'> <class '__main__.FindFile'>
+Connecting...
+From: "Book support" <lutz@rmi.net>
+To: PP4E@learning-python.com
+Subject: PYLOTTO
+Date: Tue, 22 Feb 2011 21:55:13 -0000
+
+Signing up for lotto...
+
+Connecting...
+From: lutz@learning-python.com
+To: PP4E@learning-python.com
+Subject: PYLOTTO
+Date: Tue, 22 Feb 2011 21:55:15 -0000
+
+Signing up for lotto...
+
+Connecting...
+From: the book <PP4E@learning-python.com>
+To: PP4E@learning-python.com
+Subject: PYLOTTO
+Date: Tue, 22 Feb 2011 21:55:16 -0000
+
+Signing up for lotto...
+
+<HTML>
+<TITLE>PyLotto</TITLE>
+<BODY><H1>PyLotto Results</H1>
+<H2>Players:</H2>
+<P><PRE>
+"Book support" &lt;lutz@rmi.net&gt;
+lutz@learning-python.com
+the book &lt;PP4E@learning-python.com&gt;
+</PRE></P><H2>Winners:</H2>
+<P><PRE>
+the book &lt;PP4E@learning-python.com&gt;
+</PRE></P></BODY></HTML>
+Players file cleared.
+********************************************************************************
+ <class '__main__.ShowCGI'> <class '__main__.FindEmails'>
+Connecting...
+From: "Book support" <lutz@rmi.net>
+To: PP4E@learning-python.com
+Subject: PYLOTTO
+Date: Tue, 22 Feb 2011 21:55:27 -0000
+
+Signing up for lotto...
+
+Connecting...
+From: lutz@learning-python.com
+To: PP4E@learning-python.com
+Subject: PYLOTTO
+Date: Tue, 22 Feb 2011 21:55:28 -0000
+
+Signing up for lotto...
+
+Connecting...
+From: the book <PP4E@learning-python.com>
+To: PP4E@learning-python.com
+Subject: PYLOTTO
+Date: Tue, 22 Feb 2011 21:55:29 -0000
+
+Signing up for lotto...
+
+<HTML>
+<TITLE>PyLotto</TITLE>
+<BODY><H1>PyLotto Results</H1>
+<H2>Players:</H2>
+<P><PRE>
+"Book support" &lt;lutz@rmi.net&gt;
+the book &lt;PP4E@learning-python.com&gt;
+lutz@learning-python.com
+lutz@learning-python.com
+the book &lt;PP4E@learning-python.com&gt;
+</PRE></P><H2>Winners:</H2>
+<P><PRE>
+the book &lt;PP4E@learning-python.com&gt;
+</PRE></P></BODY></HTML>
+Players file cleared.
+
+E:\Websites\public_html>
+
+
+
+
+
+[later session]
+
+
+E:\Websites\public_html>pylotto.py -reset
+Players file cleared.
+Run main logic to clear emails, with [-find email -show S].
+
+E:\Websites\public_html>pylotto.py -find file -show console
+Running in console...
+
+================================================================================
+
+Players:
+
+
+================================================================================
+
+Winners:
+
+
+E:\Websites\public_html>pylotto.py -send
+Connecting...
+From: "Book support" <lutz@rmi.net>
+To: PP4E@learning-python.com
+Subject: PYLOTTO
+Date: Tue, 22 Feb 2011 22:06:03 -0000
+
+Signing up for lotto...
+
+Connecting...
+From: lutz@learning-python.com
+To: PP4E@learning-python.com
+Subject: PYLOTTO
+Date: Tue, 22 Feb 2011 22:06:04 -0000
+
+Signing up for lotto...
+
+Connecting...
+From: the book <PP4E@learning-python.com>
+To: PP4E@learning-python.com
+Subject: PYLOTTO
+Date: Tue, 22 Feb 2011 22:06:05 -0000
+
+Signing up for lotto...
+
+
+E:\Websites\public_html>pylotto.py -find file -show console
+Running in console...
+
+================================================================================
+
+Players:
+
+"Book support" <lutz@rmi.net>
+lutz@learning-python.com
+the book <PP4E@learning-python.com>
+
+================================================================================
+
+Winners:
+
+"Book support" <lutz@rmi.net>
+
+E:\Websites\public_html>pylotto.py -find file -show cgi
+<HTML>
+<TITLE>PyLotto</TITLE>
+<BODY><H1>PyLotto Results</H1>
+<H2>Players:</H2>
+<P><PRE>
+"Book support" &lt;lutz@rmi.net&gt;
+lutz@learning-python.com
+the book &lt;PP4E@learning-python.com&gt;
+</PRE></P><H2>Winners:</H2>
+<P><PRE>
+lutz@learning-python.com
+</PRE></P></BODY></HTML>

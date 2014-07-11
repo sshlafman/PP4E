@@ -1,0 +1,33 @@
+{'keep': ['09 Once In a Lifetime.m4a',
+          "01 We're An American Band.m4a",
+          'U2-One.MP3',
+          'Not Fragile (Turner).mp3',
+          'If I Had $1000000.mp3',
+          'Resignation Superman.mp3',
+          'Against The Wind.mp3',
+          ...
+          ...more deleted
+          ...
+          'Rosalita (Come Out Tonight).mp3',
+          "10 Rock 'n' Roll Lifestyle.m4a",
+          '02 Jungle Love.m4a',
+          '16 Shambala.m4a'],
+ 'miss': ['.iTunes Preferences.plist',
+          'iTunes Library Extras.itdb',
+          'iTunes Library Genius.itdb',
+          'iTunes Library.itl',
+          '.iTunes Preferences.plist',
+          'orig.aif'],
+ 'skip': ['05 Mack the Knife.m4p',
+          '17 The Tale of Sir Robin.m4p',
+          '11 Mr. Blue Sky.m4p',
+          ...
+          ...more deleted
+          ...
+          '15 Good Riddance (Time of Your Life).m4p',
+          '07 Banditos.m4p',
+          '06 Bang a Gong (Get It On) [Single_L.m4p',
+          '01 Beautiful Day.m4p']}
+Total keep: 539
+Total skip: 17
+Total miss: 6

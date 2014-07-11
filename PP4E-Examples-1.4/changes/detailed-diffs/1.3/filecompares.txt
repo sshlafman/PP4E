@@ -1,0 +1,546 @@
+
+# mailSender.py
+
+f:\Books\4E\PP4E\examples-dev\unpack-1.3\PP4E-Examples-1.3\Examples\PP4E\Interne
+t\Email\mailtools>fc _PRIOR-mailSender.py mailSender.py
+Comparing files _PRIOR-mailSender.py and MAILSENDER.PY
+***** _PRIOR-mailSender.py
+
+            # set filename and attach to container
+            basename = os.path.basename(filename)
+            msg.add_header('Content-Disposition',
+***** MAILSENDER.PY
+
+            # set filename (ascii or utf8/mime encoded) and attach to container
+            basename = self.encodeHeader(os.path.basename(filename))   # oct 2011
+            msg.add_header('Content-Disposition',
+*****
+
+
+=====================================================================================
+
+
+# mailParser.py
+
+f:\Books\4E\PP4E\examples-dev\unpack-1.3\PP4E-Examples-1.3\Examples\PP4E\Interne
+t\Email\mailtools>fc _PRIOR-mailParser.py mailParser.py
+Comparing files _PRIOR-mailParser.py and MAILPARSER.PY
+***** _PRIOR-mailParser.py
+            filename = 'part-%03d%s' % (ix, ext)
+        return (filename, contype)
+
+***** MAILPARSER.PY
+            filename = 'part-%03d%s' % (ix, ext)
+        return (self.decodeHeader(filename), contype) # oct 2011: decode i18n fnames
+
+*****
+
+
+=====================================================================================
+
+
+# ListWindows.py
+
+f:\Books\4E\PP4E\examples-dev\unpack-1.3\PP4E-Examples-1.3\Examples\PP4E\Interne
+t\Email\PyMailGui>fc BOOK-ListWindows.py ListWindows.py
+Comparing files BOOK-ListWindows.py and LISTWINDOWS.PY
+***** BOOK-ListWindows.py
+        """
+        msgnums = self.selectedMsgs()
+        if not msgnums:
+            showerror(appname, 'No message selected')
+        else:
+            # caveat: dialog warns about replacing file
+            filename = self.saveDialog.show()             # shared class attr
+            if filename:                                  # don't verify num msgs
+                filename = os.path.abspath(filename)      # normalize / to \
+                self.getMessages(msgnums,
+                        after=lambda: self.contSave(msgnums, filename))
+
+***** LISTWINDOWS.PY
+        """
+        # Oct 2011, examples 1.3: test for blocking action before fileselect
+        # dialog, else action's exit callback might invalidate selected message
+        # numbers while file select dialog is open; getMessages blocks other
+        # changes later, with modal nature of this code; see also onDelete below
+;
+
+        if self.okayToSave():     # subclass specific test and error popup
+
+            msgnums = self.selectedMsgs()
+            if not msgnums:
+                showerror(appname, 'No message selected')
+            else:
+                # caveat: dialog warns about replacing file
+                filename = self.saveDialog.show()            # shared class attr
+
+                if filename:                                 # don't verify num msgs
+                    filename = os.path.abspath(filename)     # normalize / to \
+                    self.getMessages(msgnums,
+                            after=lambda: self.contSave(msgnums, filename))
+
+*****
+
+***** BOOK-ListWindows.py
+    def onDeleteMail(self):
+        # delete selected mails from server or file
+        msgnums = self.selectedMsgs()                      # subclass: fillIndex
+
+        if not msgnums:                                    # always verify here
+            showerror(appname, 'No message selected')
+        else:
+            if askyesno(appname, 'Verify delete %d mails?' % len(msgnums)):
+                self.doDelete(msgnums)
+
+***** LISTWINDOWS.PY
+    def onDeleteMail(self):
+        """
+        delete selected mails from server or file
+        """
+        # Oct 2011, examples 1.3: test for delete-in-progress before verification
+        # pupup, else a prior delete's exit action may be run from an after() timer
+        # event callback between pressing Delete and the verification dialog's OK,
+        # invalidating selected message numbers (and possibly deleting wrong mails!);
+        # a similar timing issue for the file selection dialog in Save was patched
+        # too, but it seems much less harmful to save than delete incorrect mails;
+
+        if self.okayToDelete():     # subclass specific test and error popup
+
+            msgnums = self.selectedMsgs()                      # subclass: fillIndex
+            if not msgnums:                                    # always verify here
+                showerror(appname, 'No message selected')
+            else:
+                if askyesno(appname, 'Verify delete %d mails?' % len(msgnums)):
+                    self.doDelete(msgnums)
+
+*****
+
+***** BOOK-ListWindows.py
+        """
+        hdrmaps  = self.headersMaps()                   # may be empty
+***** LISTWINDOWS.PY
+        """
+        def makeTimeLocal(origTimeStr):
+            """
+            Oct 2011, examples 1.3: display sent-time relative to local
+            timezone; must do after decode and for header size calc too;
+            runs: formatdate(mktime_tz(parsedate_tz(there)), localtime=True)
+            """
+            from email.utils import formatdate
+            from email._parseaddr import parsedate_tz, mktime_tz
+            if origTimeStr in [' ', '']:
+                return origTimeStr  # common case: parser fails
+
+            try:
+                timeTuple    = parsedate_tz(origTimeStr)
+                utcTimeNum   = mktime_tz(timeTuple)
+                localTimeStr = formatdate(utcTimeNum, localtime=True)
+                return localTimeStr
+            except:
+                #import traceback; traceback.print_exc()
+                #print('Local time failed:', sys.exc_info()[0], sys.exc_info()[1])
+                return origTimeStr  # use orig date-time text if anything fails
+
+        hdrmaps  = self.headersMaps()                   # may be empty
+*****
+
+***** BOOK-ListWindows.py
+                keyval = msg.get(key, ' ')
+                if key not in addrhdrs:
+                    allLens.append(len(self.decodeHeader(keyval)))
+***** LISTWINDOWS.PY
+                keyval = msg.get(key, ' ')
+                if key == 'Date':
+                    allLens.append(len(makeTimeLocal(self.decodeHeader(keyval))))
+                elif key not in addrhdrs:
+                    allLens.append(len(self.decodeHeader(keyval)))
+*****
+
+***** BOOK-ListWindows.py
+                mysize  = maxsize[key]
+                if key not in addrhdrs:
+                    keytext = self.decodeHeader(msg.get(key, ' '))
+***** LISTWINDOWS.PY
+                mysize  = maxsize[key]
+                if key == 'Date':
+                    keytext = makeTimeLocal(self.decodeHeader(msg.get(key, ' ')))
+                elif key not in addrhdrs:
+                    keytext = self.decodeHeader(msg.get(key, ' '))
+*****
+
+***** BOOK-ListWindows.py
+
+    # plus okayToQuit?, any unique actions
+    def getMessage(self, msgnum): assert False    # used by many: full mail text
+
+***** LISTWINDOWS.PY
+
+    # plus okayToQuit?, okayToDelete?, okayToSave?, any unique actions
+    def getMessage(self, msgnum): assert False    # used by many: full mail text
+
+*****
+
+***** BOOK-ListWindows.py
+
+    def doDelete(self, msgnums):
+        """
+        simple-minded, but sufficient: rewrite all
+        nondeleted mails to file; can't just delete
+        from self.msglist in-place: changes item indexes;
+        Py2.3 enumerate(L) same as zip(range(len(L)), L)
+        2.1: now threaded, else N sec pause for large files
+        """
+        if self.openFileBusy:
+***** LISTWINDOWS.PY
+
+    def okayToSave(self):
+        # Oct 2011: test before file selection popup
+        if self.openFileBusy:
+*****
+
+***** BOOK-ListWindows.py
+            # dont allow parallel open/delete changes
+            errmsg = 'Cannot delete, file is busy:\n"%s"' % self.filename
+***** LISTWINDOWS.PY
+            # dont allow parallel open/delete changes
+            errmsg = 'Cannot save, file is busy:\n"%s"' % self.filename
+            showerror(appname, errmsg)
+            return False
+        else:
+            return True
+
+    def okayToDelete(self):
+        # Oct 2011: test before verification popup too
+        if self.openFileBusy:
+            # dont allow parallel open/delete changes
+            errmsg = 'Cannot delete, file is busy:\n"%s"' % self.filename
+*****
+
+***** BOOK-ListWindows.py
+            showerror(appname, errmsg)
+        else:
+***** LISTWINDOWS.PY
+            showerror(appname, errmsg)
+            return False
+        else:
+            return True
+
+    def doDelete(self, msgnums):
+        """
+        simple-minded, but sufficient: rewrite all
+        nondeleted mails to file; can't just delete
+        from self.msglist in-place: changes item indexes;
+        Py2.3 enumerate(L) same as zip(range(len(L)), L)
+        2.1: now threaded, else N sec pause for large files
+        """
+        if self.openFileBusy:   # test probably not needed here too, but harmless
+            # dont allow parallel open/delete changes
+            errmsg = 'Cannot delete, file is busy:\n"%s"' % self.filename
+            showerror(appname, errmsg)
+        else:
+*****
+
+***** BOOK-ListWindows.py
+
+    def doDelete(self, msgnumlist):
+        """
+        threaded: delete from server now - changes msg nums;
+        may overlap with sends only, disables all except sends;
+        2.1: cache.deleteMessages now checks TOP result to see
+        if headers match selected mails, in case msgnums out of
+        synch with mail server: poss if mail deleted by other client,
+        or server deletes inbox mail automatically - some ISPs may
+        move a mail from inbox to undeliverable on load failure;
+        """
+        if loadingHdrsBusy or deletingBusy or loadingMsgsBusy:
+***** LISTWINDOWS.PY
+
+    def okayToSave(self):
+        # Oct 2011: test before file selection popup
+        if loadingHdrsBusy or deletingBusy or loadingMsgsBusy:
+            showerror(appname, 'Cannot save during load or delete')
+            return False
+        else:
+            return True
+
+    def okayToDelete(self):
+        # Oct 2011: test before verification popup too
+        if loadingHdrsBusy or deletingBusy or loadingMsgsBusy:
+*****
+
+***** BOOK-ListWindows.py
+            showerror(appname, 'Cannot delete during load or delete')
+        else:
+***** LISTWINDOWS.PY
+            showerror(appname, 'Cannot delete during load or delete')
+            return False
+        else:
+            return True
+
+    def doDelete(self, msgnumlist):
+        """
+        threaded: delete from server now - changes msg nums;
+        may overlap with sends only, disables all except sends;
+        2.1: cache.deleteMessages now checks TOP result to see
+        if headers match selected mails, in case msgnums out of
+        synch with mail server: poss if mail deleted by other client,
+        or server deletes inbox mail automatically - some ISPs may
+        move a mail from inbox to undeliverable on load failure;
+        """
+        if loadingHdrsBusy or deletingBusy or loadingMsgsBusy:  # retest is harmless
+            showerror(appname, 'Cannot delete during load or delete')
+        else:
+*****
+
+
+=====================================================================================
+
+
+# mailconfig.py
+
+f:\Books\4E\PP4E\examples-dev\unpack-1.3\PP4E-Examples-1.3\Examples\PP4E\Interne
+t\Email\PyMailGui>fc BOOK-mailconfig.py mailconfig.py
+Comparing files BOOK-mailconfig.py and MAILCONFIG.PY
+***** BOOK-mailconfig.py
+
+smtpservername = 'smtpout.secureserver.net'
+
+***** MAILCONFIG.PY
+
+smtpservername = 'smtpout.secureserver.net'    # default port 25
+
+# see below for more smt options
+
+*****
+
+***** BOOK-mailconfig.py
+# set user to None or '' if no login/authentication is required, and set
+# pswd to name of a file holding your SMTP password, or an empty string to
+# force programs to ask (in a console, or GUI)
+#-------------------------------------------------------------------------------
+
+***** MAILCONFIG.PY
+# set user to None or '' if no login/authentication is required, and set
+# pswd to either the name of a file holding your SMTP password or an empty
+# string to force programs to ask for the password (in a console, or GUI)
+#-------------------------------------------------------------------------------
+
+*****
+
+***** BOOK-mailconfig.py
+
+#-------------------------------------------------------------------------------
+# (optional) PyMailGUI: name of local one-line text file with your POP
+# password; if empty or file cannot be read, pswd is requested when first
+# connecting; pswd not encrypted: leave this empty on shared machines;
+# PyMailCGI always asks for pswd (runs on a possibly remote server);
+#-------------------------------------------------------------------------------
+
+poppasswdfile  = r'c:\temp\pymailgui.txt'      # set to '' to be asked
+
+***** MAILCONFIG.PY
+
+
+# Oct 2011, more SMTP options:
+#
+# updated to use auth smtp port number or broadband server, when my broadband isp
+# stopped allowing sends through non-auth godaddy smtp on default port 25; to use
+# a specific smtp port number, simply append it at the end of the server name string
+# as here: Python's smtplib automatically parses this off and uses it, and PyMailGUI
+# automatically uses authentication and asks for passwords if needed;
+
+# FAILS (after broadband isp change)
+smtpservername = 'smtpout.secureserver.net'    # default port 25
+
+# Godaddy: straight and encrypted and outgoing smtp ports,
+# but neither one of these seem to work as advertised
+
+#FAILS
+smtpservername = 'smtpout.secureserver.net:587'    # per smtplib.py server parsing
+#FAILS (hangs)
+smtpservername = 'smtpout.secureserver.net:465'    # SSL encrypted SMTP port
+
+# The next server requires authentication, and uses port 587. Connect using your
+# mailboxname@yourdomain.com as the "username" and the password for that mailbox.
+# this worked well in most contexts (e.g., hotels), until later broken at earthlink;
+
+#WORKS (pymailgui asks for pswd once per session on first send)
+smtpuser = 'lutz@rmi.net'
+smtppasswdfile = ''   # ask: xxxxx
+smtpservername = 'smtpauth.hosting.earthlink.net:587'
+
+# Your ISP or local network's outgoing mail server (this is my broadband provider).
+# Caveat: there's a chance that sending from rmi.net through mail.mailmt.com will
+# trigger a SPF fail and/or be marked as spam; this may also fail on the road?
+
+#WORKS (but may require direct connection?)
+smtpuser  = None                           # per your ISP
+smtppasswdfile  = ''                       # set to '' to be asked
+smtpservername = 'mail.mailmt.com'
+
+print(smtpservername)
+
+*****
+
+***** BOOK-mailconfig.py
+#-------------------------------------------------------------------------------
+# (required) local file where sent messages are always saved;
+# PyMailGUI 'Open' button allows this file to be opened and viewed;
+# don't use '.' form if may be run from another dir: e.g., pp4e demos
+#-------------------------------------------------------------------------------
+
+***** MAILCONFIG.PY
+#-------------------------------------------------------------------------------
+# (optional) PyMailGUI: name of local one-line text file with your POP
+# password; if empty or file cannot be read, pswd is requested when first
+# connecting; pswd not encrypted: leave this empty on shared machines;
+# PyMailCGI always asks for pswd (runs on a possibly remote server);
+#-------------------------------------------------------------------------------
+
+*****
+
+***** BOOK-mailconfig.py
+
+#sentmailfile = r'.\sentmail.txt'             # . means in current working dir
+***** MAILCONFIG.PY
+
+poppasswdfile  = r'c:\temp\pymailgui.txt'      # set to '' to be asked
+
+#-------------------------------------------------------------------------------
+# (required) local file where sent messages are always saved;
+# PyMailGUI 'Open' button allows this file to be opened and viewed;
+# don't use '.' form if may be run from another dir: e.g., pp4e demos
+#-------------------------------------------------------------------------------
+
+#sentmailfile = r'.\sentmail.txt'             # . means in current working dir
+*****
+
+
+=====================================================================================
+
+
+# prior file versions
+
+f:\Books\4E\PP4E\examples-dev\unpack-1.3\PP4E-Examples-1.3\Examples\PP4E\Interne
+t\Email\PyMailGui>
+    fc BOOK-ListWindows.py f:\Books\4E\PP4E\examples-official\1.2\
+    unpacked\PP4E-Examples-1.2\Examples\PP4E\Internet\Email\PyMailGui\ListWindows.py
+
+Comparing files BOOK-ListWindows.py and F:\BOOKS\4E\PP4E\EXAMPLES-OFFICIAL\1.2\U
+NPACKED\PP4E-EXAMPLES-1.2\EXAMPLES\PP4E\INTERNET\EMAIL\PYMAILGUI\LISTWINDOWS.PY
+FC: no differences encountered
+
+
+f:\Books\4E\PP4E\examples-dev\unpack-1.3\PP4E-Examples-1.3\Examples\PP4E\Interne
+t\Email\PyMailGui>
+    fc BOOK-mailconfig.py f:\Books\4E\PP4E\examples-official\1.2\u
+    npacked\PP4E-Examples-1.2\Examples\PP4E\Internet\Email\PyMailGui\mailconfig.py
+
+Comparing files BOOK-mailconfig.py and F:\BOOKS\4E\PP4E\EXAMPLES-OFFICIAL\1.2\UN
+PACKED\PP4E-EXAMPLES-1.2\EXAMPLES\PP4E\INTERNET\EMAIL\PYMAILGUI\MAILCONFIG.PY
+FC: no differences encountered
+
+
+f:\Books\4E\PP4E\examples-dev\unpack-1.3\PP4E-Examples-1.3\Examples\PP4E\Interne
+t\Email\PyMailGui>cd ..\mailtools
+
+f:\Books\4E\PP4E\examples-dev\unpack-1.3\PP4E-Examples-1.3\Examples\PP4E\Interne
+t\Email\mailtools>
+    fc _PRIOR-mailParser.py f:\Books\4E\PP4E\examples-official\1.2
+    \unpacked\PP4E-Examples-1.2\Examples\PP4E\Internet\Email\mailtools\mailParser.py
+
+Comparing files _PRIOR-mailParser.py and F:\BOOKS\4E\PP4E\EXAMPLES-OFFICIAL\1.2\
+UNPACKED\PP4E-EXAMPLES-1.2\EXAMPLES\PP4E\INTERNET\EMAIL\MAILTOOLS\MAILPARSER.PY
+FC: no differences encountered
+
+
+f:\Books\4E\PP4E\examples-dev\unpack-1.3\PP4E-Examples-1.3\Examples\PP4E\Interne
+t\Email\mailtools>
+    fc _PRIOR-mailSender.py f:\Books\4E\PP4E\examples-official\1.2
+    \unpacked\PP4E-Examples-1.2\Examples\PP4E\Internet\Email\mailtools\mailSender.py
+
+Comparing files _PRIOR-mailSender.py and F:\BOOKS\4E\PP4E\EXAMPLES-OFFICIAL\1.2\
+UNPACKED\PP4E-EXAMPLES-1.2\EXAMPLES\PP4E\INTERNET\EMAIL\MAILTOOLS\MAILSENDER.PY
+FC: no differences encountered
+
+
+=====================================================================================
+
+
+# patched files directory
+
+F:\Books\4E\PP4E\examples-dev\unpack-1.3\PP4E-Examples-1.3\changes\detailed-diffs\1.3
+\patched-files-13>
+    fc mailParser.py ..\..\..\..\Examples\PP4E\Internet\Email\mailtools\mailParser.py
+Comparing files mailParser.py and ..\..\..\..\EXAMPLES\PP4E\INTERNET\EMAIL\MAILTOOLS\
+MAILPARSER.PY
+FC: no differences encountered
+
+
+F:\Books\4E\PP4E\examples-dev\unpack-1.3\PP4E-Examples-1.3\changes\detailed-diffs\1.3
+\patched-files-13>
+    fc mailSender.py ..\..\..\..\Examples\PP4E\Internet\Email\mailtools\mailSender.py
+Comparing files mailSender.py and ..\..\..\..\EXAMPLES\PP4E\INTERNET\EMAIL\MAILTOOLS\
+MAILSENDER.PY
+FC: no differences encountered
+
+
+F:\Books\4E\PP4E\examples-dev\unpack-1.3\PP4E-Examples-1.3\changes\detailed-diffs\1.3
+\patched-files-13>
+    fc ListWindows.py ..\..\..\..\Examples\PP4E\Internet\Email\PyMailGui\ListWindows.py
+Comparing files ListWindows.py and ..\..\..\..\EXAMPLES\PP4E\INTERNET\EMAIL\PYMAILGUI
+\LISTWINDOWS.PY
+FC: no differences encountered
+
+
+F:\Books\4E\PP4E\examples-dev\unpack-1.3\PP4E-Examples-1.3\changes\detailed-diffs\1.3
+\patched-files-13>
+fc mailconfig.py ..\..\..\..\Examples\PP4E\Internet\Email\PyMailGui\mailconfig.py
+Comparing files mailconfig.py and ..\..\..\..\EXAMPLES\PP4E\INTERNET\EMAIL\PYMAILGUI\
+MAILCONFIG.PY
+FC: no differences encountered
+
+
+=====================================================================================
+
+
+# two trivial config changes for my email accounts not in the patches
+# zip file (you need to change these setting for your accounts anyhow!)
+
+f:\Books\4E\PP4E\examples-dev\unpack-1.3\PP4E-Examples-1.3\Examples\PP4E\Interne
+t\Email\PyMailGui\altconfigs>
+    fc mailconfig_rmi.py f:\Books\4E\PP4E\examples-official\1.2\unpacked\
+    PP4E-Examples-1.2\Examples\PP4E\Internet\Email\PyMailGui\altconfigs\mailconfig_rmi.py
+Comparing files mailconfig_rmi.py and F:\BOOKS\4E\PP4E\EXAMPLES-OFFICIAL\1.2\UNP
+ACKED\PP4E-EXAMPLES-1.2\EXAMPLES\PP4E\INTERNET\EMAIL\PYMAILGUI\ALTCONFIGS\MAILCO
+NFIG_RMI.PY
+***** mailconfig_rmi.py
+popusername   = 'lutz'
+myaddress     = 'Mark Lutz <lutz@rmi.net>'    # was just 'lutz@rmi.net' in book
+listbg = 'navy'
+***** F:\BOOKS\4E\PP4E\EXAMPLES-OFFICIAL\1.2\UNPACKED\PP4E-EXAMPLES-1.2\EXAMPLES
+\PP4E\INTERNET\EMAIL\PYMAILGUI\ALTCONFIGS\MAILCONFIG_RMI.PY
+popusername   = 'lutz'
+myaddress     = 'lutz@rmi.net'
+listbg = 'navy'
+*****
+
+
+f:\Books\4E\PP4E\examples-dev\unpack-1.3\PP4E-Examples-1.3\Examples\PP4E\Interne
+t\Email\PyMailGui\altconfigs>
+    fc mailconfig_train.py f:\Books\4E\PP4E\examples-official\1.2\unpacked\
+    PP4E-Examples-1.2\Examples\PP4E\Internet\Email\PyMailGui\altconfigs\mailconfig_train.py
+Comparing files mailconfig_train.py and F:\BOOKS\4E\PP4E\EXAMPLES-OFFICIAL\1.2\U
+NPACKED\PP4E-EXAMPLES-1.2\EXAMPLES\PP4E\INTERNET\EMAIL\PYMAILGUI\ALTCONFIGS\MAIL
+CONFIG_TRAIN.PY
+***** mailconfig_train.py
+popusername = 'lutz@learning-python.com'
+myaddress   = 'Mark Lutz <lutz@learning-python.com>'  # 'lutz@learn-py.com' in book
+listbg = 'wheat'                              # goldenrod, dark green, beige
+***** F:\BOOKS\4E\PP4E\EXAMPLES-OFFICIAL\1.2\UNPACKED\PP4E-EXAMPLES-1.2\EXAMPLES
+\PP4E\INTERNET\EMAIL\PYMAILGUI\ALTCONFIGS\MAILCONFIG_TRAIN.PY
+popusername = 'lutz@learning-python.com'
+myaddress   = 'lutz@learning-python.com'
+listbg = 'wheat'                              # goldenrod, dark green, beige
+*****
+

@@ -1,0 +1,185 @@
+<HTML>
+<Title>Python's New-Style Inheritance Algotrithm</Title>
+<BODY>
+
+<P><I>
+This article also appeared on O'Reilly's 
+<A HREF="http://programming.oreilly.com/2013/07/pythons-new-style-inheritance-algorithm.html">programming blog</A> in July, 2013.
+</I></P>
+
+
+<HR>
+<H1>Python's New-Style Inheritance Algorithm</H1>
+
+This article takes a brief look at the inheritance search mechanism in the Python
+programming language.  Like some other aspects of Python today, this mechanism varies 
+per line: inheritance has grown much more convoluted in 3.X, though 2.X users 
+still have a choice in the matter.  To truly understand the current state of 
+affairs, then, we need to begin our story in simpler times.
+</P>
+
+
+
+<H2>Classic Inheritance</H2>
+
+<P>
+Once upon a time (well, in 2.X's default and still widely-used 
+<I>classic classes</I>), Python attribute inheritance&mdash;the 
+<I>object.name</I> lookup at the heart of object-oriented 
+code&mdash;was fairly simple.  It essentially boiled down to this: 
+
+<P>
+<I>Attribute name references search the instance, its class, 
+and the class's superclasses depth-first and left-to-right, 
+and use the first occurrence found along the way.  Attribute 
+assignments normally store in the target object itself.</I>
+</P>
+
+<P>
+And that's it.  The reference search may be kicked off from either an instance or a 
+class, and there are special cases for <I>__getattr__</I> (run if the lookup failed
+to find a name) and <I>__setattr__</I> (run for all attribute assignments),
+but the procedure is by and large straightforward.
+</P>
+
+
+
+<H2>New-Style Inheritance</H2>
+
+<P>
+In <I>new-style classes</I>&mdash;an option in 2.X and mandated in 3.X&mdash;inheritance 
+is richer but substantially more complex, potentially requiring knowledge of advanced 
+topics to accurately resolve an attribute name's meaning, including descriptors, metaclasses, 
+and the linearized class-tree paths known as MROs.  We won't delve into those prerequisite 
+topics here, but the following is a cursory overview of the algorithm used, taken from the 
+newly-released <A HREF="http://shop.oreilly.com/product/0636920028154.do">Learning Python, 5th Edition</A>,
+where you'll find new and more complete coverage.
+</P>
+
+
+
+<H3>To look up an attribute name:</H3>
+
+<OL type=1>
+<LI>From an <I>instance</I> I, search the instance, its class, and its superclasses, as follows:
+   <OL type=a>
+   <LI>Search the __dict__ of all classes on the __mro__ found at I’s __class__
+   <LI>If a data descriptor was found in step <I>a</I>, call its __get__ and exit
+   <LI>Else, return a value in the __dict__ of the instance I
+   <LI>Else, call a nondata descriptor or return a value found in step <I>a</I>
+   </OL>
+<BR>
+<LI>From a <I>class</I> C, search the class, its superclasses, and its metaclasses tree, as follows:
+   <OL type=a>
+   <LI>Search the __dict__ of all metaclasses on the __mro__ found at C’s __class__
+   <LI>If a data descriptor was found in step <I>a</I>, call its __get__ and exit
+   <LI>Else, call a descriptor or return a value in the __dict__ of a class on C’s own __mro__
+   <LI>Else, call a nondata descriptor or return a value found in step <I>a</I>
+   </OL>
+<BR>
+<LI>In both rule 1 and 2, <I>built-in</I> operations essentially use just step <I>a</I> sources 
+for their implicit name look up (described further in the book)
+</OL>
+
+<P>
+Name sources in this procedure are attempted in order, either as numbered or per their 
+left-to-right order in "or" conjunctions.  On top of all this, method <I>__getattr__</I> 
+may be run if defined when an attribute is not found; method <I>__getattribute__</I> 
+may be run for every attribute fetch; and the implied <I>object</I> superclass provides 
+some defaults at the top of every class and metaclass tree (that is, at the end of every MRO).
+</P>
+
+
+
+<H3>The assignment subset</H3>
+
+<P>A subset of the lookup procedure is also run for attribute assignments:
+<UL>
+<LI>When applied to an <I>instance</I>, such assignments essentially follow steps <I>a</I> 
+through <I>c</I> of rule 1, searching the instance’s class tree, though step <I>b</I> calls 
+__set__ instead of __get__, and step <I>c</I> stops and stores in the instance instead 
+of attempting a fetch.
+<BR><BR>
+<LI>When applied to a <I>class</I>, such assignments run the same procedure on the 
+class’s metaclass tree: roughly the same as rule 2, but step <I>c</I> stops and stores 
+in the class.
+</UL>
+
+<P>
+The <I>__setattr__</I> method still catches all attribute assignments as before, though
+it becomes less useful for this method to use the instance __dict__ to assign names, as 
+some new-style extensions such as slots, properties, and descriptors implement attributes
+at the class level&mdash;a sort of "virtual" instance data mechanism.  In fact, some 
+instances might not have a __dict__ at all when slots are used, an optimization with 
+significant potential to break introspection-based tools.
+</P>
+
+
+
+<H3>Precedence and context</H3>
+
+<P>
+The net effect of these procedures is to impose arguably subtle and obscure <I>precedence 
+rules</I> on the foundational operation of name resolution.  For example, you can also think
+of explicitly-referenced name look-up search as being ordered this way, as implied by the 
+algorithm above (the corresponding steps of which are given in italics here):
+
+<UL>
+<LI>For <I>instances</I>, try:
+  <OL><LI>class-tree data descriptors <I>(1b)</I>
+      <LI>instance-object values <I>(1c)</I>
+      <LI>class-tree nondata descriptors <I>(1d)</I> 
+      <LI>class-tree values <I>(1d)</I>
+  </OL>
+<BR>
+<LI>For <I>classes</I>, try:
+  <OL><LI>metaclass-tree data descriptors <I>(2b)</I>
+      <LI>class-tree descriptors <I>(2c)</I>
+      <LI>class-tree values <I>(2c)</I>
+      <LI>metaclass-tree nondata descriptors <I>(2d)</I>
+      <LI>metaclass-tree values <I>(2d)</I>
+  </OL>
+</UL>
+
+Some of this may be too subtle to fathom in full fidelity without a tour through Python's 
+<I>object.c</I> and <I>typeobject.c</I> source files (which house the implementations of instances and 
+classes, respectively).  Case in point: Python runs just one or two tree searches per name lookup,
+despite the presence of four or five name sources.  And all this may happen in addition to 
+selecting a context-specific starting point per the MRO, for code brave enough to use the 
+new-style <I>super</I> built-in function&mdash;a tool with new coverage in the book, but 
+omitted here for the sake of space (if not humanity).
+</P>
+
+
+
+<H2>Famous Last Words?</H2>
+
+<P>
+The new-style inheritance algorithm applies only to programs that use classes and OOP, of course, 
+and grows more elaborate as your code or the libraries it uses adopt more advanced language tools. 
+As usual in Python, some simpler scripts may still not need to care.  But there's little 
+denying that new-style name lookup is radically more complex.  
+
+<P>
+To judge for yourself whether its added utility justifies its added complexity, see the 
+aforementioned book for the full story on this topic.  And while you ponder such things, 
+don't forget what Python's own "import this" motto seems to counsel in this department: 
+
+<PRE>    If the implementation is hard to explain, it's a bad idea.</PRE>
+</P>
+
+
+<HR>
+<P>
+<A href="http://www.python.org">
+<IMG SRC="PythonPoweredSmall.gif" ALIGN=left   
+ALT="[Python Logo]" border=0 hspace=15></A> 
+
+<ADDRESS>
+Mark Lutz  |  <A HREF="mailto:lutz@rmi.net">lutz@rmi.net</A>  |  <A HREF="http://www.rmi.net/~lutz">www.rmi.net/~lutz</A>  |  <A HREF="http://learning-python.com">learning-python.com</A>  |  June 24, 2013
+</ADDRESS>
+</P>
+</BODY></HTML>
+
+
+
