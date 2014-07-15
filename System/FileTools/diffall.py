@@ -68,10 +68,10 @@ def comparetrees(dir1, dir2, diffs, verbose=False):
             missed.remove(name)
             comparetrees(path1, path2, diffs, verbose)
             
-        # same name but not both files or dirs?
-        for name in missed:
-            diffs.append('files missed at %s - %s: %s' % (dir1, dir2, name))
-            print(name, 'DIFFERS')
+    # same name but not both files or dirs?
+    for name in missed:
+        diffs.append('files missed at %s - %s: %s' % (dir1, dir2, name))
+        print(name, 'DIFFERS')
             
 if __name__ == '__main__':
     dir1, dir2 = dirdiff.getargs()
