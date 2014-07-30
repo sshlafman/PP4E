@@ -11,7 +11,7 @@ redefine reset to support multiple independent walks that require subclass updat
 
 import os, sys
 
-class FiloVisitor:
+class FileVisitor:
     """
     Visits all nondirectory files below startDir (default '.');
     override visit* methods to provide custom file/dir handlers;
@@ -29,7 +29,7 @@ class FiloVisitor:
         for (thisDir, dirsHere, filesHere) in os.walk(startDir):
             self.visitdir(thisDir)
             for fname in filesHere:
-                fpath = os.pardir.join(thisDir, fname)
+                fpath = os.path.join(thisDir, fname)
                 self.visitfile(fpath)
                 
     def reset(self):
@@ -41,4 +41,70 @@ class FiloVisitor:
         
     def visitfile(self, filepath):
         self.fcount += 1                 # override or extend me
-        if self.trace > 0: print(self.fcount, '=>', filepath)
+        if self.trace > 0:
+            try: 
+                print(self.fcount, '=>', filepath)
+            except UnicodeEncodeError:
+                pass
+        
+class SearchVisitor(FileVisitor):
+    """
+    Search files at and below startDir for a string;
+    subclass: redefine visitmatch, extension lists, candidate as needed;
+    subclasses can use testexts to specify file types to search (but can
+    also redefine candidate to use mimetypes for text content: see ahead)
+    """
+    #skipexts = []
+    #testexts = ['.txt', '.py', '.pyw', '.html', '.c' '.h']   # search these extensions
+    testexts = []
+    skipexts = ['.gif', '.jpg', '.pyc', '.o' , '.a', '.exe'] # or skip these exts
+   
+    def __init__(self, searchkey, trace=2):
+        FileVisitor.__init__(self, searchkey, trace)
+        self.scount = 0
+        
+    def reset(self):                     # on independent walks
+        self.scount = 0
+        
+    def candidate(self, fname):                # redef for mimetypes
+        ext = os.path.splitext(fname)[1]
+        if self.testexts:
+            return ext in self.testexts        # in test list
+        else:                                  # or not in skip list
+            return ext not in self.skipexts         
+    
+    def visitfile(self, fname):
+        FileVisitor.visitfile(self, fname)
+        if not self.candidate(fname):
+            if self.trace > 0: print('Skipping', fname)
+        else:
+            try:
+                text = open(fname).read()         # 'rb' if undecodable
+            except UnicodeDecodeError:
+                pass
+            else:
+                if self.context in text:          # or text.find() != -1
+                    self.visitmatch(fname, text)
+                    self.scount += 1
+    
+    def visitmatch(self, fname, text):                # process a match
+        print('%s has %s' % (fname, self.context))    # override me lower
+        
+if __name__ == '__main__':
+    # self-test logic
+    dolist   = 1
+    dosearch = 2  # 3=do list and search
+    donext   = 4  # when next test added
+    
+    def selftest(testmask):
+        if testmask & dolist:
+            visitor = FileVisitor(trace=2)
+            visitor.run(sys.argv[2])
+            print('Visited %d files and %d dirs' % (visitor.fcount, visitor.dcount))
+            
+        if testmask & dosearch:
+            visitor = SearchVisitor(sys.argv[3], trace=0)
+            visitor.run(sys.argv[2])
+            print('Found %d files and %d dirs' % (visitor.scount, visitor.fcount))
+            
+    selftest(int(sys.argv[1]))  # e.g. 3 = dolist | dosearch
