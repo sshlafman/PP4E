@@ -159,7 +159,7 @@ if __name__ == '__main__':
     playfile('ora-pp3e.gif')                # image/gif
     playfile('priorcalendar.html')          # text/html
     playfile('lp4e-preface-preview.html')   # text/html
-    playfile('lp4e-code-readme.txt')        # text/plain
+    playfile('lp-code-readme.txt')          # text/plain
     playfile('spam.doc')                    # app
     playfile('spreadsheet.xls')             # app
     playfile('sousa.au', wait=True)         # audio/basic
