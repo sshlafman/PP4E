@@ -1,19 +1,19 @@
-sue
-job=>'hdw'
-age=>45
-pay=>44000.0
-name=>'Sue Jones'
-endrec.
 bob
+pay=>30000
 job=>'dev'
 age=>42
-pay=>30000
 name=>'Bob Smith'
 endrec.
 tom
+pay=>0
 job=>None
 age=>50
-pay=>0
 name=>'Tom Tom'
+endrec.
+sue
+pay=>44000.0
+job=>'hdw'
+age=>45
+name=>'Sue Jones'
 endrec.
 enddb.
